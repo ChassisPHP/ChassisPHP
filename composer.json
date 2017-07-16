@@ -1,7 +1,8 @@
 {
     "require": {
         "symfony/http-foundation": "^3.3",
-        "symfony/http-kernel": "^3.3"
+        "symfony/http-kernel": "^3.3",
+        "phroute/phroute": "2.1.*"
     },
     "autoload": {
         "psr-4": {

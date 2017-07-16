@@ -11,28 +11,32 @@
 
     $loader = require 'vendor/autoload.php';
     $loader->register();
-    //require 'lib/Framework/Core.php';
 
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\HttpFoundation\Response;
     use Lib\Framework\Core;
+    use Lib\Framework\Router;
+
     $request = Request::createFromGlobals();                 
 
     // Use the Core to bootstrap an app
-    $app = new Core();
+    $app = new Core($request);
 
-    $app->map(
-        '/', function () {
+    // Crank up the Router
+    $router = new Router();
+
+    $app->addRoute('GET','/', function () {
             return new Response('This is the home page!');
         }
     );
-    $app->map('/about', function ()
+    $app->addRoute('GET', '/about', function ()
     {
         return new Response('This is the about page!');
     });
-    $app->map('/test', function ()
+    $app->addRoute('GET', '/test', function ()
     {
         return new Response('Roger\'s test page?');
     });
-    $response = $app->handle($request);
-    $response->send();
+    $response = $app->dispatch();
+    
+    echo $response;
