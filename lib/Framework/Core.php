@@ -5,26 +5,25 @@ namespace Lib\Framework;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
+use Phroute\Exception\HttpMethodNotAllowedException;
+use Phroute\Exception\HttpRouteNotFoundException;
+use Phroute\Phroute\RouteCollector;
+use Phroute\Phroute\Dispatcher;
 
 class Core implements HttpKernelInterface
 {
-    protected $routes = array();
+    protected $router;
+    protected $request;
+
+    public function __construct(Request $request) 
+    {
+        $this->router = new RouteCollector();
+        $this->request = $request;
+    }
 
     public function handle(Request $request, $type = HttpKernelInterface::MASTER_REQUEST, $catch = true)
     {
-        $path = $request->getPathInfo();
-
-        // Does this URL match a route?
-        if (array_key_exists($path, $this->routes)) {
-            // execute the callback
-            $controller = $this->routes[$path];
-            $response = $controller();
-        }
-        else 
-        {
-            // no route matched, this is a not found.
-            $response = new Response('Not found!', Response::HTTP_NOT_FOUND);
-        }                                                                                                                  
+        
     
         return $response;
     }
@@ -34,4 +33,36 @@ class Core implements HttpKernelInterface
         {
            $this->routes[$path] = $controller;
         }
+
+    public function addRoute($method, $route, $function)
+    {
+        $this->router->addRoute($method, $route, $function);
+    }
+
+    public function dispatch()
+    {
+        $dispatcher = new Dispatcher($this->router->getData());
+        try {
+            $output = $dispatcher->dispatch($this->request->getMethod(), $this->request->getPathInfo());
+        } catch (HttpRouteNotFoundException $e) {
+            $output = '404';
+        } catch (HttpMethodNotAllowedException $e) {
+            $output = '400';
+        }
+
+        return $output;
+    }
+
+/*    $dispatcher = new Phroute\Dispatcher($router);
+
+    try {
+         $response = $dispatcher->dispatch($_SERVER['REQUEST_METHOD'], processInput($_SERVER['REQUEST_URI']));
+    } catch (Phroute\Exception\HttpRouteNotFoundException $e) {
+      var_dump($e);
+      die();
+    } catch (Phroute\Exception\HttpMethodNotAllowedException $e) {
+      var_dump($e);
+      die();
+    }
+    echo $response; */
 }
