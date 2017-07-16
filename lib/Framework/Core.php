@@ -6,7 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Phroute\Exception\HttpMethodNotAllowedException;
-use Phroute\Exception\HttpRouteNotFoundException;
+use Phroute\Phroute\Exception\HttpRouteNotFoundException;
 use Phroute\Phroute\RouteCollector;
 use Phroute\Phroute\Dispatcher;
 
@@ -45,7 +45,7 @@ class Core implements HttpKernelInterface
         try {
             $output = $dispatcher->dispatch($this->request->getMethod(), $this->request->getPathInfo());
         } catch (HttpRouteNotFoundException $e) {
-            $output = '404';
+            $output = $dispatcher->dispatch('GET', '/errors/404');
         } catch (HttpMethodNotAllowedException $e) {
             $output = '400';
         }

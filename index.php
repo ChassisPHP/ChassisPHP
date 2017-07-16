@@ -37,6 +37,10 @@
     {
         return new Response('Roger\'s test page?');
     });
+    $app->addRoute('GET', '/errors/404', function ()
+    {
+        return new Response('Dude - there aint no setch page<br>That\'s a 404');
+    });
     $response = $app->dispatch();
     
     echo $response;
