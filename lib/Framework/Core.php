@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Phroute\Exception\HttpMethodNotAllowedException;
 use Phroute\Phroute\Exception\HttpRouteNotFoundException;
-use Phroute\Phroute\RouteCollector;
+use Lib\Framework\Router;
 use Phroute\Phroute\Dispatcher;
 
 class Core implements HttpKernelInterface
@@ -17,8 +17,11 @@ class Core implements HttpKernelInterface
 
     public function __construct(Request $request) 
     {
-        $this->router = new RouteCollector();
+        //$this->router = new RouteCollector();
         $this->request = $request;
+        
+        // Crank up the Router
+        $this->router = new Router();
     }
 
     public function handle(Request $request, $type = HttpKernelInterface::MASTER_REQUEST, $catch = true)
