@@ -22,8 +22,6 @@
     // Use the Core to bootstrap an app
     $app = new Core($request);
 
-    // Crank up the Router
-    $router = new Router();
 
     $app->addRoute('GET','/', function () {
             return new Response('This is the home page!');
