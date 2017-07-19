@@ -1,4 +1,4 @@
-#ChassisPHP
+# ChassisPHP
 
 Pronounced Cha-see <br>
 Yes, another PHP framework. The goal with ChassisPHP is to be a framework that simplifies the process of creating a brouchure-type website.
@@ -10,7 +10,7 @@ These instructions will get you a copy of the project up and running on your loc
 It's recommended that you use [Composer](https://getcomposer.org/) to install ChassisPHP.
 
 ```bash
-$ composer require rogercreasy/ChassisPHP
+$ composer require rogercreasy/chassis-php
 ```
 This will install ChassisPHP and all required dependencies. We recommend PHP 7.1 or newer.
 
