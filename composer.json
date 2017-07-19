@@ -1,4 +1,9 @@
 {
+    "name": "rogercreasy/ChassisPHP",
+    "description": "The ChassisPHP Framework - A Framework for CMS Site Development",
+    "keywords": ["framework", "CMS", "Chassis", "ChassisPHP"],
+    "license": "MIT",
+    "type": "project",
     "require": {
         "symfony/http-foundation": "^3.3",
         "symfony/http-kernel": "^3.3",
