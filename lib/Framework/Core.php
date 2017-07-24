@@ -42,30 +42,18 @@ class Core implements HttpKernelInterface
         $this->router->addRoute($method, $route, $function);
     }
 
-    public function dispatch()
+    public function run()
     {
         $dispatcher = new Dispatcher($this->router->getData());
         try {
-            $output = $dispatcher->dispatch($this->request->getMethod(), $this->request->getPathInfo());
+            $response = $dispatcher->dispatch($this->request->getMethod(), $this->request->getPathInfo());
         } catch (HttpRouteNotFoundException $e) {
-            $output = $dispatcher->dispatch('GET', '/errors/404');
+            $response = $dispatcher->dispatch('GET', '/errors/404');
         } catch (HttpMethodNotAllowedException $e) {
-            $output = '400';
+            $response = '400';
         }
 
-        return $output;
+        return $response;
     }
 
-/*    $dispatcher = new Phroute\Dispatcher($router);
-
-    try {
-         $response = $dispatcher->dispatch($_SERVER['REQUEST_METHOD'], processInput($_SERVER['REQUEST_URI']));
-    } catch (Phroute\Exception\HttpRouteNotFoundException $e) {
-      var_dump($e);
-      die();
-    } catch (Phroute\Exception\HttpMethodNotAllowedException $e) {
-      var_dump($e);
-      die();
-    }
-    echo $response; */
 }
