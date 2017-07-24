@@ -33,6 +33,10 @@
     {
         return new Response('This is the about page!');
     });
+    $app->addRoute('GET', '/name/{name}', function ($name)
+    {
+        return new Response('Well, Hello ' . $name);
+    });
     $app->addRoute('GET', '/test', function ()
     {
         return new Response('Roger\'s test page?');
