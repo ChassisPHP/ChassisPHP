@@ -45,6 +45,6 @@
     {
         return new Response('Dude - there aint no setch page<br>That\'s a 404');
     });
-    $response = $app->dispatch();
+    $response = $app->run();
     
     echo $response;
