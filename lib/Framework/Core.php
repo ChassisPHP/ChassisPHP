@@ -12,6 +12,7 @@ use Phroute\Phroute\Dispatcher;
 
 class Core implements HttpKernelInterface
 {
+
     protected $router;
     protected $request;
 
