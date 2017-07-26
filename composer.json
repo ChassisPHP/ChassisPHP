@@ -3,11 +3,19 @@
     "description": "The ChassisPHP Framework - A Framework for CMS Site Development",
     "keywords": ["framework", "CMS", "Chassis", "ChassisPHP"],
     "license": "MIT",
+    "authors": [
+        {
+            "name": "Roger Creasy",
+            "email": "roger@rogercreasy.com",
+            "role": "Project Lead"
+        }
+    ],
     "type": "project",
     "require": {
         "symfony/http-foundation": "^3.3",
         "symfony/http-kernel": "^3.3",
-        "phroute/phroute": "2.1.*"
+        "phroute/phroute": "2.1.*",
+        "league/container": "~2.0"
     },
     "autoload": {
         "psr-4": {
