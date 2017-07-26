@@ -16,6 +16,10 @@ This will install ChassisPHP and all required dependencies. We recommend PHP 7.1
 
 Alternatively, Git clone the repo to your local system and start from there.
 
+## Style, etc.
+We follow PSR-2 for coding style, PSR-4 autoloading, and PSR-11 for containers.
+We also believe in the use of the Oxford comma (see the above line).  :-)
+
 ## Author
 
 Roger Creasy is the founder of ChassisPHP
