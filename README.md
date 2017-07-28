@@ -16,6 +16,13 @@ This will install ChassisPHP and all required dependencies. We recommend PHP 7.1
 
 Alternatively, Git clone the repo to your local system and start from there.
 
+## Style, etc.
+
+We follow PSR-2 for coding style, PSR-4 autoloading, and PSR-11 for containers.
+We also believe in the use of the Oxford comma (see the above line).  :-)
+
+ChassisPHP is not bound to any particular component. **Whenever possible** component use is written such that it can be replaced with a component of the developer's choosing. i.e. the PHP League Container is default. However, if the developer prefers Pimple, she or he can use it.
+
 ## Author
 
 Roger Creasy is the founder of ChassisPHP
