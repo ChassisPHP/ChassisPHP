@@ -12,18 +12,16 @@
 //do the autoloading stuff
 require __DIR__.'/../lib/Framework/startApp.php';
 
-
-    use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\HttpFoundation\Response;
-    use Lib\Framework\Core;
-    use Lib\Framework\Router;
+    use Lib\Framework\Container;
 
-    $request = Request::createFromGlobals();                 
+    $container = new Container;
 
     // Use the Core to bootstrap an app
-    $app = new Core($request);
+    //$app = new Core($request);
+    $app = $container->get('Core');
 
-
+    //set up the routes (TODO refactor)
     $app->addRoute('GET','/', function () {
             return new Response('This is the home page!');
         }
