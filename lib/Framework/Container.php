@@ -1,21 +1,30 @@
 <?php
 
-namespace \lib\Framework
+namespace Lib\Framework;
 
-use \League\Container\Container
+use League\Container\Container as LeagueContainer;
+use League\Container\ReflectionContainer;
+use Symfony\Component\HttpFoundation\Request;
+use Lib\Framework\Core;
 
-    class Container {
+    class Container extends LeagueContainer {
 
-        public $container
-
-        public function __contstruct ()
+        public function __construct ()
         {
-            $this->container = new Container;
+            parent::__construct();
+            
+            // register the reflection container as a delegate to enable auto wiring
+            $this->delegate(
+                new ReflectionContainer
+            );
+
+            $this->add('Request', function () {
+                $request = new Request;
+                return $request->createFromGlobals();
+            });
+
+            $this->add('Core', 'Lib\Framework\Core')->withArgument('Request');
         }
 
-        public function getContainer ()
-        {
-            return $this->container;
-        }
     }
 
