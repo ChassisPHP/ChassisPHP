@@ -21,5 +21,8 @@
         "psr-4": {
             "Lib\\": "lib/"
         }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.3"
     }
 }
