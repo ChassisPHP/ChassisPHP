@@ -1,8 +1,8 @@
 <?PHP
 
-namespace Tests;
+namespace Tests\Basic;
 
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
 
 class TestTest extends TestCase
 {
