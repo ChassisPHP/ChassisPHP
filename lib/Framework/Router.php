@@ -13,7 +13,8 @@ use Phroute\Phroute\Dispatcher;
 
 class Router extends RouteCollector
 {
-    public function __construct  () {
+    public function __construct()
+    {
         Parent::__construct();
     }
 }

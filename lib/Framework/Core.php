@@ -16,7 +16,7 @@ class Core implements HttpKernelInterface
     protected $router;
     protected $request;
 
-    public function __construct(Request $request) 
+    public function __construct(Request $request)
     {
         //$this->router = new RouteCollector();
         $this->request = $request;
@@ -33,10 +33,10 @@ class Core implements HttpKernelInterface
     }
 
             // Associates an URL with a callback function
-        public function map($path, $controller) 
-        {
+    public function map($path, $controller)
+    {
            $this->routes[$path] = $controller;
-        }
+    }
 
     public function addRoute($method, $route, $function)
     {
@@ -56,5 +56,4 @@ class Core implements HttpKernelInterface
 
         return $response;
     }
-
 }
