@@ -18,6 +18,7 @@ trait StartApp
         $app = $container->get('Core');
 
         return $app;
+
     }
 }
 
