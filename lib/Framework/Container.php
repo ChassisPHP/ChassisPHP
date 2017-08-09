@@ -18,11 +18,15 @@ class Container extends LeagueContainer
             new ReflectionContainer
         );
 
-            $this->add('Request', function () {
-                $request = new Request;
-                return $request->createFromGlobals();
-            });
+        $this->add('Request', function () {
+            $request = new Request;
+            return $request->createFromGlobals();
+        });
 
-            $this->add('Core', 'Lib\Framework\Core')->withArgument('Request');
+        //set the base directory
+        $this->add('BaseDir', function () {
+            $baseDir = dirname(__FILE__, 3);
+            return $baseDir;
+        });
     }
 }

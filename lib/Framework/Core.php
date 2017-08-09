@@ -8,18 +8,22 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Phroute\Exception\HttpMethodNotAllowedException;
 use Phroute\Phroute\Exception\HttpRouteNotFoundException;
 use Lib\Framework\Router;
+use Lib\Framework\Container;
 use Phroute\Phroute\Dispatcher;
 
 class Core implements HttpKernelInterface
 {
 
+    protected $container;
     protected $router;
     protected $request;
+    protected $baseDir;
 
-    public function __construct(Request $request)
+    public function __construct()
     {
-        $this->request = $request;
-        
+        $this->container = new Container;
+        $this->request = $this->container->get('Request');
+        $this->baseDir = $this->container->get('BaseDir');
         // Crank up the Router
         $this->router = new Router();
         $this->readRoutes();
@@ -45,7 +49,7 @@ class Core implements HttpKernelInterface
 
     public function readRoutes()
     {
-        $routes = include('../routes/frontend.php');
+        $routes = include($this->baseDir. '/routes/frontend.php');
         foreach ($routes as $route) {
             $this->addRoute($route[0], $route[1], $route[2]);
         }

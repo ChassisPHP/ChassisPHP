@@ -11,3 +11,8 @@ define('CHASSIS_START', microtime(true));
 
 //crank up the Composer autoloading
 require __DIR__.'/../../vendor/autoload.php';
+
+//set up the application
+$app = new \Lib\Framework\Core();
+
+return $app;
