@@ -18,7 +18,6 @@ require __DIR__.'/../lib/Framework/startApp.php';
     $container = new Container;
 
     // Use the Core to bootstrap an app
-    //$app = new Core($request);
     $app = $container->get('Core');
 
     //set up the routes (TODO refactor)
