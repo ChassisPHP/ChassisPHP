@@ -15,6 +15,8 @@ class RoutesTest extends TestCase
         });
         $response = $app->run();
         $responseContent = $response->getContent();
+        $responseStatus = $response->getStatusCode();
         $this->assertContains($responseContent, 'TEST');
+        $this->assertEquals($responseStatus, 200);
     }
 }
