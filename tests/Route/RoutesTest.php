@@ -9,7 +9,7 @@ class RoutesTest extends TestCase
 {
     public function testBasicRouting()
     {
-        $app = $this->StartInstance();
+        $app = parent::startApp();//require __DIR__ . '/../../lib/Framework/startApp.php';
         $app->addRoute('GET', '/', function () {
             return new Response('TEST');
         });

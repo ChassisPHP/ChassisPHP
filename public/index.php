@@ -10,15 +10,7 @@
  */
 
 //do the autoloading stuff
-require __DIR__.'/../lib/Framework/startApp.php';
-
-    use Symfony\Component\HttpFoundation\Response;
-    use Lib\Framework\Container;
-
-    $container = new Container;
-
-    // Use the Core to bootstrap an app
-    $app = $container->get('Core');
+$app = require __DIR__.'/../lib/Framework/startApp.php';
 
     $response = $app->run();
     
