@@ -26,7 +26,8 @@ class Core implements HttpKernelInterface
         $this->baseDir = $this->container->get('BaseDir');
         // Crank up the Router
         $this->router = new Router();
-        $this->readRoutes();
+        $this->readFrontendRoutes();
+        $this->readBackendRoutes();
     }
 
     public function getContainer()
@@ -47,18 +48,31 @@ class Core implements HttpKernelInterface
            $this->routes[$path] = $controller;
     }
 
+    // add routes to the router
     public function addRoute($method, $route, $function)
     {
         $this->router->addRoute($method, $route, $function);
     }
 
-    public function readRoutes()
+    // read frontend routes from array
+    public function readFrontendRoutes()
     {
         $routes = include($this->baseDir. '/routes/frontend.php');
         foreach ($routes as $route) {
             $this->addRoute($route[0], $route[1], $route[2]);
         }
     }
+
+    //read backend routes from array
+    public function readBackendRoutes()
+    {
+        $routes = include($this->baseDir. '/routes/backend.php');
+        foreach ($routes as $route) {
+            $routeLocation = 'backend' . $route[1];
+            $this->addRoute($route[0], $routeLocation, $route[2]);
+        }
+    }
+
     // Generate the response
     public function run()
     {
