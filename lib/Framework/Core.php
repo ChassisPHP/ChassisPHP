@@ -29,6 +29,11 @@ class Core implements HttpKernelInterface
         $this->readRoutes();
     }
 
+    public function getContainer()
+    {
+        return $this->container;
+    }
+
     public function handle(Request $request, $type = HttpKernelInterface::MASTER_REQUEST, $catch = true)
     {
         
