@@ -71,8 +71,8 @@ class Core implements HttpKernelInterface
     {
         $routes = include($this->baseDir. '/routes/backend.php');
         foreach ($routes as $route) {
-            $routeLocation = 'backend' . $route[1];
-            $r->addRoute($route[0], $routeLocation, $route[2]);
+            //$routeLocation = '/backend' . $route[1];
+            $r->addRoute($route[0], $route[1], $route[2]);
         }
     }
 

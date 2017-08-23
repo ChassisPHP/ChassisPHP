@@ -8,19 +8,15 @@ return [
  * This file contains your application
  * backenend, admin pages routes
  */
-    ['GET', '/', function () {
-        return new Response('This is the backend front page!');
+    ['GET', '/backend', function () {
+        echo 'This is the backend front page!';
     }],
 
-    ['GET', '/users', function () {
-        return new Response('This is the users management page!');
+    ['GET', '/backend/users', function () {
+        echo 'This is the users management page!';
     }],
 
-    ['GET', '/test', function () {
-        return new Response('This is Roger\'s test page');
-    }],
-
-    ['GET', '/name/{name}', function ($name) {
-        return new Response('Well, hello ' . $name .'!');
+    ['GET', '/backend/test', function () {
+        echo 'This is Roger\'s test page';
     }],
 ];
