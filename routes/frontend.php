@@ -8,9 +8,7 @@ return [
  * This file contains your application
  * frontend, public-facing routes
  */
-    ['GET', '/', function () {
-        echo 'This is the home page!';
-    }],
+    ['GET', '/', ['Http\Controllers\HomeController', 'index']],
 
     ['GET', '/new', function () {
         echo 'This is a test page!';

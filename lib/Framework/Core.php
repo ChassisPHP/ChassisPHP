@@ -97,9 +97,11 @@ class Core implements HttpKernelInterface
                 $response->setStatusCode(405);
                 break;
             case \FastRoute\Dispatcher::FOUND:
-                $handler = $routeInfo[1];
+                $classname = $routeInfo[1][0];
+                $method = $routeInfo[1][1];
                 $vars = $routeInfo[2];
-                call_user_func($handler, $vars);
+                $class = new $classname;
+                $class->$method($vars);
                 break;
         }
 
