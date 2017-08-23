@@ -8,13 +8,15 @@
 
 namespace Lib\Framework;
 
-use Phroute\Phroute\RouteCollector;
-use Phroute\Phroute\Dispatcher;
+use Fastroute\Dispatcher;
 
 class Router extends RouteCollector
 {
+    public $dispatcher;
+
     public function __construct()
     {
         Parent::__construct();
+        $this->dispatcher = new Dispatcher;
     }
 }

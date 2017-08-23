@@ -17,17 +17,20 @@ class Core implements HttpKernelInterface
     protected $container;
     protected $router;
     protected $request;
+    protected $response;
     protected $baseDir;
+    protected $routeDefinitionCallback;
 
     public function __construct()
     {
         $this->container = new Container;
         $this->request = $this->container->get('Request');
         $this->baseDir = $this->container->get('BaseDir');
-        // Crank up the Router
-        $this->router = new Router();
-        $this->readFrontendRoutes();
-        $this->readBackendRoutes();
+        $this->response = new Response;
+       // Crank up the Router
+       // $this->router = new Router();
+       // $this->readFrontendRoutes();
+       // $this->readBackendRoutes();
     }
 
     public function getContainer()
@@ -48,43 +51,59 @@ class Core implements HttpKernelInterface
            $this->routes[$path] = $controller;
     }
 
-    // add routes to the router
+    /* add routes to the router
     public function addRoute($method, $route, $function)
     {
         $this->router->addRoute($method, $route, $function);
-    }
+    }*/
 
     // read frontend routes from array
-    public function readFrontendRoutes()
+    public function readFrontendRoutes($r)
     {
         $routes = include($this->baseDir. '/routes/frontend.php');
         foreach ($routes as $route) {
-            $this->addRoute($route[0], $route[1], $route[2]);
+            $r->addRoute($route[0], $route[1], $route[2]);
         }
     }
 
     //read backend routes from array
-    public function readBackendRoutes()
+    public function readBackendRoutes($r)
     {
         $routes = include($this->baseDir. '/routes/backend.php');
         foreach ($routes as $route) {
             $routeLocation = 'backend' . $route[1];
-            $this->addRoute($route[0], $routeLocation, $route[2]);
+            $r->addRoute($route[0], $routeLocation, $route[2]);
         }
     }
 
     // Generate the response
     public function run()
     {
-        $dispatcher = new Dispatcher($this->router->getData());
-        try {
-            $response = $dispatcher->dispatch($this->request->getMethod(), $this->request->getPathInfo());
-        } catch (HttpRouteNotFoundException $e) {
-            $response = $dispatcher->dispatch('GET', '/errors/404');
-        } catch (HttpMethodNotAllowedException $e) {
-            $response = '400';
+        // create the collection of routes
+        $this->routeDefinitionCallback = function (\FastRoute\RouteCollector $r) {
+            $this->readFrontendRoutes($r);
+            $this->readBackendRoutes($r);
+        };
+
+        $dispatcher = \FastRoute\simpleDispatcher($this->routeDefinitionCallback);
+        $routeInfo = $dispatcher->dispatch($this->request->getMethod(), $this->request->getRequestUri());
+        switch ($routeInfo[0]) {
+            case \FastRoute\Dispatcher::NOT_FOUND:
+                $this->response->setContent('404 - Page not found');
+                $this->response->setStatusCode(404);
+                break;
+            case \FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
+                $response->setContent('405 - Method not allowed');
+                $response->setStatusCode(405);
+                break;
+            case \FastRoute\Dispatcher::FOUND:
+                $handler = $routeInfo[1];
+                $vars = $routeInfo[2];
+                call_user_func($handler, $vars);
+                break;
         }
 
-        return $response;
+        $this->response->sendHeaders();
+        $this->response->sendContent();
     }
 }

@@ -9,15 +9,15 @@ return [
  * frontend, public-facing routes
  */
     ['GET', '/', function () {
-        return new Response('This is the home page!');
+        echo 'This is the home page!';
     }],
 
     ['GET', '/new', function () {
-        return new Response('This is a test page!');
+        echo 'This is a test page!';
     }],
 
     ['GET', '/test', function () {
-        return new Response('This is Roger\'s test page');
+        echo 'This is Roger\'s test page';
     }],
 
     ['GET', '/name/{name}', function ($name) {
