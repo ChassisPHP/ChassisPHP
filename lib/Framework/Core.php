@@ -93,7 +93,6 @@ class Core implements HttpKernelInterface
         
         $dispatcher = \FastRoute\simpleDispatcher($this->routeDefinitionCallback);
         $routeInfo = $dispatcher->dispatch($this->request->getMethod(), $this->request->getRequestUri());
-        
         switch ($routeInfo[0]) {
             case Dispatcher::NOT_FOUND:
                 $this->response->setContent('404 - Page not found');
@@ -104,11 +103,17 @@ class Core implements HttpKernelInterface
                 $response->setStatusCode(405);
                 break;
             case Dispatcher::FOUND:
-                $classname = $routeInfo[1][0];
-                $method = $routeInfo[1][1];
-                $vars = $routeInfo[2];
-                $class = new $classname;
-                $class->$method($vars);
+                if (is_array($routeInfo[1])) {
+                    $classname = $routeInfo[1][0];
+                    $method = $routeInfo[1][1];
+                    $vars = $routeInfo[2];
+                    $class = new $classname;
+                    $class->$method($vars);
+                } else {
+                    $handler = $routeInfo[1];
+                    $vars = $routeInfo[2];
+                    call_user_func($handler, $vars);
+                }
                 break;
         }
         
