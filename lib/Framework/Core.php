@@ -63,22 +63,15 @@ class Core implements HttpKernelInterface
            $this->routes[$path] = $controller;
     }
 
-    // read frontend routes from array
-    public function readFrontendRoutes($r)
+    // read in all routes defined in files im the routes directory
+    public function readRoutes($r)
     {
-        $routes = include($this->baseDir. '/routes/frontend.php');
-        foreach ($routes as $route) {
-            $r->addRoute($route[0], $route[1], $route[2]);
-        }
-    }
-
-    //read backend routes from array
-    public function readBackendRoutes($r)
-    {
-        $routes = include($this->baseDir. '/routes/backend.php');
-        foreach ($routes as $route) {
-            //$routeLocation = '/backend' . $route[1];
-            $r->addRoute($route[0], $route[1], $route[2]);
+        $routesDir = $this->baseDir . '/routes/*.php';
+        foreach (glob($routesDir) as $routeFile) {
+            $routes = include($routeFile);
+            foreach ($routes as $route) {
+                $r->addRoute($route[0], $route[1], $route[2]);
+            }
         }
     }
 
@@ -87,8 +80,7 @@ class Core implements HttpKernelInterface
     {
         // create the collection of routes
         $this->routeDefinitionCallback = function (RouteCollector $r) {
-            $this->readFrontendRoutes($r);
-            $this->readBackendRoutes($r);
+            $this->readRoutes($r);
         };
         
         $dispatcher = \FastRoute\simpleDispatcher($this->routeDefinitionCallback);
