@@ -83,7 +83,7 @@ class Core implements HttpKernelInterface
             $this->readRoutes($r);
         };
         
-        $dispatcher = \FastRoute\simpleDispatcher($this->routeDefinitionCallback);
+        $dispatcher = $this->router->dispatcher($this->routeDefinitionCallback);
         $routeInfo = $dispatcher->dispatch($this->request->getMethod(), $this->request->getRequestUri());
         switch ($routeInfo[0]) {
             case Dispatcher::NOT_FOUND:

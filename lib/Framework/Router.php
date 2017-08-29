@@ -9,33 +9,21 @@
 namespace Lib\Framework;
 
 use FastRoute\RouteCollector;
-use FastRoute\RouteParser\Std;
-use FastRoute\DataGenerator\GroupCountBased;
 
 class Router
 {
-    /*
-    private $routeParser;
-    private $dataGenerator;
-    private $routeCollector;
-    private $response;
+    
+    private $dispatcher;
 
     public function __construct()
     {
-        $this->routeParser = new Std;
-        $this->dataGenerator = new GroupCountBased;
-        $this->routeCollector = new RouteCollector($this->routeParser, $this->dataGenerator);
-        $this->response = new Response;
+        //
     }
 
-    public function addRoute($method, $route, $handler)
-    {
-        $this->routeCollector->addRoute($method, $route, $handler);
-    }
 
-    public function dispatch($request, $routeCollection)
+    public function dispatcher($routeDefinitionCallback)
     {
-        return $this->response;
+        $dispatcher = \FastRoute\simpleDispatcher($routeDefinitionCallback);
+        return $dispatcher;
     }
-     */
 }
