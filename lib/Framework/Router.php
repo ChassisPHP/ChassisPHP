@@ -20,8 +20,15 @@ class Router
         //
     }
 
+    public function getRouteInfo($request, $routeDefinitionCallback)
+    {
+        $dispatcher = $this->dispatcher($routeDefinitionCallback);
+        $routeInfo = $dispatcher->dispatch($request->getMethod(), $request->getRequestUri());
 
-    public function dispatcher($routeDefinitionCallback)
+        return $routeInfo;
+    }
+
+    private function dispatcher($routeDefinitionCallback)
     {
         $dispatcher = \FastRoute\simpleDispatcher($routeDefinitionCallback);
         return $dispatcher;
