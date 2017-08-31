@@ -83,8 +83,10 @@ class Core implements HttpKernelInterface
             $this->readRoutes($r);
         };
         
-        $dispatcher = $this->router->dispatcher($this->routeDefinitionCallback);
-        $routeInfo = $dispatcher->dispatch($this->request->getMethod(), $this->request->getRequestUri());
+        //$dispatcher = $this->router->dispatcher($this->routeDefinitionCallback);
+        //$routeInfo = $dispatcher->dispatch($this->request->getMethod(), $this->request->getRequestUri());
+        
+        $routeInfo = $this->router->getRouteInfo($this->request, $this->routeDefinitionCallback);
         switch ($routeInfo[0]) {
             case Dispatcher::NOT_FOUND:
                 $this->response->setContent('404 - Page not found');
