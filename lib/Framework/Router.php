@@ -23,7 +23,13 @@ class Router
     public function getRouteInfo($request, $routeDefinitionCallback)
     {
         $dispatcher = $this->dispatcher($routeDefinitionCallback);
-        $routeInfo = $dispatcher->dispatch($request->getMethod(), $request->getRequestUri());
+        $requestURI = $request->getRequestUri();
+        
+        // if the route has a trainling /, remove it
+        if (strlen($requestURI)>1) {
+            $requestURI = rtrim($requestURI, "/");
+        }
+        $routeInfo = $dispatcher->dispatch($request->getMethod(), $requestURI);
 
         return $routeInfo;
     }
