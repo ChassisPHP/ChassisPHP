@@ -3,11 +3,9 @@
 namespace Lib\Framework;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Lib\Framework\Router;
 use Lib\Framework\Container;
-use FastRoute\Dispatcher;
 use FastRoute\RouteCollector;
 
 class Core implements HttpKernelInterface
@@ -25,7 +23,7 @@ class Core implements HttpKernelInterface
         $this->container = new Container;
         $this->request = $this->container->get('Request');
         $this->baseDir = $this->container->get('BaseDir');
-        $this->response = new Response;
+        //$this->response = new Response;
         
         // Crank up the Router
         $this->router = new Router();
@@ -83,35 +81,7 @@ class Core implements HttpKernelInterface
             $this->readRoutes($r);
         };
         
-        //$dispatcher = $this->router->dispatcher($this->routeDefinitionCallback);
-        //$routeInfo = $dispatcher->dispatch($this->request->getMethod(), $this->request->getRequestUri());
-        
-        $routeInfo = $this->router->getRouteInfo($this->request, $this->routeDefinitionCallback);
-        switch ($routeInfo[0]) {
-            case Dispatcher::NOT_FOUND:
-                $this->response->setContent('404 - Page not found');
-                $this->response->setStatusCode(404);
-                break;
-            case Dispatcher::METHOD_NOT_ALLOWED:
-                $response->setContent('405 - Method not allowed');
-                $response->setStatusCode(405);
-                break;
-            case Dispatcher::FOUND:
-                if (is_array($routeInfo[1])) {
-                    $classname = $routeInfo[1][0];
-                    $classname = 'Http\Controllers\\' . $classname;
-                    $method = $routeInfo[1][1];
-                    $vars = $routeInfo[2];
-                    $class = new $classname;
-                    $class->$method($vars);
-                } else {
-                    $handler = $routeInfo[1];
-                    $vars = $routeInfo[2];
-                    call_user_func($handler, $vars);
-                }
-                break;
-        }
-        
+        $this->response = $this->router->dispatch($this->request, $this->routeDefinitionCallback);
         $this->response->sendHeaders();
         $this->response->sendContent();
     }
