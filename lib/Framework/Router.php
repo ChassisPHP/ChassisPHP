@@ -11,6 +11,8 @@ namespace Lib\Framework;
 use FastRoute\RouteCollector;
 use FastRoute\Dispatcher;
 use Symfony\Component\HttpFoundation\Response;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\ResponseInterface;
 
 class Router
 {
