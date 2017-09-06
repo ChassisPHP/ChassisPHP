@@ -30,7 +30,7 @@ class Router
         $dispatcher = $this->dispatcher($routeDefinitionCallback);
         $requestURI = $request->getRequestUri();
 
-      // if the route has a trainling /, remove it
+      // if the route has a trailing /, remove it
         if (strlen($requestURI)>1) {
             $requestURI = rtrim($requestURI, "/");
         }
