@@ -23,9 +23,8 @@ class Core implements HttpKernelInterface
         $this->container = new Container;
         $this->request = $this->container->get('Request');
         $this->baseDir = $this->container->get('BaseDir');
-        //$this->response = new Response;
         
-        // Crank up the Router
+      // Crank up the Router
         $this->router = new Router();
     }
 
@@ -67,7 +66,12 @@ class Core implements HttpKernelInterface
         $routesDir = $this->baseDir . '/routes/*.php';
         foreach (glob($routesDir) as $routeFile) {
             $routes = include($routeFile);
+            $routeGroup = "/" . basename($routeFile, ".php");
+        
             foreach ($routes as $route) {
+                if ($routeGroup != "/frontend") {
+                    $route[1] = $routeGroup . $route[1];
+                }
                 $r->addRoute($route[0], $route[1], $route[2]);
             }
         }
