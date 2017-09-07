@@ -13,5 +13,3 @@
 $app = require __DIR__.'/../lib/Framework/startApp.php';
 
     $response = $app->run();
-    
-    echo $response;
