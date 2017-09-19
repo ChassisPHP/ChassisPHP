@@ -16,7 +16,8 @@
         "symfony/http-kernel": "^3.3",
         "league/container": "~2.0",
         "nikic/fast-route": "^1.2",
-        "psr/http-message": "^1.0"
+        "psr/http-message": "^1.0",
+        "vlucas/phpdotenv": "^2.4"
     },
     "autoload": {
         "psr-4": {

@@ -7,6 +7,8 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Lib\Framework\Router;
 use Lib\Framework\Container;
 use FastRoute\RouteCollector;
+use Dotenv\Dotenv;
+use Dotenv\Exception\InvalidPathException;
 
 class Core implements HttpKernelInterface
 {
@@ -23,8 +25,12 @@ class Core implements HttpKernelInterface
         $this->container = new Container;
         $this->request = $this->container->get('Request');
         $this->baseDir = $this->container->get('BaseDir');
-        
-      // Crank up the Router
+
+        // Load environment vars
+        $dotenv = new Dotenv(dirname(__FILE__, 3), '.env');
+        $dotenv->load();
+
+        // Crank up the Router
         $this->router = new Router();
     }
 
