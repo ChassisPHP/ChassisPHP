@@ -11,7 +11,7 @@ class Connection
 
     public function __construct()
     {
-        $this->entitymanager = Setup::createAnnotationMetadataConfiguration(array(__DIR__."/entities"), $this->isDevMode);
+        $config = Setup::createAnnotationMetadataConfiguration(array(__DIR__."/entities"), $this->isDevMode);
 
         $conn = array(
                 'driver' => 'pdo_sqlite',
