@@ -21,13 +21,20 @@ class User
     protected $userName;
 
     /**
-    * @ORM\Column(type="string", length=255, unique=true)
+    * @Column(type="string", length=255, unique=true)
     * @Assert\NotBlank()
     * @Assert\Email()
     **/
-    private $email;
+    protected $email;
 
-    /** @Column(type="integer") **/
+    /**
+    * @Column(type="string", length=64)
+    **/
+    protected $passwd;
+
+    /**
+    * @Column(type="integer")
+    **/
     protected $userLevel;
     
     public function getId()
@@ -35,14 +42,24 @@ class User
         return $this->id;
     }
     
-    public function getName()
+    public function getUserName()
     {
         return $this->name;
     }
 
-    public function setName($name)
+    public function setUserName($userName)
     {
-        $this->name = $name;
+        $this->userName = $userName;
+    }
+    
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    public function setEmail($email)
+    {
+        $this->email = $email;
     }
     
     public function getPasswd()
