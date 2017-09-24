@@ -11,11 +11,11 @@ class Connection
 
     public function __construct()
     {
-        $config = Setup::createAnnotationMetadataConfiguration(array(__DIR__."/entities"), $this->isDevMode);
+        $config = Setup::createAnnotationMetadataConfiguration(array(dirname(__FILE__, 3)."Database/entities"), $this->isDevMode);
 
         $conn = array(
                 'driver' => 'pdo_sqlite',
-                    'path' => __DIR__ . '/db.sqlite',
+                    'path' => (dirname(__FILE__, 3)."Database/db.sqlite",
                 );
 
         // obtaining the entity manager
