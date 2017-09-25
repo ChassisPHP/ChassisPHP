@@ -12,9 +12,7 @@ return [
         echo 'This is the backend front page!';
     }],
 
-    ['GET', '/users', function () {
-        echo 'This is the users management page!';
-    }],
+    ['GET', '/users', ['Backend\UserController', 'index']],
 
     ['GET', '/test', function () {
         echo 'This is Roger\'s test page';

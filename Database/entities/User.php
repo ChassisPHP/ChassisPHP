@@ -1,6 +1,6 @@
 <?PHP
 
-namespace Lib\Database\entities\User;
+namespace Database\entities;
 
 /**
  * @Entity @Table(name="users")
@@ -44,7 +44,7 @@ class User
     
     public function getUserName()
     {
-        return $this->name;
+        return $this->userName;
     }
 
     public function setUserName($userName)
@@ -74,11 +74,11 @@ class User
     
     public function getUserLevel()
     {
-        return $this->name;
+        return $this->userLevel;
     }
 
     public function setUserLevel($userLevel)
     {
-        $this->name = $userLevel;
+        $this->userLevel = $userLevel;
     }
 }
