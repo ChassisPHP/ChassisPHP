@@ -15,8 +15,8 @@ class Connection
 
         $conn = array(
                 'driver' => 'pdo_sqlite',
-                    'path' => (dirname(__FILE__, 3)."Database/db.sqlite",
-                );
+                'path' => dirname(__FILE__, 3)."/Database/db.sqlite",
+            );
 
         // obtaining the entity manager
         $this->entityManager = EntityManager::create($conn, $config);

@@ -24,7 +24,8 @@
     "autoload": {
         "psr-4": {
             "Lib\\": "lib/",
-            "Http\\": "Http/"
+            "Http\\": "Http/",
+            "Database\\": "Database/"
         }
     },
     "autoload-dev": {
