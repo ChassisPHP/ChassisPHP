@@ -31,7 +31,7 @@ class Core implements HttpKernelInterface
         $dotenv->load();
 
         // Crank up the Router
-        $this->router = new Router();
+        $this->router = $this->container->get('Router');
     }
 
     public function getContainer()
