@@ -5,7 +5,9 @@ namespace Lib\Framework;
 use League\Container\Container as LeagueContainer;
 use League\Container\ReflectionContainer;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Lib\Framework\Core;
+use Lib\Framework\Router;
 
 class Container extends LeagueContainer
 {
@@ -21,6 +23,17 @@ class Container extends LeagueContainer
         $this->add('Request', function () {
             $request = new Request;
             return $request->createFromGlobals();
+        });
+
+        $this->add('Response', function () {
+            $response = new Response;
+            return $response;
+        });
+
+        $this->add('Router', function () {
+            $response = $this->get('Response');
+            $router = new Router($response);
+            return $router;
         });
 
         //set the base directory

@@ -20,9 +20,9 @@ class Router
     private $dispatcher;
     public $response;
 
-    public function __construct()
+    public function __construct(Response $response)
     {
-        $this->response = new Response;
+        $this->response = $response;
     }
 
     public function getRouteInfo($request, $routeDefinitionCallback)
