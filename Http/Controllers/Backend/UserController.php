@@ -20,7 +20,7 @@ class UserController
     {
         $userRepository = $this->entityManager->getRepository('Database\entities\User');
         $users = $userRepository->findAll();
-
+        
         foreach ($users as $user) {
             $id = $user->getId();
             $name = $user->getUserName();

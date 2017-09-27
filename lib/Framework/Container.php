@@ -8,6 +8,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Lib\Framework\Core;
 use Lib\Framework\Router;
+use Dotenv\Dotenv;
+use Dotenv\Exception\InvalidPathException;
+use Lib\Database\Connection;
+use Lib\Framework\Config;
 
 class Container extends LeagueContainer
 {
@@ -40,6 +44,22 @@ class Container extends LeagueContainer
         $this->add('BaseDir', function () {
             $baseDir = dirname(__FILE__, 3);
             return $baseDir;
+        });
+        
+        $this->add('Dotenv', function () {
+            $dotenv = new Dotenv(dirname(__FILE__, 3), '.env');
+            return $dotenv->load();
+        });
+
+        $this->add('Connection', function () {
+            $config = $this->get('Config');
+            $connection = new Connection($config);
+            return $connection;
+        });
+
+        $this->add('Config', function () {
+            $config = new Config;
+            return $config;
         });
     }
 }

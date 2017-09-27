@@ -3,22 +3,27 @@ namespace Lib\Database;
 
 use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
+use Lib\Framework\Config;
 
 class Connection
 {
     public $entitymanager;
     private $isDevMode = true;
+    private $config;
 
     public function __construct()
     {
-        $config = Setup::createAnnotationMetadataConfiguration(array(dirname(__FILE__, 3)."Database/entities"), $this->isDevMode);
-
+        $this->config = new Config;
+        $connectionConfig = Setup::createAnnotationMetadataConfiguration(array(dirname(__FILE__, 3)."Database/entities"), $this->isDevMode);
+        $driver = envar('DATABASE_DRIVER', 'pdo_mysql');
+        $dbType = envar('DATABASE_TYPE', 'mysql');
+        $path = dirname(__FILE__, 3) . "/" . $this->config[$dbType]['database'];
         $conn = array(
-                'driver' => 'pdo_sqlite',
-                'path' => dirname(__FILE__, 3)."/Database/db.sqlite",
+                'driver' => $driver,
+                'path' => $path,
             );
 
         // obtaining the entity manager
-        $this->entityManager = EntityManager::create($conn, $config);
+        $this->entityManager = EntityManager::create($conn, $connectionConfig);
     }
 }
