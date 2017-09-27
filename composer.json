@@ -22,6 +22,9 @@
         "symfony/yaml": "^3.3"
     },
     "autoload": {
+        "files": [
+            "lib/Framework/helpers.php"
+        ],
         "psr-4": {
             "Lib\\": "lib/",
             "Http\\": "Http/",

@@ -1,7 +1,5 @@
 <?PHP
 
-use Symfony\Component\HttpFoundation\Response;
-
 return [
 /*
  * These are the routes for your backend
