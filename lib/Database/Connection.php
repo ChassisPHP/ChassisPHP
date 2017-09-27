@@ -12,9 +12,9 @@ class Connection
     public function __construct()
     {
         $config = Setup::createAnnotationMetadataConfiguration(array(dirname(__FILE__, 3)."Database/entities"), $this->isDevMode);
-
+        $driver = getenv('DATABASE_DRIVER');
         $conn = array(
-                'driver' => 'pdo_sqlite',
+                'driver' => $driver,
                 'path' => dirname(__FILE__, 3)."/Database/db.sqlite",
             );
 
