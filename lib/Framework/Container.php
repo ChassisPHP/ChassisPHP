@@ -12,13 +12,14 @@ use Dotenv\Dotenv;
 use Dotenv\Exception\InvalidPathException;
 use Lib\Database\Connection;
 use Lib\Framework\Config;
+use Psr\Log\LoggerInterface;
 
 class Container extends LeagueContainer
 {
-    public function __construct()
+    public function __construct(LoggerInterface $logger = null)
     {
         parent::__construct();
- 
+
         // register the reflection container as a delegate to enable auto wiring
         $this->delegate(
             new ReflectionContainer
@@ -45,7 +46,7 @@ class Container extends LeagueContainer
             $baseDir = dirname(__FILE__, 3);
             return $baseDir;
         });
-        
+
         $this->add('Dotenv', function () {
             $dotenv = new Dotenv(dirname(__FILE__, 3), '.env');
             return $dotenv->load();
@@ -60,6 +61,10 @@ class Container extends LeagueContainer
         $this->add('Config', function () {
             $config = new Config;
             return $config;
+        });
+
+        $this->add('Logger', function() {
+           return $logger;
         });
     }
 }
