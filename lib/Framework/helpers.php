@@ -1,5 +1,8 @@
 <?PHP
 
+use Symfony\Component\VarDumper\Dumper\HtmlDumper;
+use Symfony\Component\VarDumper\Cloner\VarCloner;
+
 // Get the value of a .env variable
 // If the variable is not set, use the default
 if (! function_exists('envar')) {
@@ -19,11 +22,9 @@ if (! function_exists('envar')) {
 if (! function_exists('debugVar')) {
     function debugVar($var)
     {
-        if (is_array($var)) {
-            print_r($var);
-        } else {
-            var_dump($var);
-        }
+	$dumper = new HtmlDumper;
+	$cloner = new VarCloner;
+	$dumper->dump($cloner->cloneVar($var));
         die();
     }
 }
