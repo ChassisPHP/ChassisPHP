@@ -3,3 +3,4 @@
 .env
 *.swp
 vendor
+public/logs/
