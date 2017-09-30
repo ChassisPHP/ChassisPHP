@@ -1,3 +1,7 @@
+.idea/
+.git/
 .env
 *.swp
 vendor
+public/logs/
+composer.lock
