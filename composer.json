@@ -20,7 +20,8 @@
         "psr/http-message": "^1.0",
         "vlucas/phpdotenv": "^2.4",
         "doctrine/orm": "^2.5",
-        "symfony/yaml": "^3.3"
+        "symfony/yaml": "^3.3",
+        "monolog/monolog": "^1.23"
     },
     "autoload": {
         "files": [
