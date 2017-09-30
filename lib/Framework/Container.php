@@ -12,11 +12,13 @@ use Dotenv\Dotenv;
 use Dotenv\Exception\InvalidPathException;
 use Lib\Database\Connection;
 use Lib\Framework\Config;
-use Psr\Log\LoggerInterface;
+
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
 
 class Container extends LeagueContainer
 {
-    public function __construct(LoggerInterface $logger = null)
+    public function __construct()
     {
         parent::__construct();
 
@@ -64,7 +66,8 @@ class Container extends LeagueContainer
         });
 
         $this->add('Logger', function() {
-           return $logger;
+            $log = new Logger('CHASSISPHP');
+            $log->pushHandler(new StreamHandler('logs/app.log', LOGGER::DEBUG));
         });
     }
 }

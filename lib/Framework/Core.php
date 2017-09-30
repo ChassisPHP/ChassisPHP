@@ -26,7 +26,7 @@ class Core implements HttpKernelInterface
         $this->baseDir = $this->container->get('BaseDir');
         $this->dotenv = $this->container->get('Dotenv');
         $this->router = $this->container->get('Router');
-//        $this->logger = $this->container->get('Logger');
+        $this->logger = $this->container->get('Logger');
     }
 
     public function getContainer()
