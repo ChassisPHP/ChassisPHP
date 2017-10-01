@@ -1,4 +1,5 @@
 # ChassisPHP
+[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 
 Pronounced Cha-see <br>
 Yes, another PHP framework. The goal with ChassisPHP is to be a framework that simplifies the process of creating a brouchure-type website.
@@ -26,3 +27,6 @@ ChassisPHP is not bound to any particular component. **Whenever possible** compo
 ## Author
 
 Roger Creasy is the founder of ChassisPHP
+
+## License
+[The MIT License (MIT)](LICENSE)
