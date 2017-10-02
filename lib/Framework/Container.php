@@ -67,7 +67,7 @@ class Container extends LeagueContainer
 
         $this->add('Logger', function() {
             $log = new Logger('CHASSISPHP');
-            $log->pushHandler(new StreamHandler('logs/app.log', LOGGER::DEBUG));
+            $log->pushHandler(new StreamHandler(dirname(__FILE__, 3) . 'Storage/logs/app.log', LOGGER::DEBUG));
         });
     }
 }
