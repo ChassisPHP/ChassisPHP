@@ -27,6 +27,7 @@ class Core implements HttpKernelInterface
         $this->dotenv = $this->container->get('Dotenv');
         $this->router = $this->container->get('Router');
         $this->logger = $this->container->get('Logger');
+        $this->template = $this->container->get('Twig');
     }
 
     public function getContainer()
@@ -50,8 +51,7 @@ class Core implements HttpKernelInterface
 
     public function handle(Request $request, $type = HttpKernelInterface::MASTER_REQUEST, $catch = true)
     {
-        
-    
+        //TODO:: fix ?
         return $response;
     }
 
@@ -88,6 +88,6 @@ class Core implements HttpKernelInterface
         
         $this->response = $this->router->dispatch($this->request, $this->routeDefinitionCallback);
         $this->response->sendHeaders();
-        $this->response->sendContent();
+        return $this->response->sendContent();
     }
 }
