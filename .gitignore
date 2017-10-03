@@ -2,6 +2,7 @@
 .git/
 .env
 *.swp
+*.swo
 vendor
 public/logs/
 /storage
