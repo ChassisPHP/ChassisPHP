@@ -14,7 +14,8 @@ return [
     }],
 
     ['GET', '/test', function () {
-        echo 'This is Roger\'s test page';
+        echo $this->container->get('Twig')->render('test.twig');
+        return true;
     }],
 
     ['GET', '/name/{name}', ['NameController', 'show']],
