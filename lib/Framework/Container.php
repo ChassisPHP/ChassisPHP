@@ -73,7 +73,7 @@ class Container extends LeagueContainer
         $this->add('Twig', function() {
             $loader = new \Twig_Loader_Filesystem(dirname(__FILE__, 3) . '/views');
             return $twig = new \Twig_Environment($loader, array(
-                'cache' => __DIR__ . '/storage/compiledviews',
+                'cache' => dirname(__FILE__, 3) . '/storage/compiledviews',
             ));
         }, TRUE);
     }
