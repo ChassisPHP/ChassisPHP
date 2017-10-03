@@ -21,7 +21,8 @@
         "vlucas/phpdotenv": "^2.4",
         "doctrine/orm": "^2.5",
         "symfony/yaml": "^3.3",
-        "monolog/monolog": "^1.23"
+        "monolog/monolog": "^1.23",
+        "twig/twig": "^2.0"
     },
     "autoload": {
         "files": [
