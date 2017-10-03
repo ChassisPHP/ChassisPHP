@@ -90,4 +90,13 @@ class Core implements HttpKernelInterface
         $this->response->sendHeaders();
         return $this->response->sendContent();
     }
+
+    // Clean up
+    public function destroy()
+    {
+        // Clean up the session variable
+        Session::destroy();
+
+        // other cleanup??
+    }
 }
