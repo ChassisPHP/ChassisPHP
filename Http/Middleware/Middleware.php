@@ -5,7 +5,7 @@ namespace Http\Middleware;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 
-class AuthMiddleware
+class Middleware
 {
     public function __invoke(
         Request $request,
