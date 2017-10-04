@@ -64,7 +64,7 @@ class User
     
     public function getPasswd()
     {
-        return $this->name;
+        return $this->passwd;
     }
 
     public function setPasswd($passwd)
