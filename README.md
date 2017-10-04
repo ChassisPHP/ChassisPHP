@@ -15,7 +15,15 @@ $ composer require rogercreasy/chassis-php
 ```
 This will install ChassisPHP and all required dependencies. We recommend PHP 7.1 or newer.
 
-Alternatively, Git clone the repo to your local system and start from there.
+Alternatively, Git clone the repo to your local system with command
+```bash
+$ git clone https://github.com/RogerCreasy/ChassisPHP.git
+```
+then goto folder and install your dependency using composer
+```bash
+$ composer install
+```
+and start from there.
 
 ## Style, etc.
 
