@@ -1,4 +1,4 @@
-<?PHP
+<?php
 
 namespace Database\entities;
 

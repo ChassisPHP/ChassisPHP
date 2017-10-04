@@ -1,9 +1,9 @@
-<?PHP
+<?php
 
 namespace Http\Controllers\Backend;
 
 use Lib\Database\Connection;
-use Database\entities\User;
+use Database\Entities\User;
 
 class UserController
 {
@@ -18,7 +18,7 @@ class UserController
 
     public function index()
     {
-        $userRepository = $this->entityManager->getRepository('Database\entities\User');
+        $userRepository = $this->entityManager->getRepository('Database\Entities\User');
         $users = $userRepository->findAll();
         
         foreach ($users as $user) {

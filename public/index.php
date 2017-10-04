@@ -1,4 +1,4 @@
-<?PHP
+<?php
 
 /**
  *  ChassisPHP - A PHP framework designed for CMS
