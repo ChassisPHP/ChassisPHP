@@ -65,16 +65,16 @@ class Container extends LeagueContainer
             return $config;
         });
 
-        $this->add('Logger', function() {
+        $this->add('Logger', function () {
             $log = new Logger('CHASSISPHP');
             $log->pushHandler(new StreamHandler(dirname(__FILE__, 3) . 'Storage/logs/app.log', LOGGER::DEBUG));
         });
 
-        $this->add('Twig', function() {
-            $loader = new \Twig_Loader_Filesystem(dirname(__FILE__, 3) . '/views');
+        $this->add('Twig', function () {
+            $loader = new \Twig_Loader_Filesystem(dirname(__FILE__, 3) . '/resources/views');
             return $twig = new \Twig_Environment($loader, array(
                 'cache' => dirname(__FILE__, 3) . '/storage/compiledviews',
             ));
-        }, TRUE);
+        }, true);
     }
 }

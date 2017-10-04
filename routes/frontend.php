@@ -14,7 +14,7 @@ return [
     }],
 
     ['GET', '/test', function () {
-        echo $this->container->get('Twig')->render('test.twig');
+        echo $this->container->get('Twig')->render('test.html.twig');
         return true;
     }],
 
