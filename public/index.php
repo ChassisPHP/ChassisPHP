@@ -15,6 +15,9 @@ define('CHASSIS_START', microtime(true));
 // crank up the Composer autoloading
 require __DIR__.'/../vendor/autoload.php';
 
+// load environment variables
+\Lib\Framework\EnvVarsLoader::loadEnvVars();
+
 // set session storage location and
 // start the session
 ini_set('session.save_path', dirname(__FILE__, 2) . '/storage/sessions');
@@ -22,7 +25,7 @@ ini_set('session.gc_probability', 1);
 session_start();
 
 // set the timeout for the session
-$timeout = 1800;
+$timeout = envar('SESSION_TIMEOUT', 1800);
 
 if (isset($_SESSION['timeout'])) {
     // See if the number of seconds since the last

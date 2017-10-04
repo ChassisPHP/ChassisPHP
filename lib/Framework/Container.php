@@ -50,8 +50,7 @@ class Container extends LeagueContainer
         });
 
         $this->add('Dotenv', function () {
-            $dotenv = new Dotenv(dirname(__FILE__, 3), '.env');
-            return $dotenv->load();
+            return EnvVarsLoader::loadEnvVars();
         });
 
         $this->add('Connection', function () {
