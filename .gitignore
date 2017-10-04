@@ -6,4 +6,5 @@
 vendor
 public/logs/
 /storage
+Database/db.sqlite
 composer.lock
