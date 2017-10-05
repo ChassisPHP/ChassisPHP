@@ -1,4 +1,4 @@
-<?PHP
+<?php
 
 namespace Tests;
 
@@ -12,11 +12,11 @@ trait CreatesApp
     {
 
         //crank up the Composer autoloading
-        require dirname(__FILE__, 2) . '/vendor/autoload.php';
+        require dirname(__FILE__, 2) . '/../vendor/autoload.php';
 
         //set up the application
         $app = new \Lib\Framework\Core();
-        
+
         return $app;
     }
 }

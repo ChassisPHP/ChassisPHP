@@ -1,7 +1,7 @@
-<?PHP
+<?php
 
 /**
- *  ChassisPHP - A PHP framework designed for CMS
+ * ChassisPHP - A PHP framework designed for CMS
  *
  * @package ChassisPHP
  * @copyright Copyright (c) 2017 Roger Creasy
