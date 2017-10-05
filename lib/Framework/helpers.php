@@ -1,4 +1,4 @@
-<?PHP
+<?php
 
 use Symfony\Component\VarDumper\Dumper\HtmlDumper;
 use Symfony\Component\VarDumper\Cloner\VarCloner;

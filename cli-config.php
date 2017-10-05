@@ -1,4 +1,4 @@
-<?PHP
+<?php
 
 $connection = new \Database\Connection;
 $entityManager = $connection->entityManager;

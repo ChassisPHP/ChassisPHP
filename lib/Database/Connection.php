@@ -1,4 +1,5 @@
-<?PHP
+<?php
+
 namespace Lib\Database;
 
 use Doctrine\ORM\Tools\Setup;
@@ -14,7 +15,7 @@ class Connection
     public function __construct()
     {
         $this->config = new Config;
-        $connectionConfig = Setup::createAnnotationMetadataConfiguration(array(dirname(__FILE__, 3)."Database/entities"), $this->isDevMode);
+        $connectionConfig = Setup::createAnnotationMetadataConfiguration(array(dirname(__FILE__, 3)."Database/Entities"), $this->isDevMode);
         $driver = envar('DATABASE_DRIVER', 'pdo_mysql');
         $dbType = envar('DATABASE_TYPE', 'mysql');
         $path = dirname(__FILE__, 3) . "/" . $this->config[$dbType]['database'];
