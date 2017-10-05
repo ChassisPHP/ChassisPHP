@@ -11,7 +11,8 @@ class EnvVarsLoader
     public static function loadEnvVars()
     {
         if (static::$envVars === null) {
-            $loader = new Dotenv(dirname(__FILE__, 3), '.env');
+            $path = dirname(__FILE__, 3);
+            $loader = new Dotenv($path . DIRECTORY_SEPARATOR);
             static::$envVars = $loader->load();
         }
         return static::$envVars;
