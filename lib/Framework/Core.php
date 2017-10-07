@@ -2,12 +2,10 @@
 
 namespace Lib\Framework;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Lib\Framework\Container;
 use FastRoute\RouteCollector;
 
-class Core implements HttpKernelInterface
+class Core
 {
 
     protected $container;
@@ -22,7 +20,7 @@ class Core implements HttpKernelInterface
     public function __construct()
     {
         $this->container = new Container;
-        $this->request = $this->container->get('Request');
+        $this->request = $this->container->get('PsrRequestInterface');
         $this->baseDir = $this->container->get('BaseDir');
         $this->dotenv = $this->container->get('Dotenv');
         $this->router = $this->container->get('Router');
@@ -47,12 +45,6 @@ class Core implements HttpKernelInterface
             }
         }
         throw new \BadMethodCallException("Method $method is not valid");
-    }
-
-    public function handle(Request $request, $type = HttpKernelInterface::MASTER_REQUEST, $catch = true)
-    {
-        //TODO:: fix ?
-        return $response;
     }
 
     // Associates an URL with a callback function
@@ -86,9 +78,7 @@ class Core implements HttpKernelInterface
             $this->readRoutes($r);
         };
         
-        $this->response = $this->router->dispatch($this->request, $this->routeDefinitionCallback);
-        $this->response->sendHeaders();
-        return $this->response->sendContent();
+        $this->router->dispatch($this->request, $this->routeDefinitionCallback);
     }
 
     // Clean up
