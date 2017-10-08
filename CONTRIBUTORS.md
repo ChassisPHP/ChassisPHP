@@ -10,6 +10,8 @@ ChassisPHP is a project for the community. I want to thank the following communi
 - [tarlepp](https://github.com/tarlepp)
 - [selfInvoking](https://github.com/selfInvoking)
 - [Braunson](https://github.com/Braunson)
+- [peppeocchi](https://github.com/peppeocchi)
+- [LiamBailey](https://github.com/LiamBailey)
 
 ---
 
