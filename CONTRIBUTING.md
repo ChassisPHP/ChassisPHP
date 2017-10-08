@@ -2,10 +2,9 @@ THIS FILE IS INCOMPLETE AND IS STILL UNDER DEVELOPMENT
 
 # Contributing
 
-When contributing to this repository, please first discuss the change you wish to make via issue,
-email, or any other method with the owners of this repository before making a change. 
+When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the owners of this repository before making a change. 
 
-Please note we have a code of conduct, please follow it in all your interactions with the project.
+Please note we have a code of conduct which should be followed in all your interactions with the project.
 
 ## Pull Request Process
 
@@ -13,16 +12,15 @@ Please note we have a code of conduct, please follow it in all your interactions
    build.
 2. Update the README.md with details of changes to the interface, this includes new environment 
    variables, exposed ports, useful file locations and container parameters.
-3. You may merge the Pull Request in once you have the sign-off of another developer, or if you 
-   do not have permission to do that, you may request the another reviewer to merge it for you.
+3. Pull requests will be reviewed and merged once approved. Changes may be requested and the review process could be delayed if the community is asked to review.
 
 ## Code of Conduct
 
 ### Our Pledge
 
-In the interest of fostering an open and welcoming environment, we as
+In the interest of fostering an open and welcoming environment, we, as
 contributors and maintainers pledge to making participation in our project and
-our community a harassment-free experience for everyone, regardless of age, body
+our community a harassment-free experience for everyone. This aim is regardless of age, body
 size, disability, ethnicity, gender identity and expression, level of experience,
 nationality, personal appearance, race, religion, or sexual identity and
 orientation.
@@ -52,12 +50,12 @@ advances
 ### Our Responsibilities
 
 Project maintainers are responsible for clarifying the standards of acceptable
-behavior and are expected to take appropriate and fair corrective action in
+behavior. They are expected to take appropriate and fair corrective action in
 response to any instances of unacceptable behavior.
 
 Project maintainers have the right and responsibility to remove, edit, or
 reject comments, commits, code, wiki edits, issues, and other contributions
-that are not aligned to this Code of Conduct, or to ban temporarily or
+that are not aligned to the Code of Conduct, or to ban temporarily or
 permanently any contributor for other behaviors that they deem inappropriate,
 threatening, offensive, or harmful.
 
