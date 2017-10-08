@@ -4,15 +4,14 @@ namespace Lib\Framework;
 
 use League\Container\Container as LeagueContainer;
 use League\Container\ReflectionContainer;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\ResponseInterface;
 use Lib\Framework\Core;
 use Lib\Framework\Router;
 use Dotenv\Dotenv;
 use Dotenv\Exception\InvalidPathException;
 use Lib\Database\Connection;
 use Lib\Framework\Config;
-
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 
@@ -27,18 +26,11 @@ class Container extends LeagueContainer
             new ReflectionContainer
         );
 
-        $this->add('Request', function () {
-            $request = new Request;
-            return $request->createFromGlobals();
-        });
-
-        $this->add('Response', function () {
-            $response = new Response;
-            return $response;
-        });
+        $this->addServiceProvider('App\ServiceProviders\ResponseServiceProvider');
+        $this->addServiceProvider('App\ServiceProviders\RequestServiceProvider');
 
         $this->add('Router', function () {
-            $response = $this->get('Response');
+            $response = $this->get('PsrResponseInterface');
             $router = new Router($response);
             return $router;
         });

@@ -22,7 +22,8 @@
         "doctrine/orm": "^2.5",
         "symfony/yaml": "^3.3",
         "monolog/monolog": "^1.23",
-        "twig/twig": "^2.0"
+        "twig/twig": "^2.0",
+        "zendframework/zend-diactoros": "^1.6"
     },
     "autoload": {
         "files": [
@@ -31,7 +32,8 @@
         "psr-4": {
             "Lib\\": "lib/",
             "Http\\": "Http/",
-            "Database\\": "Database/"
+            "Database\\": "Database/",
+            "App\\": "app/"
         }
     },
     "autoload-dev": {

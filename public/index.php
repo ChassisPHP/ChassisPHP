@@ -44,4 +44,4 @@ $_SESSION['timeout'] = time();
 // set up the application
 $app = new \Lib\Framework\Core();
 
-$response = $app->run();
+$app->run();

@@ -10,7 +10,6 @@ namespace Lib\Framework;
 
 use FastRoute\RouteCollector;
 use FastRoute\Dispatcher;
-use Symfony\Component\HttpFoundation\Response;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
@@ -20,20 +19,22 @@ class Router
     private $dispatcher;
     public $response;
 
-    public function __construct(Response $response)
+    public function __construct(ResponseInterface $response)
     {
         $this->response = $response;
     }
 
-    public function getRouteInfo($request, $routeDefinitionCallback)
+    public function getRouteInfo(ServerRequestInterface $request, $routeDefinitionCallback)
     {
+        $params = $request->getServerParams();
+        $requestURI = $params['REQUEST_URI'];
         $dispatcher = $this->dispatcher($routeDefinitionCallback);
-        $requestURI = $request->getRequestUri();
 
-      // if the route has a trailing /, remove it
+        // if the route has a trailing /, remove it
         if (strlen($requestURI)>1) {
             $requestURI = rtrim($requestURI, "/");
         }
+
         $routeInfo = $dispatcher->dispatch($request->getMethod(), $requestURI);
 
         return $routeInfo;
@@ -51,8 +52,8 @@ class Router
         $routeInfo = $this->getRouteInfo($request, $routeDefinitionCallback);
         switch ($routeInfo[0]) {
             case Dispatcher::NOT_FOUND:
-                $this->response->setContent('404 - Page not found');
-                $this->response->setStatusCode(404);
+                $newResponse = $this->response->withStatus(404);
+                return $newResponse;
                 break;
             case Dispatcher::METHOD_NOT_ALLOWED:
                 $response->setContent('405 - Method not allowed');
