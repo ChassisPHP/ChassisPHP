@@ -12,6 +12,7 @@ ChassisPHP is a project for the community. I want to thank the following communi
 - [Braunson](https://github.com/Braunson)
 - [peppeocchi](https://github.com/peppeocchi)
 - [LiamBailey](https://github.com/LiamBailey)
+- [MarkussZ](https://github.com/MarkussZ)
 
 ---
 
