@@ -4,6 +4,7 @@ namespace Lib\Framework;
 
 use Lib\Framework\Container;
 use FastRoute\RouteCollector;
+use Psr\Http\Message\ResponseInterface;
 
 class Core
 {
@@ -15,6 +16,7 @@ class Core
     protected $baseDir;
     protected $dotenv;
     protected $routeDefinitionCallback;
+    protected $template;
     protected $logger;
 
     public function __construct()
@@ -77,8 +79,50 @@ class Core
         $this->routeDefinitionCallback = function (RouteCollector $r) {
             $this->readRoutes($r);
         };
-        
-        $this->router->dispatch($this->request, $this->routeDefinitionCallback);
+
+        $response = $this->router->dispatch($this->request, $this->routeDefinitionCallback);
+
+        if ($response->getStatusCode() < 200 || $response->getStatusCode() >= 400) {
+            $response = $response->withBody(
+                ResponseBody::createFromString(
+                    $this->template->render($this->container->get('template.defaults.' . $response->getStatusCode()))
+                )
+            );
+        }
+
+        $this->send($response);
+    }
+
+    protected function send(ResponseInterface $response)
+    {
+        header(
+            sprintf(
+                'HTTP/%s %s %s',
+                $response->getProtocolVersion(),
+                $response->getStatusCode(),
+                $response->getReasonPhrase()
+            )
+        );
+
+        foreach ($response->getHeaders() as $headerName => $headerValues) {
+            foreach ($headerValues as $headerValue) {
+                header(sprintf('%s: %s', $headerName, $headerValue), false);
+            }
+        }
+
+        $body = $response->getBody();
+
+        if ($body->isSeekable()) {
+            $body->rewind();
+        }
+
+        while (!$body->eof()) {
+            echo $body->read(4096); // TODO Make this configurable?
+
+            if (\connection_status() !== \CONNECTION_NORMAL) {
+                break;
+            }
+        }
     }
 
     // Clean up

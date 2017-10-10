@@ -68,5 +68,8 @@ class Container extends LeagueContainer
                 'auto_reload' => true,
             ));
         }, true);
+
+        // Add additional default error pages here.
+        $this->add('template.defaults.404', 'errors/404.twig');
     }
 }
