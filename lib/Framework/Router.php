@@ -17,7 +17,7 @@ class Router
 {
     
     private $dispatcher;
-    public $response;
+    private $response;
 
     public function __construct(ResponseInterface $response)
     {
@@ -50,11 +50,11 @@ class Router
     public function dispatch($request, $routeDefinitionCallback)
     {
         $routeInfo = $this->getRouteInfo($request, $routeDefinitionCallback);
+
         switch ($routeInfo[0]) {
             case Dispatcher::NOT_FOUND:
-                $newResponse = $this->response->withStatus(404);
-                return $newResponse;
-                break;
+                return $this->response->withStatus(404);
+
             case Dispatcher::METHOD_NOT_ALLOWED:
                 $response->setContent('405 - Method not allowed');
                 $response->setStatusCode(405);
