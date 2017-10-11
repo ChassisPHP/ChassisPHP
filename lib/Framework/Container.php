@@ -6,8 +6,6 @@ use League\Container\Container as LeagueContainer;
 use League\Container\ReflectionContainer;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use Lib\Framework\Core;
-use Lib\Framework\Router;
 use Dotenv\Dotenv;
 use Dotenv\Exception\InvalidPathException;
 use Lib\Database\Connection;
