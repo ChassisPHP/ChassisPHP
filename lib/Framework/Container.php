@@ -9,7 +9,6 @@ use Psr\Http\Message\ResponseInterface;
 use Dotenv\Dotenv;
 use Dotenv\Exception\InvalidPathException;
 use Lib\Database\Connection;
-use Lib\Framework\Config;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 
