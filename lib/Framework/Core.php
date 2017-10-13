@@ -2,7 +2,6 @@
 
 namespace Lib\Framework;
 
-use Lib\Framework\Container;
 use FastRoute\RouteCollector;
 use Psr\Http\Message\ResponseInterface;
 
