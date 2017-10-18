@@ -12,16 +12,19 @@ use FastRoute\RouteCollector;
 use FastRoute\Dispatcher;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
+use Lib\Framework\Http\MiddlewareQueue;
 
 class Router
 {
     
     private $dispatcher;
     private $response;
+    protected $middlewareQueue;
 
-    public function __construct(ResponseInterface $response)
+    public function __construct(ResponseInterface $response, MiddlewareQueue $middlewareQueue)
     {
         $this->response = $response;
+        $this->middlewareQueue = $middlewareQueue;
     }
 
     public function getRouteInfo(ServerRequestInterface $request, $routeDefinitionCallback)
@@ -65,8 +68,9 @@ class Router
                     $classname = 'Http\Controllers\\' . $classname;
                     $method = $routeInfo[1][1];
                     $vars = $routeInfo[2];
-                    $class = new $classname;
-                    $class->$method($vars);
+                    $class = new $classname($this->middlewareQueue);
+                    $classResponse = $class->$method($vars);
+                    $this->response->withBody(ResponseBody::createFromString($classResponse));
                 } else {
                     $handler = $routeInfo[1];
                     $vars = $routeInfo[2];
@@ -74,6 +78,9 @@ class Router
                 }
                 break;
         }
+
+        // call the middlewareQueue
+        $this->response = $this->middlewareQueue->callMiddleware($request, $this->response);
         return $this->response;
     }
 }

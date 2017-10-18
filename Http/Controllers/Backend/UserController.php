@@ -4,14 +4,18 @@ namespace Http\Controllers\Backend;
 
 use Lib\Database\Connection;
 use Database\Entities\User;
+use Lib\Framework\Http\Controller;
+use Lib\Framework\Http\MiddlewareQueue;
 
-class UserController
+class UserController extends Controller
 {
     private $connection;
     private $entityManager;
 
-    public function __construct()
+    public function __construct(MiddlewareQueue $middlewareQueue)
     {
+        parent::__construct($middlewareQueue);
+        $this->addMiddleware('TestMiddleware');
         $this->connection = new Connection;
         $this->entityManager = $this->connection->entityManager;
     }
