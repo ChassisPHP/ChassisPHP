@@ -25,10 +25,14 @@ class Container extends LeagueContainer
 
         $this->addServiceProvider('App\ServiceProviders\ResponseServiceProvider');
         $this->addServiceProvider('App\ServiceProviders\RequestServiceProvider');
+        $this->addServiceProvider('App\ServiceProviders\UserControllerServiceProvider');
+
+        $this->share('MiddlewareQueue', new \Lib\Framework\Http\MiddlewareQueue($this->get('PsrRequestInterface'), $this->get('PsrResponseInterface')));
 
         $this->add('Router', function () {
             $response = $this->get('PsrResponseInterface');
-            $router = new Router($response);
+            $middlewareQueue = $this->get('MiddlewareQueue');
+            $router = new Router($response, $middlewareQueue);
             return $router;
         });
 
