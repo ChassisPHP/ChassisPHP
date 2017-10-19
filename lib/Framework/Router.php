@@ -21,7 +21,7 @@ class Router
     private $response;
     protected $middlewareQueue;
 
-    public function __construct(ResponseInterface $response, MiddlewareQueue $middlewareQueue)
+    public function __construct(ServerRequestInterface $request, ResponseInterface $response, MiddlewareQueue $middlewareQueue)
     {
         $this->response = $response;
         $this->middlewareQueue = $middlewareQueue;

@@ -1,10 +1,10 @@
 <?php
 
-namespace Http\Middleware;
+namespace Lib\Framework\Http\Middleware;
 
 use Lib\Framework\Session;
 
-class TestMiddleware
+class SessionMiddleware
 {
     /**
      * Example middleware invokable class
@@ -17,9 +17,14 @@ class TestMiddleware
      **/
     public function __invoke($request, $response, $next = null)
     {
+        if (!$next) {
+            return $response;
+        }
 
-        $name = Session::get('name');
-        $response->getBody()->write('BEFORE ');
+        if (Session::get('name') == null) {
+            Session::start();
+            $name = Session::set('name', 'guest');
+        }
         $response = $next($request, $response);
         $response->getBody()->write(' Name:'. $name);
 

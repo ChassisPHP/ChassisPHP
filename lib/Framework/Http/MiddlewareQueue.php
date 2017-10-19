@@ -21,7 +21,7 @@ class MiddlewareQueue
     }
 
     // add middleware to the queue
-    public function addMiddleware($middleware)
+    public function addMiddleware($middleware, $middlewareDir = '\Http\Middleware\\')
     {
         // if the queue is empty, handle it
         if ($this->queue->isEmpty()) {
@@ -30,7 +30,7 @@ class MiddlewareQueue
 
         $this->queue->rewind();
         $this->next = $this->queue->current();
-        $middleware = '\Http\Middleware\\'.$middleware;
+        $middleware = $middlewareDir.$middleware;
         $this->middleware = new $middleware;
         $this->queue[] = function (
             ServerRequestInterface $request,
