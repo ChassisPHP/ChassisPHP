@@ -30,9 +30,10 @@ class Container extends LeagueContainer
         $this->share('MiddlewareQueue', new \Lib\Framework\Http\MiddlewareQueue($this->get('PsrRequestInterface'), $this->get('PsrResponseInterface')));
 
         $this->add('Router', function () {
+            $request = $this->get('PsrRequestInterface');
             $response = $this->get('PsrResponseInterface');
             $middlewareQueue = $this->get('MiddlewareQueue');
-            $router = new Router($response, $middlewareQueue);
+            $router = new Router($request, $response, $middlewareQueue);
             return $router;
         });
 
