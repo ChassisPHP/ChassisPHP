@@ -1,6 +1,6 @@
 <?php
 
-namespace Http\Middleware;
+namespace App\Http\Middleware;
 
 use Lib\Framework\Session;
 
@@ -17,7 +17,6 @@ class TestMiddleware
      **/
     public function __invoke($request, $response, $next = null)
     {
-
         $name = Session::get('name');
         $response->getBody()->write('BEFORE ');
         $response = $next($request, $response);
