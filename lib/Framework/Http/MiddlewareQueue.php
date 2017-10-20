@@ -11,7 +11,9 @@ class MiddlewareQueue
     protected $queue;
     protected $response;
     protected $request;
-    
+    protected $next;
+    protected $middleware;
+
     // set up our middleware queue as a DoubleLinkedList
     public function __construct(ServerRequestInterface $request, ResponseInterface $response)
     {
@@ -21,16 +23,16 @@ class MiddlewareQueue
     }
 
     // add middleware to the queue
-    public function addMiddleware($middleware, $middlewareDir = '\Http\Middleware\\')
+    public function addMiddleware($middleware, $middlewareDir = '\App\Http\Middleware\\')
     {
         // if the queue is empty, handle it
         if ($this->queue->isEmpty()) {
-            $this->startQueue($this->response);
+            $this->startQueue();
         }
 
         $this->queue->rewind();
         $this->next = $this->queue->current();
-        $middleware = $middlewareDir.$middleware;
+        $middleware = $middlewareDir . $middleware;
         $this->middleware = new $middleware;
         $this->queue[] = function (
             ServerRequestInterface $request,
@@ -48,17 +50,19 @@ class MiddlewareQueue
         $this->queue[] = function ($request, $response) {
             return $response;
         };
+
         return;
     }
 
     public function callMiddleware(ServerRequestInterface $request, ResponseInterface $response)
     {
-        if (! $this->queue->isEmpty()) {
+        if (!$this->queue->isEmpty()) {
             $this->queue->rewind();
             $next = $this->queue->pop();
             $response = $next($request, $response);
             return $response;
         }
+
         return $response;
     }
 }
