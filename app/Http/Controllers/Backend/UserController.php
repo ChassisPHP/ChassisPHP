@@ -1,9 +1,8 @@
 <?php
 
-namespace Http\Controllers\Backend;
+namespace App\Http\Controllers\Backend;
 
 use Lib\Database\Connection;
-use Database\Entities\User;
 use Lib\Framework\Http\Controller;
 use Lib\Framework\Http\MiddlewareQueue;
 

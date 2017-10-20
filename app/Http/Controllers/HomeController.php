@@ -1,6 +1,6 @@
 <?php
 
-namespace Http\Controllers;
+namespace App\Http\Controllers;
 
 use Lib\Framework\Session;
 

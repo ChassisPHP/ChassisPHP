@@ -65,7 +65,7 @@ class Router
             case Dispatcher::FOUND:
                 if (is_array($routeInfo[1])) {
                     $classname = $routeInfo[1][0];
-                    $classname = 'Http\Controllers\\' . $classname;
+                    $classname = 'App\Http\Controllers\\' . $classname;
                     $method = $routeInfo[1][1];
                     $vars = $routeInfo[2];
                     $class = new $classname($this->middlewareQueue);
