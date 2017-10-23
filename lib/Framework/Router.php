@@ -53,7 +53,7 @@ class Router
     public function dispatch($request, $routeDefinitionCallback)
     {
         $routeInfo = $this->getRouteInfo($request, $routeDefinitionCallback);
-
+        
         switch ($routeInfo[0]) {
             case Dispatcher::NOT_FOUND:
                 return $this->response->withStatus(404);
@@ -70,17 +70,27 @@ class Router
                     $vars = $routeInfo[2];
                     $class = new $classname($this->middlewareQueue);
                     $classResponse = $class->$method($vars);
-                    $this->response->withBody(ResponseBody::createFromString($classResponse));
+                    //$this->response->withBody(ResponseBody::createFromString($classResponse));
+                    $this->middlewareQueue->addController($classResponse);
                 } else {
                     $handler = $routeInfo[1];
                     $vars = $routeInfo[2];
-                    call_user_func($handler, $vars);
+                    $this->response->withBody(ResponseBody::createFromString(call_user_func($handler, $vars)));
                 }
                 break;
         }
 
+        $this->addCoreMiddleware();
         // call the middlewareQueue
         $this->response = $this->middlewareQueue->callMiddleware($request, $this->response);
+ 
         return $this->response;
+    }
+
+    // add the core middleware that should be applied to all routesd
+    private function addCoreMiddleware()
+    {
+        //$middlewareQueue = $this->container->get('MiddlewareQueue');
+        $this->middlewareQueue->addMiddleware('SessionMiddleware', '\Lib\Framework\Http\Middleware\\');
     }
 }
