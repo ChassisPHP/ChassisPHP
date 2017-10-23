@@ -17,17 +17,13 @@ class SessionMiddleware
      **/
     public function __invoke($request, $response, $next = null)
     {
-        if (!$next) {
-            return $response;
-        }
-
-        if (Session::get('name') == null) {
+        if (!Session::$sessionStarted) {
             Session::start();
             $name = Session::set('name', 'guest');
         }
-        $response = $next($request, $response);
-        $response->getBody()->write(' Name:'. $name);
 
+        $response->getBody()->write(' Testing session started before controller or route ');
+        $response = $next($request, $response);
         return $next($request, $response);
     }
 }

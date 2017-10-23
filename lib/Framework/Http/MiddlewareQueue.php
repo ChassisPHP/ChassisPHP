@@ -5,6 +5,7 @@ namespace Lib\Framework\Http;
 use SplDoublyLinkedList;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Lib\Framework\ResponseBody;
 
 class MiddlewareQueue
 {
@@ -25,40 +26,66 @@ class MiddlewareQueue
     // add middleware to the queue
     public function addMiddleware($middleware, $middlewareDir = '\App\Http\Middleware\\')
     {
-        // if the queue is empty, handle it
+        //if the queue is empty, handle it
         if ($this->queue->isEmpty()) {
             $this->startQueue();
         }
 
-        $this->queue->rewind();
-        $this->next = $this->queue->current();
+        $next = $this->queue->top();
         $middleware = $middlewareDir . $middleware;
-        $this->middleware = new $middleware;
-        $this->queue[] = function (
+        $callable = new $middleware;
+        $this->queue->push(function (
             ServerRequestInterface $request,
             ResponseInterface $response
+        ) use (
+            $callable,
+            $next
         ) {
-            $result = call_user_func($this->middleware, $request, $response, $this->next);
+            $result = call_user_func($callable, $request, $response, $next);
             return $result;
-        };
+        });
 
         return $this->queue;
     }
 
     private function startQueue()
     {
-        $this->queue[] = function ($request, $response) {
+        $this->queue->push(function (ServerRequestInterface $request, ResponseInterface $response) {
             return $response;
-        };
+        });
 
         return;
+    }
+
+    public function getQueue()
+    {
+        return $this->queue;
+    }
+
+    public function addController($classResponse)
+    {
+        //if the queue is empty, handle it
+        if ($this->queue->isEmpty()) {
+            $this->startQueue();
+        }
+
+        $next = $this->queue->top();
+        $this->queue->push(function (
+            ServerRequestInterface $request,
+            ResponseInterface $response
+        ) use (
+            $classResponse,
+            $next
+        ) {
+            $response = $response->withBody(ResponseBody::createFromString($classResponse));
+            return $next($request, $response);
+        });
     }
 
     public function callMiddleware(ServerRequestInterface $request, ResponseInterface $response)
     {
         if (!$this->queue->isEmpty()) {
-            $this->queue->rewind();
-            $next = $this->queue->pop();
+            $next = $this->queue->top();
             $response = $next($request, $response);
             return $response;
         }
