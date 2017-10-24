@@ -54,7 +54,7 @@ ChassisPHP is not bound to any particular component. **Whenever possible** compo
 
 ## Author
 
-Roger Creasy is the founder of ChassisPHP. [Many community contributors](CONTRIBUTORS.md)
+Roger Creasy is the founder of ChassisPHP which has a large community of [contributors](CONTRIBUTORS.md).
 
 ## License
 [The MIT License (MIT)](LICENSE)
