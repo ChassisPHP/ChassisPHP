@@ -35,7 +35,7 @@ $ phpunit
 
 ## Style, etc.
 
-We follow PSR-2 for coding style, PSR-4 autoloading, and PSR-11 for containers.
+We follow PSR-2 for coding style, PSR-4 autoloading, PSR-7 for messaging, and PSR-11 for containers.
 We also believe in the use of the Oxford comma (see the above line).  :-)
 
 ChassisPHP is not bound to any particular component. **Whenever possible** component use is written such that it can be replaced with a component of the developer's choosing. i.e. the PHP League Container is default. However, if the developer prefers Pimple, she or he can use it.
@@ -43,6 +43,7 @@ ChassisPHP is not bound to any particular component. **Whenever possible** compo
 
 ## Contributing
 
+We REALLY do want your help. ChassisPHP has grown into a project with real potential! We try to be a helpful, welcoming, and nurturing community. Please look at the code, try it out, and let us know what you want changed. Make a pull request for the change, if you want.
 1. Fork it!
 2. Clone the repo: `git clone [insert link]`
 2. Create your feature branch: `git checkout -b my-new-feature`
@@ -54,7 +55,9 @@ ChassisPHP is not bound to any particular component. **Whenever possible** compo
 
 ## Author
 
-Roger Creasy is the founder of ChassisPHP which has a large community of [contributors](CONTRIBUTORS.md).
+ChassisPHP has a quickly growing community of [contributors](CONTRIBUTORS.md). If you want your name added to that list of contributors, see the "Contributing" section above.<br>
+Roger Creasy is the maintainer of the ChassisPHP project, and is its founder.
+ 
 
 ## License
 [The MIT License (MIT)](LICENSE)
