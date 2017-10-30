@@ -14,11 +14,12 @@ class MiddlewareQueue
     protected $request;
     protected $next;
     protected $middleware;
+    protected $key;
 
     // set up our middleware queue as a DoubleLinkedList
     public function __construct(ServerRequestInterface $request, ResponseInterface $response)
     {
-        $this->queue = new SplDoublyLinkedList;
+        $this->queue = array();
         $this->response = $response;
         $this->request = $request;
     }
@@ -27,69 +28,75 @@ class MiddlewareQueue
     public function addMiddleware($middleware, $middlewareDir = '\App\Http\Middleware\\')
     {
         //if the queue is empty, handle it
-        if ($this->queue->isEmpty()) {
-            $this->startQueue();
-        }
+       // if (empty($this->queue)) {
+         //   $this->startQueue();
+       // }
 
-        $next = $this->queue->top();
         $middleware = $middlewareDir . $middleware;
         $callable = new $middleware;
-        $this->queue->push(function (
-            ServerRequestInterface $request,
-            ResponseInterface $response
-        ) use (
-            $callable,
-            $next
-        ) {
-            $result = call_user_func($callable, $request, $response, $next);
-            return $result;
-        });
+        array_push($this->queue, $callable);
 
         return $this->queue;
     }
 
     private function startQueue()
     {
-        $this->queue->push(function (ServerRequestInterface $request, ResponseInterface $response) {
-            return $response;
-        });
+        $this->queue[0] = null;
 
         return;
     }
 
     public function getQueue()
     {
-        return $this->queue;
+        $c = array();
+        foreach ($this->queue as $k => $v) {
+            $c[$k] = $v;
+        }
+        debugVar($c);
     }
 
     public function addController($classResponse)
     {
-        //if the queue is empty, handle it
-        if ($this->queue->isEmpty()) {
-            $this->startQueue();
-        }
-
-        $next = $this->queue->top();
-        $this->queue->push(function (
-            ServerRequestInterface $request,
-            ResponseInterface $response
-        ) use (
-            $classResponse,
-            $next
-        ) {
-            $response = $response->withBody(ResponseBody::createFromString($classResponse));
-            return $next($request, $response);
-        });
+        // add string content to response via controllerMiddleware object
+        $controller = '\Lib\Framework\Http\Middleware\ControllerMiddleware';
+        $callable = new $controller($classResponse);
+        array_unshift($this->queue, $callable);
     }
 
     public function callMiddleware(ServerRequestInterface $request, ResponseInterface $response)
     {
-        if (!$this->queue->isEmpty()) {
-            $next = $this->queue->top();
-            $response = $next($request, $response);
-            return $response;
-        }
+        $middlewareStack = $this->traverseMiddleware();
 
+        $middlewareStack->rewind();
+        $start = $middlewareStack->top();
+        
+        $response = $start($request, $response);
+    
         return $response;
+    }
+
+    private function traverseMiddleware()
+    {
+        $stack = new SplDoublyLinkedList;
+        foreach ($this->queue as $key => $middleware) {
+            if ($key == 0) {
+                $next = null;
+            } else {
+                $stack->rewind();
+                $next = $stack->top();
+            }
+            
+            $stack->push(function (
+                ServerRequestInterface $request,
+                ResponseInterface $response
+            ) use (
+                $middleware,
+                $next
+            ) {
+                $result = call_user_func($middleware, $request, $response, $next);
+                return $result;
+            });
+        }
+        return $stack;
     }
 }

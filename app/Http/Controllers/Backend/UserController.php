@@ -29,7 +29,8 @@ class UserController extends Controller
             $name = $user->getUserName();
             $email = $user->getEmail();
             $userLevel = $user->getUserLevel();
-            echo "$id | $name | $email | $userLevel \n";
+            $classResponse = "$id | $name | $email | $userLevel <br>\n";
+            return $classResponse;
         }
     }
 }
