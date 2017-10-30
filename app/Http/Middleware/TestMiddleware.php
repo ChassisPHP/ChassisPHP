@@ -18,10 +18,11 @@ class TestMiddleware
     public function __invoke($request, $response, $next = null)
     {
         $name = Session::get('name');
-        $response->getBody()->write('BEFORE ');
+        $response->getBody()->write('BEFORE <br>');
         $response = $next($request, $response);
+
         $response->getBody()->write(' Name:'. $name);
 
-        return $next($request, $response);
+        return $response;
     }
 }

@@ -6,6 +6,6 @@ class NameController
 {
     public function show($vars)
     {
-        echo "Well, hello $vars[name] !!";
+        return "Well, hello $vars[name] !!";
     }
 }

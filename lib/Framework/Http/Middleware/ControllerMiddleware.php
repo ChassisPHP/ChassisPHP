@@ -2,12 +2,21 @@
 
 namespace Lib\Framework\Http\Middleware;
 
-use Lib\Framework\Session;
+use Lib\Framework\ResponseBody;
 
-class SessionMiddleware
+class ControllerMiddleware
 {
+    private $classResponse;
+
+    public function __construct($classResponse)
+    {
+        $this->classResponse = $classResponse;
+    }
+
     /**
-     * Example middleware invokable class
+     *  middleware invokable class
+     *  this class allows the controller
+     *  response to be placed in the middleware stack
      *
      * @param  \Psr\Http\Message\ServerRequestInterface $request  PSR7 request
      * @param  \Psr\Http\Message\ResponseInterface      $response PSR7 response
@@ -17,13 +26,7 @@ class SessionMiddleware
      **/
     public function __invoke($request, $response, $next = null)
     {
-        if (!Session::$sessionStarted) {
-            Session::start();
-            $name = Session::set('name', 'guest');
-        }
-
-        $response->getBody()->write(' Testing session started before controller or route '); //this is here for testing, to show that the session middleware is called before output
-        $response = $next($request, $response);
+        $response->getBody()->write(ResponseBody::createFromString($this->classResponse));
         return $response;
     }
 }
