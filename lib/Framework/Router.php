@@ -52,7 +52,7 @@ class Router
     }
 
     // dispatch a response
-    public function dispatch($request, $routeDefinitionCallback)
+    public function dispatch($request, $routeDefinitionCallback, $container)
     {
         $routeInfo = $this->getRouteInfo($request, $routeDefinitionCallback);
         
@@ -70,7 +70,7 @@ class Router
                     $classname = 'App\Http\Controllers\\' . $classname;
                     $method = $routeInfo[1][1];
                     $vars = $routeInfo[2];
-                    $class = new $classname($this->middlewareQueue);
+                    $class = $container->get($classname);
                     $classResponse = $class->$method($vars);
                     $this->middlewareQueue->addController($classResponse);
                 } else {

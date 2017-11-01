@@ -8,10 +8,12 @@ use Lib\Framework\Container;
 class Controller
 {
     protected $middlewareQueue;
+    protected $twig;
 
-    public function __construct(MiddlewareQueue $middlewareQueue)
+    public function __construct(MiddlewareQueue $middlewareQueue, \Twig_Environment $twig)
     {
         $this->middlewareQueue = $middlewareQueue;
+        $this->twig = $twig;
     }
 
     protected function addMiddleware($middleware)
