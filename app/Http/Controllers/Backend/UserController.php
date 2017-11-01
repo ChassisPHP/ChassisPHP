@@ -11,9 +11,9 @@ class UserController extends Controller
     private $connection;
     private $entityManager;
 
-    public function __construct(MiddlewareQueue $middlewareQueue)
+    public function __construct($middleware, $twig)
     {
-        parent::__construct($middlewareQueue);
+        parent::__construct($middleware, $twig);
         $this->addMiddleware('TestMiddleware');
         $this->connection = new Connection;
         $this->entityManager = $this->connection->entityManager;

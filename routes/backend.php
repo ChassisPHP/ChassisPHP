@@ -10,6 +10,8 @@ return [
         return 'This is the backend front page!';
     }],
 
+    ['GET', '/register', ['Backend\AuthController', 'index']],
+    
     ['GET', '/users', ['Backend\UserController', 'index']],
 
     ['GET', '/test', function () {

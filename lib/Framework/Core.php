@@ -80,7 +80,7 @@ class Core
             $this->readRoutes($r);
         };
 
-        $response = $this->router->dispatch($this->request, $this->routeDefinitionCallback);
+        $response = $this->router->dispatch($this->request, $this->routeDefinitionCallback, $this->container);
 
         if ($response->getStatusCode() < 200 || $response->getStatusCode() >= 400) {
             $response = $response->withBody(
