@@ -1,6 +1,6 @@
 <?php
 
-namespace Http\Middleware;
+namespace App\Http\Middleware;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;

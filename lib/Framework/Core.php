@@ -27,6 +27,7 @@ class Core
         $this->router = $this->container->get('Router');
         $this->logger = $this->container->get('Logger');
         $this->template = $this->container->get('Twig');
+        //$this->addCoreMiddleware();
     }
 
     public function getContainer()
@@ -79,7 +80,7 @@ class Core
             $this->readRoutes($r);
         };
 
-        $response = $this->router->dispatch($this->request, $this->routeDefinitionCallback);
+        $response = $this->router->dispatch($this->request, $this->routeDefinitionCallback, $this->container);
 
         if ($response->getStatusCode() < 200 || $response->getStatusCode() >= 400) {
             $response = $response->withBody(
@@ -122,6 +123,13 @@ class Core
                 break;
             }
         }
+    }
+
+    // add the core middleware that should be applied to all routes
+    private function addCoreMiddleware()
+    {
+        $middlewareQueue = $this->container->get('MiddlewareQueue');
+        $middlewareQueue->addMiddleware('SessionMiddleware', '\Lib\Framework\Http\Middleware\\');
     }
 
     // Clean up

@@ -7,12 +7,14 @@ return [
  * backenend, admin pages routes
  */
     ['GET', '', function () {
-        echo 'This is the backend front page!';
+        return 'This is the backend front page!';
     }],
 
+    ['GET', '/register', ['Backend\AuthController', 'index']],
+    
     ['GET', '/users', ['Backend\UserController', 'index']],
 
     ['GET', '/test', function () {
-        echo 'This is Roger\'s test page';
+        return 'This is Roger\'s test page';
     }],
 ];

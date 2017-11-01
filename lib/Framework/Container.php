@@ -11,6 +11,8 @@ use Dotenv\Exception\InvalidPathException;
 use Lib\Database\Connection;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
+use Lib\Framework\Http\Controller;
+use App\Http\Controllers\Backend\AuthController;
 
 class Container extends LeagueContainer
 {
@@ -25,10 +27,15 @@ class Container extends LeagueContainer
 
         $this->addServiceProvider('App\ServiceProviders\ResponseServiceProvider');
         $this->addServiceProvider('App\ServiceProviders\RequestServiceProvider');
+        $this->addServiceProvider('App\ServiceProviders\UserControllerServiceProvider');
+
+        $this->share('MiddlewareQueue', new \Lib\Framework\Http\MiddlewareQueue($this->get('PsrRequestInterface'), $this->get('PsrResponseInterface')));
 
         $this->add('Router', function () {
+            $request = $this->get('PsrRequestInterface');
             $response = $this->get('PsrResponseInterface');
-            $router = new Router($response);
+            $middlewareQueue = $this->get('MiddlewareQueue');
+            $router = new Router($request, $response, $middlewareQueue);
             return $router;
         });
 
@@ -65,6 +72,18 @@ class Container extends LeagueContainer
                 'auto_reload' => true,
             ));
         }, true);
+
+        $this->add('Lib\Framework\Http\Controller')
+            ->withArgument($this->get('MiddlewareQueue'))
+            ->withArgument($this->get('Twig'));
+   
+        $this->add('App\Http\Controllers\Backend\AuthController')
+            ->withArgument($this->get('MiddlewareQueue'))
+            ->withArgument($this->get('Twig'));
+
+        $this->add('App\Http\Controllers\Backend\UserController')
+            ->withArgument($this->get('MiddlewareQueue'))
+            ->withArgument($this->get('Twig'));
 
         // Add additional default error pages here.
         $this->add('template.defaults.404', 'errors/404.twig');

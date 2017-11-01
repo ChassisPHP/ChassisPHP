@@ -4,13 +4,16 @@ namespace Lib\Framework;
 
 class Session
 {
-    private $session = false;
+    public static $sessionStarted = false;
 
     // no real advantage to do this here. added for consistency
     public static function start()
     {
-        session_start();
-        self::session == true;
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        } else {
+            // TODO add exception
+        }
     }
 
     // set a session key value

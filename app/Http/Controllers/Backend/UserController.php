@@ -1,17 +1,20 @@
 <?php
 
-namespace Http\Controllers\Backend;
+namespace App\Http\Controllers\Backend;
 
 use Lib\Database\Connection;
-use Database\Entities\User;
+use Lib\Framework\Http\Controller;
+use Lib\Framework\Http\MiddlewareQueue;
 
-class UserController
+class UserController extends Controller
 {
     private $connection;
     private $entityManager;
 
-    public function __construct()
+    public function __construct($middleware, $twig)
     {
+        parent::__construct($middleware, $twig);
+        $this->addMiddleware('TestMiddleware');
         $this->connection = new Connection;
         $this->entityManager = $this->connection->entityManager;
     }
@@ -26,7 +29,8 @@ class UserController
             $name = $user->getUserName();
             $email = $user->getEmail();
             $userLevel = $user->getUserLevel();
-            echo "$id | $name | $email | $userLevel \n";
+            $classResponse = "$id | $name | $email | $userLevel <br>\n";
+            return $classResponse;
         }
     }
 }

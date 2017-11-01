@@ -12,16 +12,21 @@ use FastRoute\RouteCollector;
 use FastRoute\Dispatcher;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
+use Lib\Framework\Http\MiddlewareQueue;
 
 class Router
 {
     
     private $dispatcher;
+    private $request;
     private $response;
+    protected $middlewareQueue;
 
-    public function __construct(ResponseInterface $response)
+    public function __construct(ServerRequestInterface $request, ResponseInterface $response, MiddlewareQueue $middlewareQueue)
     {
+        $this->request = $request;
         $this->response = $response;
+        $this->middlewareQueue = $middlewareQueue;
     }
 
     public function getRouteInfo(ServerRequestInterface $request, $routeDefinitionCallback)
@@ -47,10 +52,10 @@ class Router
     }
 
     // dispatch a response
-    public function dispatch($request, $routeDefinitionCallback)
+    public function dispatch($request, $routeDefinitionCallback, $container)
     {
         $routeInfo = $this->getRouteInfo($request, $routeDefinitionCallback);
-
+        
         switch ($routeInfo[0]) {
             case Dispatcher::NOT_FOUND:
                 return $this->response->withStatus(404);
@@ -62,18 +67,33 @@ class Router
             case Dispatcher::FOUND:
                 if (is_array($routeInfo[1])) {
                     $classname = $routeInfo[1][0];
-                    $classname = 'Http\Controllers\\' . $classname;
+                    $classname = 'App\Http\Controllers\\' . $classname;
                     $method = $routeInfo[1][1];
                     $vars = $routeInfo[2];
-                    $class = new $classname;
-                    $class->$method($vars);
+                    $class = $container->get($classname);
+                    $classResponse = $class->$method($vars);
+                    $this->middlewareQueue->addController($classResponse);
                 } else {
                     $handler = $routeInfo[1];
                     $vars = $routeInfo[2];
-                    call_user_func($handler, $vars);
+                    $classResponse = call_user_func($handler, $vars);
+                    $this->middlewareQueue->addController($classResponse);
                 }
                 break;
         }
+
+        $this->addCoreMiddleware();
+        
+        // call the middlewareQueue
+        $this->response = $this->middlewareQueue->callMiddleware($request, $this->response);
         return $this->response;
+    }
+
+    // add the core middleware that should be applied to all routes
+    // any other middleware that should be run prior to routes/controllers
+    // can be added here
+    private function addCoreMiddleware()
+    {
+        $this->middlewareQueue->addMiddleware('SessionMiddleware', '\Lib\Framework\Http\Middleware\\');
     }
 }

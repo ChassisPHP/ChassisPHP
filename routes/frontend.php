@@ -9,18 +9,17 @@ return [
     ['GET', '/', ['HomeController', 'index']],
 
     ['GET', '/new', function () {
-        echo 'This is a test page!';
+        return 'This is a test page!';
     }],
 
     ['GET', '/test', function () {
-        echo $this->container->get('Twig')->render('test.html.twig');
-        return true;
+        return $this->container->get('Twig')->render('test.html.twig');
     }],
 
     ['GET', '/name/{name}', ['NameController', 'show']],
 
     ['GET', '/errors/404', function () {
-        echo 'Dude - there aint no setch page<br>That\'s a 404';
+        return 'Dude - there aint no setch page<br>That\'s a 404';
     }],
 
 ];
