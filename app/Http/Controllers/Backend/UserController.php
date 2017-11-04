@@ -5,11 +5,13 @@ namespace App\Http\Controllers\Backend;
 use Lib\Database\Connection;
 use Lib\Framework\Http\Controller;
 use Lib\Framework\Http\MiddlewareQueue;
+use Doctrine\ORM\Query;
 
 class UserController extends Controller
 {
     private $connection;
     private $entityManager;
+    private $view;
 
     public function __construct($middleware, $twig)
     {
@@ -17,6 +19,7 @@ class UserController extends Controller
         $this->addMiddleware('TestMiddleware');
         $this->connection = new Connection;
         $this->entityManager = $this->connection->entityManager;
+        $this->view = $twig;
     }
 
     public function index()
@@ -24,13 +27,6 @@ class UserController extends Controller
         $userRepository = $this->entityManager->getRepository('Database\Entities\User');
         $users = $userRepository->findAll();
         
-        foreach ($users as $user) {
-            $id = $user->getId();
-            $name = $user->getUserName();
-            $email = $user->getEmail();
-            $userLevel = $user->getUserLevel();
-            $classResponse = "$id | $name | $email | $userLevel <br>\n";
-            return $classResponse;
-        }
+        return $this->view->render('backend/partials/users.php', array('users' =>  $users));
     }
 }
