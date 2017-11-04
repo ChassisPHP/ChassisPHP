@@ -1,13 +1,13 @@
-{% extends 'backend/layout.html.twig' %}
+{% extends 'backend/layout.twig.php' %}
 {% block content %} 
 <?php print_r($users); ?>
-<article class="main-content">
+<article class="container itemCenter">
 
-    <header>
+    <header class="item itemCenter">
         <h1>Active User Accounts</h1>
     </header>
   
-    <div>
+    <div class="item itemCenter">
         <ul>
         {% for user in users %}
             <li>{{ user.Id }} {{ user.UserName }} {{ user.Email }} {{ user.userLevel }}</li>

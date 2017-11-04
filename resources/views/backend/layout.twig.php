@@ -5,7 +5,10 @@
     <title>HTML 5 complete</title>
     <link rel="stylesheet" href="/css/main.css" />
 </head>
+
 <body>
-    {% block content %}{% endblock %}    
+    <main class="content center itemCenter">
+        {% block content %}{% endblock %}
+    </main>    
 </body>
 </html>
