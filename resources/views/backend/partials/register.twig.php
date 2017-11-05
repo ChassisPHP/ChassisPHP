@@ -3,15 +3,7 @@
 <article class="main-content">
 
   <header>
-    <h1>Responsive Form Example</h1>
-    <small>
-                <p>
-                    This example demonstrates how to create a simple form layout that can responsively expand and
-                    stack depending on the width of the page.
-                </p>
-                <p>&nbsp;</p>
-            </small>
-
+    <h1>Register a new user</h1>
   </header>
 
   
@@ -35,10 +27,8 @@
   </div>
 
   <div class="form-group">
-    <label>City,State,Zip</label>
-    <input value="Walnut Creek" class="input-control" placeholder="City" style="flex: 6" />    
-    <input value="CA" class="input-control" placeholder="State" style="flex:1" />    
-    <input value="94152" class="input-control" placeholder="Postal Code" style="flex:2" />
+    <label>User Level</label>
+    <input value="3" class="input-control" placeholder="3" style="flex: 6" />    
   </div>
 
   <div class="form-group">

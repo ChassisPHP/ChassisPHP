@@ -7,6 +7,7 @@
 </head>
 
 <body>
+    {{ include('backend/partials/nav.twig.php') }}
     <main class="content center itemCenter">
         {% block content %}{% endblock %}
     </main>    
