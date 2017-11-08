@@ -71,6 +71,7 @@ class Router
                     $method = $routeInfo[1][1];
                     $vars = $routeInfo[2];
                     $class = $container->get($classname);
+                    $class->setRequest($request);
                     $classResponse = $class->$method($vars);
                     $this->middlewareQueue->addController($classResponse);
                 } else {

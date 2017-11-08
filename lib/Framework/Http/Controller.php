@@ -7,6 +7,7 @@ use Lib\Framework\Container;
 
 class Controller
 {
+    protected $request;
     protected $middlewareQueue;
     protected $twig;
 
@@ -19,5 +20,10 @@ class Controller
     protected function addMiddleware($middleware)
     {
         $this->middlewareQueue->addMiddleware($middleware);
+    }
+
+    public function setRequest($request)
+    {
+        $this->request = $request;
     }
 }
