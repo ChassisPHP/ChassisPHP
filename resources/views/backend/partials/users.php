@@ -3,10 +3,16 @@
 <?php print_r($users); ?>
 <article class="container itemCenter column">
 
+    {% if message.content is defined %}
+    <div class="item alert {{ message.type }}">
+        {{ message.content }}
+    </div>
+    {% endif %} 
+    
     <header class="item">
         <h1>Active User Accounts</h1>
     </header>
-  
+
     <div class="item">
         <ul>
         {% for user in users %}
