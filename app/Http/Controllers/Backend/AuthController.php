@@ -83,6 +83,8 @@ class AuthController extends Controller
     public function show($id)
     {
         //
+        $user = $this->entityManager->getRepository('Database\Entities\User')->find($id);
+        // TODO add functionality to get user details
     }
  
     /**
@@ -115,6 +117,14 @@ class AuthController extends Controller
     */
     public function destroy($id)
     {
-            //
+        // remove a user from the DB
+        $user = $this->entityManager->getRepository('Database\Entities\User')->find($id);
+        $this->entityManager->remove($user);
+        $this->entityManager->flush();
+        
+        $message['type'] = 'alert-danger';
+        $message['content'] = "User $name deleted succesfully";
+    
+        return $this->index($message);
     }
 }
