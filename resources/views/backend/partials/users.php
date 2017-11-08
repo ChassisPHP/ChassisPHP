@@ -10,7 +10,7 @@
     <div class="item">
         <ul>
         {% for user in users %}
-            <li>{{ user.Id }} {{ user.UserName }} {{ user.Email }} {{ user.userLevel }}</li>
+            <li>{{ user.Id }} {{ user.Name }} {{ user.UserName }} {{ user.Email }} {{ user.userLevel }}</li>
         {% endfor %}
         </ul>
     </div>

@@ -15,6 +15,12 @@ class User
     protected $id;
 
     /**
+    *  @Column(type="string", length=255)
+    *  @Assert\NotBlank()
+    **/
+    protected $name;
+
+    /**
     *  @Column(type="string", length=255, unique=true)
     *  @Assert\NotBlank()
     **/
@@ -40,6 +46,16 @@ class User
     public function getId()
     {
         return $this->id;
+    }
+    
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function setName($name)
+    {
+        $this->name = $name;
     }
     
     public function getUserName()
