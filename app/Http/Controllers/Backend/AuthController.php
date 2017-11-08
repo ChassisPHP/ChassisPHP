@@ -23,13 +23,13 @@ class AuthController extends Controller
         $this->view = $twig;
     }
 
-    public function index()
+    public function index($message = null)
     {
         // Display all users from the DB
         $userRepository = $this->entityManager->getRepository('Database\Entities\User');
         $users = $userRepository->findAll();
         
-        return $this->view->render('backend/partials/users.php', array('users' =>  $users));
+        return $this->view->render('backend/partials/users.php', array('users' => $users, 'message' => $message));
     }
 
     /**
@@ -67,8 +67,11 @@ class AuthController extends Controller
 
         $this->entityManager->persist($user);
         $this->entityManager->flush();
-        
-    //    return $this->view->render('backend/partials/users.php', array('users' =>  $users));
+
+        $message['type'] = 'alert-info';
+        $message['content'] = "User $name added succesfully";
+    
+        return $this->index($message);
     }
 
     /**
