@@ -118,7 +118,9 @@ class AuthController extends Controller
     public function destroy($id)
     {
         // remove a user from the DB
-        $user = $this->entityManager->getRepository('Database\Entities\User')->find($id);
+        $userRepo = $this->entityManager->getRepository('Database\Entities\User');
+        $user = $userRepo->find($id['ID']);
+        $name = $user->getName();
         $this->entityManager->remove($user);
         $this->entityManager->flush();
         

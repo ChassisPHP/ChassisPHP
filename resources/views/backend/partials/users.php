@@ -1,6 +1,5 @@
 {% extends 'backend/layout.twig.php' %}
 {% block content %} 
-<?php print_r($users); ?>
 <article class="container itemCenter column">
 
     {% if message.content is defined %}
@@ -14,11 +13,16 @@
     </header>
 
     <div class="item">
-        <ul>
-        {% for user in users %}
-            <li>{{ user.Id }} {{ user.Name }} {{ user.UserName }} {{ user.Email }} {{ user.userLevel }}</li>
-        {% endfor %}
-        </ul>
+        <div class="Rtable Rtable--6cols center">
+            {% for user in users %}
+            <div class="Rtable-cell">{{ user.Id }}</div>
+            <div class="Rtable-cell">{{ user.Name }}</div>
+            <div class="Rtable-cell">{{ user.UserName }}</div>
+            <div class="Rtable-cell">{{ user.Email }}</div>
+            <div class="Rtable-cell">{{ user.userLevel }}</div>
+            <div class="Rtable-cell"><a href="/backend/users/delete/{{ user.ID }}">DELETE</a></div>
+            {% endfor %}
+        </div>
     </div>
 
 </article>
