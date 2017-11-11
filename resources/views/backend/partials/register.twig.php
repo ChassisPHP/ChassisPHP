@@ -7,7 +7,7 @@
     </header>
   
     
-    <form action="/backend/register" method="post"> 
+    <form action="/backend/users/register" method="post"> 
         <div class="form-group">
           <label>Name</label>
           <input name="name" value="Real Name" class="input-control" />

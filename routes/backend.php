@@ -10,11 +10,11 @@ return [
         return 'This is the backend front page!';
     }],
 
-    ['GET', '/register', ['Backend\AuthController', 'create']],
-    ['POST', '/register', ['Backend\AuthController', 'store']],
 
-    ['GET', '/users', ['Backend\AuthController', 'index']],
-    ['GET', '/users/delete/{ID}', ['Backend\AuthController', 'destroy']],
+    ['GET', '/users', ['Backend\UserController', 'index']],
+    ['GET', '/users/register', ['Backend\UserController', 'create']],
+    ['POST', '/users/register', ['Backend\UserController', 'store']],
+    ['GET', '/users/delete/{ID}', ['Backend\UserController', 'destroy']],
 
     ['GET', '/test', function () {
         return 'This is Roger\'s test page';
