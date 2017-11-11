@@ -171,6 +171,8 @@ button {
 
 /* Buttons */
 .button {
+    color: white;
+    margin: 5px;
     border-radius: 8px;
     padding: 10px 8px;
     font-size: 14px;
@@ -184,9 +186,4 @@ button {
 .button:hover {
     background-color: #e7e7e7;
     color: black;
-}
-
-.button a {
-    text-decoration:none;
-    color:black;
 }
