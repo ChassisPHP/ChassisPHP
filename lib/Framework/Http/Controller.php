@@ -7,14 +7,14 @@ use Lib\Framework\Container;
 
 class Controller
 {
-    protected $request;
     protected $middlewareQueue;
-    protected $twig;
+    protected $middleware;
+    protected $request;
+    protected $view;
 
-    public function __construct(MiddlewareQueue $middlewareQueue, \Twig_Environment $twig)
+    public function __construct()
     {
-        $this->middlewareQueue = $middlewareQueue;
-        $this->twig = $twig;
+        //
     }
 
     protected function addMiddleware($middleware)
@@ -22,8 +22,21 @@ class Controller
         $this->middlewareQueue->addMiddleware($middleware);
     }
 
+    // inject the Request
     public function setRequest($request)
     {
         $this->request = $request;
+    }
+    
+    // inject the MiddlewareQueue
+    public function setMiddlewareQueue($middlewareQueue)
+    {
+        $this->middlewareQueue = $middlewareQueue;
+    }
+    
+    // inject Twig
+    public function setView($view)
+    {
+        $this->view = $view;
     }
 }
