@@ -1,6 +1,6 @@
 {% extends 'backend/layout.twig.php' %}
 {% block content %} 
-<article class="container itemCenter column">
+<article class="container itemCenter center column">
 
     {% if message.content is defined %}
     <div class="item alert {{ message.type }}">
@@ -12,6 +12,7 @@
         <h1>Active User Accounts</h1>
     </header>
 
+    <a href="/backend/register" class="button blueBackground">Add User</a>
     <div class="item">
         <div class="Rtable Rtable--6cols center">
             {% for user in users %}

@@ -100,10 +100,6 @@ button {
     justify-content: flex-end;
 }
 
-.blueBackground {
-    background: #71adf7;
-}
-
 .nav {
     list-style: none;
 }
@@ -157,8 +153,8 @@ button {
     padding: 0.8em 1.2em;
     overflow: hidden; // Or flex might break
     list-style: none;
-    border: solid @bw white;
-    background: fade(slategrey,20%);
+    border: solid white;
+    background: #f0f0f0;
     > h1, > h2, > h3, > h4, > h5, > h6 { margin: 0; }
 }
 
@@ -167,3 +163,30 @@ button {
 .Rtable--4cols > .Rtable-cell  { width: 25%; }
 .Rtable--5cols > .Rtable-cell  { width: 20%; }
 .Rtable--6cols > .Rtable-cell  { width: 16.6%; }
+
+/* Colors */
+.blueBackground {
+    background: #71adf7;
+}
+
+/* Buttons */
+.button {
+    border-radius: 8px;
+    padding: 10px 8px;
+    font-size: 14px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
+
+.button:hover {
+    background-color: #e7e7e7;
+    color: black;
+}
+
+.button a {
+    text-decoration:none;
+    color:black;
+}
