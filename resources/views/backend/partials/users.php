@@ -21,7 +21,7 @@
             <div class="Rtable-cell">{{ user.UserName }}</div>
             <div class="Rtable-cell">{{ user.Email }}</div>
             <div class="Rtable-cell">{{ user.userLevel }}</div>
-            <div class="Rtable-cell"><a href="/backend/users/delete/{{ user.ID }}">DELETE</a></div>
+            <div class="Rtable-cell"><a href="/backend/users/delete/{{ user.ID }}" onclick="return confirm('Are you sure?')">DELETE</a></div>
             {% endfor %}
         </div>
     </div>
