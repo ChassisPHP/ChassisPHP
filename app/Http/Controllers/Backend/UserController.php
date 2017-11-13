@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use Lib\Database\Connection;
+use Lib\Framework\Hash;
 use Lib\Framework\Http\Controller;
 use Doctrine\ORM\Query;
 use Database\Entities\User;
@@ -12,11 +13,13 @@ class UserController extends Controller
 
     private $connection;
     private $entityManager;
+    private $hash;
 
     public function __construct()
     {
         // Set up DB connection and entity
         $this->connection = new Connection;
+        $this->hash = new Hash;
         $this->entityManager = $this->connection->entityManager;
     }
 
@@ -53,6 +56,7 @@ class UserController extends Controller
         $username = $formVars['username'];
         $email = $formVars['email'];
         $passwd = $formVars['passwd'];
+        $passwd = $this->hash->make($passwd);
         $userLevel = $formVars['userLevel'];
 
         $user = new User;
