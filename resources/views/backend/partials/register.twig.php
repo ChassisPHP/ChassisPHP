@@ -1,7 +1,13 @@
 {% extends 'backend/layout.twig.php' %}
 {% block content %} 
-<article class="main-content">
+<article class="container itemCenter center column">
 
+    {% if message.content is defined %}
+    <div class="item alert {{ message.type }}">
+        {{ message.content }}
+    </div>
+    {% endif %} 
+    
     <header>
       <h1>Register a new user</h1>
     </header>

@@ -16,6 +16,9 @@ return [
     ['POST', '/users/register', ['Backend\UserController', 'store']],
     ['GET', '/users/delete/{ID}', ['Backend\UserController', 'destroy']],
 
+    ['GET', '/login', ['Backend\AuthController', 'index']],
+    ['POST', '/login', ['Backend\AuthController', 'store']],
+
     ['GET', '/test', function () {
         return 'This is Roger\'s test page';
     }],

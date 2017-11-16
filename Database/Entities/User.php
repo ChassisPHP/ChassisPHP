@@ -2,44 +2,50 @@
 
 namespace Database\entities;
 
+//use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\UniqueConstraint;
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
- * @Entity @Table(name="users")
- * */
+* @ORM\Entity
+* @ORM\Table(name="users",uniqueConstraints={@UniqueConstraint(name="unique_email", columns={"email"})})
+*/
 class User
 {
     /**
-    * @Id
-    * @Column(type="integer")
-    * @GeneratedValue
+    * @ORM\Id
+    * @ORM\Column(type="integer")
+    * @ORM\GeneratedValue
     **/
     protected $id;
 
     /**
-    *  @Column(type="string", length=255)
+    *  @ORM\Column(type="string", length=255)
     *  @Assert\NotBlank()
     **/
     protected $name;
 
     /**
-    *  @Column(type="string", length=255, unique=true)
+    *  @ORM\Column(type="string", length=255, unique=true)
     *  @Assert\NotBlank()
     **/
     protected $userName;
 
     /**
-    * @Column(type="string", length=255, unique=true)
+    * @ORM\Column(type="string", length=255, unique=true)
     * @Assert\NotBlank()
     * @Assert\Email()
     **/
     protected $email;
 
     /**
-    * @Column(type="string", length=64)
+    * @ORM\Column(type="string", length=64)
     **/
     protected $passwd;
 
     /**
-    * @Column(type="integer")
+    * @ORM\Column(type="integer")
     **/
     protected $userLevel;
     

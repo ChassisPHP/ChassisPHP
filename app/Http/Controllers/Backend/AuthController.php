@@ -7,9 +7,8 @@ use Lib\Framework\Hash;
 use Lib\Framework\Http\Controller;
 use Doctrine\ORM\Query;
 use Database\Entities\User;
-use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 
-class UserController extends Controller
+class AuthController extends Controller
 {
 
     private $connection;
@@ -26,11 +25,8 @@ class UserController extends Controller
 
     public function index($message = null)
     {
-        // Display all users from the DB
-        $userRepository = $this->entityManager->getRepository('Database\Entities\User');
-        $users = $userRepository->findAll();
-        
-        return $this->view->render('backend/partials/users.php', array('users' => $users, 'message' => $message));
+        // Display Login form
+        return $this->view->render('backend/pages/login.php');
     }
 
     /**
@@ -39,9 +35,9 @@ class UserController extends Controller
     * @return Response
     *
     */
-    public function create($message = null)
+    public function create()
     {
-        return $this->view->render('backend/partials/register.twig.php', array('message' => $message));
+        return $this->view->render('backend/partials/register.twig.php');
     }
 
     /**
@@ -53,31 +49,19 @@ class UserController extends Controller
     public function store()
     {
         $formVars = $this->request->getParsedBody();
-        $name = $formVars['name'];
-        $username = $formVars['username'];
         $email = $formVars['email'];
         $passwd = $formVars['passwd'];
         $passwd = $this->hash->make($passwd);
-        $userLevel = $formVars['userLevel'];
 
-        $user = new User;
-        $user->setName($name);
-        $user->setUserName($username);
-        $user->setEmail($email);
-        $user->setPasswd($passwd);
-        $user->setUserLevel($userLevel);
+        //TODO Validation
 
-        try {
-            $this->entityManager->persist($user);
-            $this->entityManager->flush();
-            $message['type'] = 'alert-info';
-            $message['content'] = "User $name added succesfully";
-        } catch (UniqueConstraintViolationException $e) {
-            $message['type'] = 'alert-danger';
-            $message['content'] = "User exists in database";
-        }
+        // Lookup user by email
+        $user = $this->entityManager->getRepository('Database\Entities\User')->findby(array('email' => $email));
+        debugVar($user);
+        $message['type'] = 'alert-info';
+        $message['content'] = "User $name added succesfully";
     
-        return $this->create($message);
+        return $this->index($message);
     }
 
     /**

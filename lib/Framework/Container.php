@@ -96,6 +96,27 @@ class Container extends LeagueContainer
                    $this->get('Twig')
                 ]
             );
+        
+        $this->add('App\Http\Controllers\Backend\AuthController')
+            ->withMethodCall(
+                'setMiddlewareQueue',
+                [
+                   $this->get('MiddlewareQueue')
+                ]
+            )
+            ->withMethodCall(
+                'setRequest',
+                [
+                   $this->get('PsrRequestInterface')
+                ]
+            )
+            ->withMethodCall(
+                'setView',
+                [
+                   $this->get('Twig')
+                ]
+            );
+
 
         // Add additional default error pages here.
         $this->add('template.defaults.404', 'errors/404.twig');
