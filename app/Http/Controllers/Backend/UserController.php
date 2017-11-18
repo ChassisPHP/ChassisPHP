@@ -39,9 +39,9 @@ class UserController extends Controller
     * @return Response
     *
     */
-    public function create($message = null)
+    public function create($message = null, $formVars = null)
     {
-        return $this->view->render('backend/partials/register.twig.php', array('message' => $message));
+        return $this->view->render('backend/partials/register.twig.php', array('message' => $message, 'formVars' => $formVars));
     }
 
     /**
@@ -72,12 +72,12 @@ class UserController extends Controller
             $this->entityManager->flush();
             $message['type'] = 'alert-info';
             $message['content'] = "User $name added succesfully";
+            return $this->index($message);
         } catch (UniqueConstraintViolationException $e) {
             $message['type'] = 'alert-danger';
             $message['content'] = "User exists in database";
+            return $this->create($message, $formVars);
         }
-    
-        return $this->create($message);
     }
 
     /**
