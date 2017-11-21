@@ -24,6 +24,12 @@ class UserController extends Controller
         $this->entityManager = $this->connection->entityManager;
     }
 
+    public function addMiddleware()
+    {
+        // Only allow logged in users
+        $this->middlewareQueue->addMiddleware('AuthMiddleware', '\Lib\Framework\Http\Middleware\\');
+    }
+
     public function index($message = null)
     {
         // Display all users from the DB

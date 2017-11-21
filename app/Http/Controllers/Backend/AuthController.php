@@ -7,6 +7,7 @@ use Lib\Framework\Hash;
 use Lib\Framework\Http\Controller;
 use Doctrine\ORM\Query;
 use Database\Entities\User;
+use Lib\Framework\Session;
 
 class AuthController extends Controller
 {
@@ -22,11 +23,18 @@ class AuthController extends Controller
         $this->hash = new Hash;
         $this->entityManager = $this->connection->entityManager;
     }
+    
+    public function addMiddleware()
+    {
+        // Only allow logged in users
+        //$this->middlewareQueue->addMiddleware('AuthMiddleware', '\Lib\Framework\Http\Middleware\\');
+    }
+
 
     public function index($message = null)
     {
         // Display Login form
-        return $this->view->render('backend/pages/login.php');
+        return $this->view->render('backend/pages/login.php', array('message' => $message));
     }
 
     /**
@@ -51,17 +59,23 @@ class AuthController extends Controller
         $formVars = $this->request->getParsedBody();
         $email = $formVars['email'];
         $passwd = $formVars['passwd'];
-        $passwd = $this->hash->make($passwd);
 
         //TODO Validation
 
         // Lookup user by email
-        $user = $this->entityManager->getRepository('Database\Entities\User')->findby(array('email' => $email));
-        debugVar($user);
-        $message['type'] = 'alert-info';
-        $message['content'] = "User $name added succesfully";
+        $user = $this->entityManager->getRepository('Database\Entities\User')->findoneby(array('email' => $email));
+        //debugVar($user);
+        if ($user && $this->hash->check($passwd, $user->getPasswd())) {
+            Session::set('user', $user->getId());
+            Session::set('authenticated', true);
+            // send the user to the backend home page
+            return header('Location: /backend/users'); // TODO refaactor this to a helper class with more functionality
+        } else {
+            $message['type'] = 'alert-danger';
+            $message['content'] = "Wrong Email or Password, please try again";
     
-        return $this->index($message);
+            return $this->index($message);
+        }
     }
 
     /**
