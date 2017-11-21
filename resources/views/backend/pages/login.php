@@ -2,6 +2,12 @@
 {% block content %} 
 <article class="main-content">
 
+    {% if message.content is defined %}
+    <div class="item alert {{ message.type }}">
+        {{ message.content }}
+    </div>
+    {% endif %} 
+    
     <header>
       <h1>Log In</h1>
     </header>
@@ -10,7 +16,7 @@
     <form action="/backend/login" method="post"> 
         <div class="form-group">
           <label>Email</label>
-          <input name="email" value="email" class="input-control" />
+          <input name="email" placeholder="email" class="input-control" />
         </div>
       
         <div class="form-group">

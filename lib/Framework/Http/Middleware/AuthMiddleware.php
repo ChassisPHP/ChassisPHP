@@ -1,14 +1,12 @@
-<?php
+<?PHP
 
 namespace Lib\Framework\Http\Middleware;
 
 use Lib\Framework\Session;
 
-class SessionMiddleware
+class AuthMiddleware
 {
     /**
-     * Example middleware invokable class
-     *
      * @param  \Psr\Http\Message\ServerRequestInterface $request  PSR7 request
      * @param  \Psr\Http\Message\ResponseInterface      $response PSR7 response
      * @param  callable                                 $next     Next middleware
@@ -17,15 +15,12 @@ class SessionMiddleware
      **/
     public function __invoke($request, $response, $next = null)
     {
-        if (!Session::$sessionStarted) {
-            Session::start();
-            $userid = Session::get('user');
-            if (!$userid) {
-                Session::set('user', 'guest');
-            }
+        if (!Session::get('authenticated')) {
+            // user is authenticated
+            // TODO refaactor this to a helper class with more functionality
+            // also, add flash message
+            return header('Location: /backend/login');
         }
-
-        //$response->getBody()->write(' Testing session started before controller or route '); //this is here for testing, to show that the session middleware is called before output
         $response = $next($request, $response);
         return $response;
     }

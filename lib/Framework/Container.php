@@ -95,6 +95,10 @@ class Container extends LeagueContainer
                 [
                    $this->get('Twig')
                 ]
+            )
+            ->withMethodCall(
+                'addMiddleware',
+                []
             );
         
         $this->add('App\Http\Controllers\Backend\AuthController')
@@ -115,6 +119,10 @@ class Container extends LeagueContainer
                 [
                    $this->get('Twig')
                 ]
+            )
+            ->withMethodCall(
+                'addMiddleware',
+                []
             );
 
 
