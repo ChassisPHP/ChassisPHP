@@ -4,6 +4,7 @@ namespace Lib\Framework\Http;
 
 use Lib\Framework\Http\MiddlewareQueue;
 use Lib\Framework\Container;
+use Lib\Framework\Session;
 
 class Controller
 {
