@@ -81,7 +81,7 @@ class UserController extends Controller
             return $this->index($message);
         } catch (UniqueConstraintViolationException $e) {
             $message['type'] = 'alert-danger';
-            $message['content'] = "User exists in database";
+            $message['content'] = "Email has already been registered";
             return $this->create($message, $formVars);
         }
     }

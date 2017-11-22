@@ -19,6 +19,7 @@ class AuthMiddleware
             // user is authenticated
             // TODO refaactor this to a helper class with more functionality
             // also, add flash message
+            Session::set('error', 'The page you attempted to access requires that you log in ');
             return header('Location: /backend/login');
         }
         $response = $next($request, $response);

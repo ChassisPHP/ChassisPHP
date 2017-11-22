@@ -37,6 +37,12 @@ class Session
             return false;
     }
 
+    // clear an individual session key
+    public static function clear($key)
+    {
+        unset($_SESSION[$key]);
+    }
+
     // destroy the session when we are done with it
     public static function destroy()
     {

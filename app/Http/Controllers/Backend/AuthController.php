@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Backend;
 
 use Lib\Database\Connection;
 use Lib\Framework\Hash;
+use Lib\Framework\Session;
 use Lib\Framework\Http\Controller;
 use Doctrine\ORM\Query;
 use Database\Entities\User;
-use Lib\Framework\Session;
 
 class AuthController extends Controller
 {
@@ -33,7 +33,11 @@ class AuthController extends Controller
 
     public function index($message = null)
     {
-        // Display Login form
+        if (Session::get('error')) {
+            $message['type'] = 'alert-danger';
+            $message['content'] = Session::get('error');
+        }
+        // Display L$message['content'] = ogin form
         return $this->view->render('backend/pages/login.php', array('message' => $message));
     }
 
@@ -68,6 +72,13 @@ class AuthController extends Controller
         if ($user && $this->hash->check($passwd, $user->getPasswd())) {
             Session::set('user', $user->getId());
             Session::set('authenticated', true);
+
+            // if the user has attempted to access a restricted
+            // page without logging in, we need to clear the error
+            if (Session::get('error')) {
+                Session::clear('error');
+            }
+
             // send the user to the backend home page
             return header('Location: /backend/users'); // TODO refaactor this to a helper class with more functionality
         } else {
