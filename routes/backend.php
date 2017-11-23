@@ -18,8 +18,4 @@ return [
 
     ['GET', '/login', ['Backend\AuthController', 'index']],
     ['POST', '/login', ['Backend\AuthController', 'store']],
-
-    ['GET', '/test', function () {
-        return 'This is Roger\'s test page';
-    }],
 ];
