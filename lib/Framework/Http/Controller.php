@@ -13,18 +13,6 @@ class Controller
     protected $request;
     protected $view;
 
-    public function __construct()
-    {
-        //
-    }
-    
-    /*
-    protected function addMiddleware($middleware, $middlewareDir = '\App\Http\Middleware\\')
-    {
-        $this->middlewareQueue->addMiddleware($middleware, $middlewareDir);
-    }
-     */
-
     // inject the Request
     public function setRequest($request)
     {

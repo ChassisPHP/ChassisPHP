@@ -25,7 +25,6 @@ class SessionMiddleware
             }
         }
 
-        //$response->getBody()->write(' Testing session started before controller or route '); //this is here for testing, to show that the session middleware is called before output
         $response = $next($request, $response);
         return $response;
     }

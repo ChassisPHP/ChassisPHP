@@ -68,7 +68,6 @@ class AuthController extends Controller
 
         // Lookup user by email
         $user = $this->entityManager->getRepository('Database\Entities\User')->findoneby(array('email' => $email));
-        //debugVar($user);
         if ($user && $this->hash->check($passwd, $user->getPasswd())) {
             Session::set('user', $user->getId());
             Session::set('authenticated', true);
