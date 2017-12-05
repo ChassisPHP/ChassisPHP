@@ -3,23 +3,31 @@
 namespace Tests\RoutesTest;
 
 use Tests\TestCase;
-use Symfony\Component\HttpFoundation\Response;
+use Zend\Diactoros\ServerRequestFactory;
+use GuzzleHttp\Client;
 
 class RoutesTest extends TestCase
 {
-    public function testBasicRouting()
-    {
-        $app = $this->createApplication();
-        $app->addRoute('GET', '/routetest', function () {
-            return new Response('TEST');
-        });
+    private $http;
+    private $app;
 
-        $container = $app->getContainer();
-        $request = $container->get('Request');
-        $request->duplicate(null, null, null, null, null, array('REQUEST_URI' => '/routetest', 'HTTP_HOST' => '192.168.1.10'));
-        $response = $app->run();
-        $responseContent = $response->getContent();
-        $responseStatus = $response->getStatusCode();
-        $this->assertEquals($responseStatus, 200);
+    public function setUp()
+    {
+        $this->http = new Client(['base_uri' => 'https://chassis.local/', 'verify' => false]);
+    }
+
+    public function tearDown()
+    {
+        $this->http = null;
+    }
+
+    public function testGet()
+    {
+        $response = $this->http->request('GET', '/');
+
+        $this->assertEquals(200, $response->getStatusCode());
+
+        $contentType = $response->getHeaders()["Content-Type"][0];
+        $this->assertEquals("text/html; charset=UTF-8", $contentType);
     }
 }
