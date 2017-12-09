@@ -46,7 +46,7 @@ class Session
     // destroy the session when we are done with it
     public static function destroy()
     {
-        if (self::session) {
+        if (session_status() == PHP_SESSION_NONE) {
             session_unset();
             session_destroy();
         }
