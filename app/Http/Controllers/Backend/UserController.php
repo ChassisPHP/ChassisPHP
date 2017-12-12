@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use Lib\Database\Connection;
 use Lib\Framework\Hash;
 use Lib\Framework\Http\Controller;
+use Lib\Framework\Session;
 use Doctrine\ORM\Query;
 use Database\Entities\User;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
@@ -35,8 +36,9 @@ class UserController extends Controller
         // Display all users from the DB
         $userRepository = $this->entityManager->getRepository('Database\Entities\User');
         $users = $userRepository->findAll();
-        
-        return $this->view->render('backend/partials/users.php', array('users' => $users, 'message' => $message));
+        $loggedInUser = Session::get('name');
+               
+        return $this->view->render('backend/partials/users.php', array('users' => $users, 'message' => $message, 'loggedInUser' => $loggedInUser));
     }
 
     /**
