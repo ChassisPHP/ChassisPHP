@@ -8,6 +8,6 @@
         <li><a href="/backend/register">Add User</a></li>
         <li><a href="#">Careers</a></li>
         <li><a href="#">Logout</a></li>
-        <li>{{ user.name }}</li
+        <li>{{ loggedInUser }}</li
     </ul>
 </nav>

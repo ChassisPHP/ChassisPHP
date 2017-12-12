@@ -70,6 +70,7 @@ class AuthController extends Controller
         $user = $this->entityManager->getRepository('Database\Entities\User')->findoneby(array('email' => $email));
         if ($user && $this->hash->check($passwd, $user->getPasswd())) {
             Session::set('user', $user->getId());
+            Session::set('name', $user->getName());
             Session::set('authenticated', true);
 
             // if the user has attempted to access a restricted
