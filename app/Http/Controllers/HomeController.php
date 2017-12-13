@@ -3,12 +3,18 @@
 namespace App\Http\Controllers;
 
 use Lib\Framework\Session;
+use Lib\Framework\Http\Controller;
 
-class HomeController
+class HomeController extends Controller
 {
+    public function addMiddleware()
+    {
+        // TODO change container to check for existence of this method
+        // only do "withmethod if esists
+    }
+
     public function index()
     {
-        $name = Session::get('name');
-        echo "$name HOME PAGE Success!!!!";
+        return $this->view->render('frontend/pages/welcome.twig.php');
     }
 }
