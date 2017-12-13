@@ -77,6 +77,30 @@ class Container extends LeagueContainer
             ->withArgument($this->get('MiddlewareQueue'))
             ->withArgument($this->get('Twig'));
    
+        $this->add('App\Http\Controllers\HomeController')
+            ->withMethodCall(
+                'setMiddlewareQueue',
+                [
+                   $this->get('MiddlewareQueue')
+                ]
+            )
+            ->withMethodCall(
+                'setRequest',
+                [
+                   $this->get('PsrRequestInterface')
+                ]
+            )
+            ->withMethodCall(
+                'setView',
+                [
+                   $this->get('Twig')
+                ]
+            )
+            ->withMethodCall(
+                'addMiddleware',
+                []
+            );
+        
         $this->add('App\Http\Controllers\Backend\UserController')
             ->withMethodCall(
                 'setMiddlewareQueue',
