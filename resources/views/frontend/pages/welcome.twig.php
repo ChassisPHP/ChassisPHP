@@ -2,8 +2,8 @@
 {% block content %}
 
 <article class="main-content">
-    <div>
-        Welcome to ChassisPHP!
+    <div class="container center">
+    <div class="banner"><h1>Welcome to ChassisPHP!</h1></div>
     </div>
 </article>
 {% endblock %}
