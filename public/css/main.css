@@ -91,6 +91,13 @@ button {
     flex-direction: column;
 }
 
+.banner {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 /* Navigation */
 .flexStart {
     justify-content: flex-start;
