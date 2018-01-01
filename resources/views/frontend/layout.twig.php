@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="/css/main.css" />
 </head>
 <body>
+    {% include('frontend/partials/nav.twig.php') %}
     {% block content %}{% endblock %}    
 </body>
 </html>
