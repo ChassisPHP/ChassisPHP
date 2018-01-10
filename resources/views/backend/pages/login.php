@@ -1,4 +1,5 @@
 {% extends 'backend/layout.twig.php' %}
+{% block title %}ChassisPHP Login{% endblock %}
 {% block content %} 
 <article class="main-content">
 
