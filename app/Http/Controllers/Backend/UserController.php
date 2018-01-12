@@ -38,7 +38,7 @@ class UserController extends Controller
         $users = $userRepository->findAll();
         $loggedInUser = Session::get('name');
                
-        return $this->view->render('backend/partials/users.php', array('users' => $users, 'message' => $message, 'loggedInUser' => $loggedInUser));
+        return $this->view->render('backend/pages/users.php', array('users' => $users, 'message' => $message, 'loggedInUser' => $loggedInUser));
     }
 
     /**
@@ -49,7 +49,7 @@ class UserController extends Controller
     */
     public function create($message = null, $formVars = null)
     {
-        return $this->view->render('backend/partials/register.twig.php', array('message' => $message, 'formVars' => $formVars));
+        return $this->view->render('backend/pages/register.twig.php', array('message' => $message, 'formVars' => $formVars));
     }
 
     /**
@@ -62,7 +62,6 @@ class UserController extends Controller
     {
         $formVars = $this->request->getParsedBody();
         $name = $formVars['name'];
-        $username = $formVars['username'];
         $email = $formVars['email'];
         $passwd = $formVars['passwd'];
         $passwd = $this->hash->make($passwd);
@@ -70,7 +69,6 @@ class UserController extends Controller
 
         $user = new User;
         $user->setName($name);
-        $user->setUserName($username);
         $user->setEmail($email);
         $user->setPasswd($passwd);
         $user->setUserLevel($userLevel);

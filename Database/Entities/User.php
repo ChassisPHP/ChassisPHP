@@ -27,12 +27,6 @@ class User
     protected $name;
 
     /**
-    *  @ORM\Column(type="string", length=255, unique=true)
-    *  @Assert\NotBlank()
-    **/
-    protected $userName;
-
-    /**
     * @ORM\Column(type="string", length=255, unique=true)
     * @Assert\NotBlank()
     * @Assert\Email()
@@ -62,16 +56,6 @@ class User
     public function setName($name)
     {
         $this->name = $name;
-    }
-    
-    public function getUserName()
-    {
-        return $this->userName;
-    }
-
-    public function setUserName($userName)
-    {
-        $this->userName = $userName;
     }
     
     public function getEmail()
