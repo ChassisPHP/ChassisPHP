@@ -21,11 +21,30 @@ class Connection
         //$connectionConfig = Setup::createAnnotationMetadataConfiguration(array(dirname(__FILE__, 3)."/Database/Entities"), $this->isDevMode);
         $driver = envar('DATABASE_DRIVER', 'pdo_mysql');
         $dbType = envar('DATABASE_TYPE', 'mysql');
-        $path = dirname(__FILE__, 3) . "/" . $this->config[$dbType]['database'];
-        $conn = array(
-                'driver' => $driver,
-                'path' => $path,
-            );
+        switch ($dbType) {
+            case "sqlite":
+                $path = dirname(__FILE__, 3) . "/" . $this->config[$dbType]['database'];
+                $conn = array(
+                        'driver' => $driver,
+                        'path' => $path,
+                        );
+                break;
+            case "mysql":
+                $dbName = envar('DATABASE_NAME');
+                $dbUser = envar('DATABASE_USER');
+                $dbPasswd = envar('DATABASE_PASSWORD');
+                $dbHost = envar('DATABASE_HOST');
+                $conn = array(
+                    'dbname' => $dbName,
+                    'user' => $dbUser,
+                    'password' => $dbPasswd,
+                    'host' => $dbHost,
+                    'driver' => 'pdo_mysql',
+                    );
+                break;
+            default:
+                echo('invalid database type');
+        }
 
         $connectionConfig = Setup::createConfiguration($this->isDevMode);
         $connectionDriver = new AnnotationDriver(new AnnotationReader(), dirname(__FILE__, 3)."/Database/Entities");
