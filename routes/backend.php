@@ -16,6 +16,9 @@ return [
     ['POST', '/users/register', ['Backend\UserController', 'store']],
     ['GET', '/users/delete/{ID}', ['Backend\UserController', 'destroy']],
 
+    ['GET', '/content', ['Backend\ContentController', 'index']],
+    ['GET', '/content/{ID}', ['Backend\ContentController', 'select']],
+
     ['GET', '/login', ['Backend\AuthController', 'index']],
     ['POST', '/login', ['Backend\AuthController', 'store']],
 ];
