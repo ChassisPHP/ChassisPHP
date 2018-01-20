@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\entities;
+namespace Database\Entities;
 
 //use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\ORM\Mapping as ORM;
