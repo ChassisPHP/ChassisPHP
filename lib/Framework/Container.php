@@ -70,6 +70,7 @@ class Container extends LeagueContainer
             return $twig = new \Twig_Environment($loader, array(
                 'cache' => dirname(__FILE__, 3) . '/storage/compiledviews',
                 'auto_reload' => true,
+                'debug' => true,
             ));
         }, true);
 
@@ -149,6 +150,30 @@ class Container extends LeagueContainer
                 []
             );
 
+        $this->add('App\Http\Controllers\Backend\ContentController')
+            ->withMethodCall(
+                'setMiddlewareQueue',
+                [
+                   $this->get('MiddlewareQueue')
+                ]
+            )
+            ->withMethodCall(
+                'setRequest',
+                [
+                   $this->get('PsrRequestInterface')
+                ]
+            )
+            ->withMethodCall(
+                'setView',
+                [
+                   $this->get('Twig')
+                ]
+            )
+            ->withMethodCall(
+                'addMiddleware',
+                []
+            );
+        
 
         // Add additional default error pages here.
         $this->add('template.defaults.404', 'errors/404.twig');

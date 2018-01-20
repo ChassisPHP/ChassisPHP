@@ -29,7 +29,7 @@ class Content
     protected $title;
 
     /**
-     * @ORM\Column(type="string", unique="true")
+     * @ORM\Column(type="string", unique=true)
      */
     protected $slug;
 
