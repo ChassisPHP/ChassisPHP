@@ -13,15 +13,14 @@
     </header>
     
     <a href="/backend/content" class="button blueBackground">All Content</a>
-    <div class="item">
-        <div class="Rtable Rtable--5cols center">
-            <div class="Rtable-cell">{{ entryDetails.Id }}</div>
-            <div class="Rtable-cell">{{ entryDetails.Title }}</div>
-            <div class="Rtable-cell">{{ entryDetails.Body }}</div>
+    <div class="col60">
+        <div class="item itemCenter">
+            <h1 class="">{{ entryDetails.Title }}</h1>
+            <p>{{ entryDetails.Body }}</p>
             <div class="Rtable-cell">{{ entryDetails.PublicationDate|date('Y-m-d H:i:s') }}</div>
-            <div class="Rtable-cell"><a href="/backend/content/delete/{{ content.ID }}" onclick="return confirm('Are you sure?')">DELETE</a></div>
+            <button class="button redBackground"><a href="/backend/content/delete/{{ content.ID }}" onclick="return confirm('Are you sure?')">DELETE</a></button>
+            </div>
         </div>
     </div>
-
 </article>
 {% endblock %}

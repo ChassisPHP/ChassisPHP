@@ -98,6 +98,10 @@ button {
     font-size: 4em;
 }
 
+.col60 {
+    width: 60%;
+}
+
 /* Navigation */
 .flexStart {
     justify-content: flex-start;
@@ -174,6 +178,10 @@ button {
 /* Colors */
 .blueBackground {
     background: #71adf7;
+}
+
+.redBackground {
+    background: red;
 }
 
 .textGrey {

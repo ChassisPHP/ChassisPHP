@@ -15,11 +15,14 @@ class AuthMiddleware
      **/
     public function __invoke($request, $response, $next = null)
     {
+        $serverProps = $request->getServerParams('REQUEST_URI');
+        $URI = $serverProps['REQUEST_URI'];
         if (!Session::get('authenticated')) {
             // user is authenticated
             // TODO refaactor this to a helper class with more functionality
             // also, add flash message
             Session::set('error', 'The page you attempted to access requires that you log in ');
+            Session::set('history', $URI);
             return header('Location: /backend/login');
         }
         $response = $next($request, $response);
