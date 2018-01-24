@@ -20,8 +20,11 @@ require __DIR__.'/../vendor/autoload.php';
 
 // set session storage location and
 // start the session
+$config = new \Lib\Framework\Config;
+$gcProb = $config['gcProb'];
+debugVar($gcProb);
 ini_set('session.save_path', dirname(__FILE__, 2) . '/storage/sessions');
-ini_set('session.gc_probability', 1);
+ini_set('session.gc_probability', $gcProb);
 session_start();
 
 // set the timeout for the session

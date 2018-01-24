@@ -4,7 +4,7 @@ return [
 
     /*
      * Database connections
-     * Currently only SQLite is set up
+     * Currently only SQLite & mySQL are set up
      * others to come soon
     */
    

@@ -17,7 +17,7 @@ class Config implements ArrayAccess
             $configs = include($configFile);
         
             foreach ($configs as $config) {
-                $this->config = $config;
+                $this->config += $config;
             }
         }
     }
