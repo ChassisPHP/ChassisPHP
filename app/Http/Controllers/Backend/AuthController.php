@@ -31,13 +31,9 @@ class AuthController extends Controller
     }
 
 
-    public function index($message = null)
+    public function index()
     {
-        if (Session::get('error')) {
-            $message['type'] = 'alert-danger';
-            $message['content'] = Session::get('error');
-        }
-        // Display L$message['content'] = ogin form
+        $message =  Session::getMessage();
         return $this->view->render('backend/pages/login.php', array('message' => $message));
     }
 
@@ -84,10 +80,10 @@ class AuthController extends Controller
             //$location = "Location: ".$URI
             return header("Location: $URI"); // TODO refactor this to a helper class with more functionality
         } else {
-            $message['type'] = 'alert-danger';
-            $message['content'] = "Wrong Email or Password, please try again";
+            //$message['type'] = 'alert-danger';
+            Session::setMessage('warning', 'Wrong Email or Password, please try again');
     
-            return $this->index($message);
+            return $this->index();
         }
     }
 

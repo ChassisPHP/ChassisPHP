@@ -43,6 +43,31 @@ class Session
         unset($_SESSION[$key]);
     }
 
+    // message handling
+    // set message
+    public static function setMessage($type, $message)
+    {
+        $_SESSION['message']['type'] = $type;
+        $_SESSION['message']['content'] = $message;
+    }
+
+    // message handling
+    // get message
+    public static function getMessage()
+    {
+        if (isset($_SESSION['message']['content'])) {
+            $message = array(
+                'type' => $_SESSION['message']['type'],
+                'content' => $_SESSION['message']['content'],
+            );
+            unset($_SESSION['message']['type']);
+            unset($_SESSION['message']['content']);
+            return $message;
+        } else {
+            return false;
+        }
+    }
+
     // destroy the session when we are done with it
     public static function destroy()
     {
