@@ -127,23 +127,16 @@ class AuthController extends Controller
     }
  
     /**
-    * Remove the specified resource from storage.
+    * Log the current user out and return them to the homepage
     *
-    * @param  int  $id
     * @return Response
     */
-    public function destroy($id)
+    public function logout()
     {
-        // remove a user from the DB
-        $userRepo = $this->entityManager->getRepository('Database\Entities\User');
-        $user = $userRepo->find($id['ID']);
-        $name = $user->getName();
-        $this->entityManager->remove($user);
-        $this->entityManager->flush();
-        
-        $message['type'] = 'alert-danger';
-        $message['content'] = "User $name deleted succesfully";
-    
-        return $this->index($message);
+        // destroy the  user's session
+        Session::destroy();
+
+        // return the homepage as the response
+        return $this->view->render('frontend/pages/welcome.twig.php');
     }
 }

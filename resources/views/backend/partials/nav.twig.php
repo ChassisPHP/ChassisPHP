@@ -7,7 +7,7 @@
         <li><a href="/backend/users">Users</a></li>
         <li><a href="/backend/register">Add User</a></li>
         <li><a href="#">Careers</a></li>
-        <li><a href="#">Logout</a></li>
-        <li>{{ loggedInUser }}</li
+        <li><a href="/backend/logout">Logout</a></li>
+        <li>{{ loggedInUser }}</li>
     </ul>
 </nav>

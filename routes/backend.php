@@ -21,4 +21,5 @@ return [
 
     ['GET', '/login', ['Backend\AuthController', 'index']],
     ['POST', '/login', ['Backend\AuthController', 'store']],
+    ['GET', '/logout', ['Backend\AuthController', 'logout']],
 ];
