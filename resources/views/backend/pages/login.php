@@ -4,7 +4,7 @@
 <article class="main-content">
 
     {% if message.content is defined %}
-    <div class="item alert {{ message.type }}">
+    <div class="item alert alert-{{ message.type }}">
         {{ message.content }}
     </div>
     {% endif %} 
