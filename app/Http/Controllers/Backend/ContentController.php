@@ -44,39 +44,41 @@ class ContentController extends Controller
     * Show the form for creating a new resource.
     *
     * @return Response
-    *
+     */
 
-    public function create($message = null, $formVars = null)
+    public function create($formVars = null)
     {
-        return $this->view->render('backend/pages/register.twig.php', array('message' => $message, 'formVars' => $formVars));
+        return $this->view->render('backend/pages/contentForm.twig.php', array('formVars' => $formVars));
     }
 
     /**
     * Store a newly created resource in storage.
     *
     * @return Response
-    *
+     */
 
     public function store()
     {
         $formVars = $this->request->getParsedBody();
-        $name = $formVars['name'];
-        $email = $formVars['email'];
-        $passwd = $formVars['passwd'];
-        $passwd = $this->hash->make($passwd);
-        $userLevel = $formVars['userLevel'];
+        $title = $formVars['title'];
+        $slug = $formVars['slug'];
+        $body = $formVars['body'];
+        $author = $formVars['author'];
 
-        $user = new User;
-        $user->setName($name);
-        $user->setEmail($email);
-        $user->setPasswd($passwd);
-        $user->setUserLevel($userLevel);
+        $timestamp = new \DateTime();
+
+        $content = new Content;
+        $content->setTitle($title);
+        $content->setSlug($slug);
+        $content->setBody($body);
+        $content->setAuthor($author);
+        $content->setPublicationDate($timestamp);
 
         try {
-            $this->entityManager->persist($user);
+            $this->entityManager->persist($content);
             $this->entityManager->flush();
             $message['type'] = 'alert-info';
-            $message['content'] = "User $name added succesfully";
+            $message['content'] = "$title content added succesfully";
             return $this->index($message);
         } catch (UniqueConstraintViolationException $e) {
             $message['type'] = 'alert-danger';
