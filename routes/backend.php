@@ -17,7 +17,10 @@ return [
     ['GET', '/users/delete/{ID}', ['Backend\UserController', 'destroy']],
 
     ['GET', '/content', ['Backend\ContentController', 'index']],
+    ['GET', '/content/create', ['Backend\ContentController', 'create']],
+    ['POST', '/content/create', ['Backend\ContentController', 'store']],
     ['GET', '/content/{ID}', ['Backend\ContentController', 'select']],
+    ['GET', '/content/delete/{ID}', ['Backend\ContentController', 'destroy']],
 
     ['GET', '/login', ['Backend\AuthController', 'index']],
     ['POST', '/login', ['Backend\AuthController', 'store']],
