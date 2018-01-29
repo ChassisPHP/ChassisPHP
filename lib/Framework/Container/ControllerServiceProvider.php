@@ -14,6 +14,9 @@ class ControllerServiceProvider extends AbstractServiceProvider
 
     public function __construct()
     {
+        // loop through the controllers directory and
+        // add the namespace of each controller
+        // to the provides array
         $this->provides = $this->readInControllers();
     }
 

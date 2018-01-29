@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 * @ORM\Entity
 * @ORM\Table(name="content",indexes={
 *       @Index(name="publication_date", columns={"publicationDate"})},
-*       uniqueConstraints={@UniqueConstraint(name="unique_slug", columns={"slug"})}
+*       uniqueConstraints={@UniqueConstraint(name="unique_slug", columns={"slug", "position"})}
 *       )
 */
 class Content
@@ -27,6 +27,11 @@ class Content
      * @ORM\Column(type="string")
      */
     protected $title;
+
+    /**
+     * @ORM\Column(type="string", unique=true)
+     */
+    protected $position;
 
     /**
      * @ORM\Column(type="string", unique=true)
@@ -57,6 +62,11 @@ class Content
     public function getId()
     {
         return $this->id;
+    }
+    
+    public function getPosition()
+    {
+        return $this->position;
     }
     
     public function getTitle()
@@ -93,6 +103,11 @@ class Content
     public function setTitle($title)
     {
         $this->title = $title;
+    }
+
+    public function setPosition($position)
+    {
+        $this->title = $position;
     }
 
     public function setSlug($slug)
