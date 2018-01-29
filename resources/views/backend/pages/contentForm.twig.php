@@ -19,6 +19,11 @@
         </div>
       
         <div class="form-group">
+          <label>Position</label>
+          <input name="position" placeholder="Content Position" value="{{ formVars.Position }}" class="input-control" />
+        </div>
+      
+        <div class="form-group">
           <label>Slug</label>
           <input name="slug" placeholder="Slug" value="{{ formVars.slug }}" class="input-control" />
         </div>

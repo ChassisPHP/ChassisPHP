@@ -61,6 +61,7 @@ class ContentController extends Controller
     {
         $formVars = $this->request->getParsedBody();
         $title = $formVars['title'];
+        $position = $formVars['position'];
         $slug = $formVars['slug'];
         $body = $formVars['body'];
         $author = $formVars['author'];
@@ -69,6 +70,7 @@ class ContentController extends Controller
 
         $content = new Content;
         $content->setTitle($title);
+        $content->setPosition($position);
         $content->setSlug($slug);
         $content->setBody($body);
         $content->setAuthor($author);
