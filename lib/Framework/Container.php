@@ -27,7 +27,9 @@ class Container extends LeagueContainer
 
         $this->addServiceProvider('App\ServiceProviders\ResponseServiceProvider');
         $this->addServiceProvider('App\ServiceProviders\RequestServiceProvider');
-        $this->addServiceProvider('App\ServiceProviders\UserControllerServiceProvider');
+
+        // Add developer controllers
+        $this->addServiceProvider('Lib\Framework\Container\ControllerServiceProvider');
 
         $this->share('MiddlewareQueue', new \Lib\Framework\Http\MiddlewareQueue($this->get('PsrRequestInterface'), $this->get('PsrResponseInterface')));
 
@@ -73,107 +75,6 @@ class Container extends LeagueContainer
                 'debug' => true,
             ));
         }, true);
-
-        $this->add('Lib\Framework\Http\Controller')
-            ->withArgument($this->get('MiddlewareQueue'))
-            ->withArgument($this->get('Twig'));
-   
-        $this->add('App\Http\Controllers\HomeController')
-            ->withMethodCall(
-                'setMiddlewareQueue',
-                [
-                   $this->get('MiddlewareQueue')
-                ]
-            )
-            ->withMethodCall(
-                'setRequest',
-                [
-                   $this->get('PsrRequestInterface')
-                ]
-            )
-            ->withMethodCall(
-                'setView',
-                [
-                   $this->get('Twig')
-                ]
-            )
-            ->withMethodCall(
-                'addMiddleware',
-                []
-            );
-        
-        $this->add('App\Http\Controllers\Backend\UserController')
-            ->withMethodCall(
-                'setMiddlewareQueue',
-                [
-                   $this->get('MiddlewareQueue')
-                ]
-            )
-            ->withMethodCall(
-                'setRequest',
-                [
-                   $this->get('PsrRequestInterface')
-                ]
-            )
-            ->withMethodCall(
-                'setView',
-                [
-                   $this->get('Twig')
-                ]
-            )
-            ->withMethodCall(
-                'addMiddleware',
-                []
-            );
-        
-        $this->add('App\Http\Controllers\Backend\AuthController')
-            ->withMethodCall(
-                'setMiddlewareQueue',
-                [
-                   $this->get('MiddlewareQueue')
-                ]
-            )
-            ->withMethodCall(
-                'setRequest',
-                [
-                   $this->get('PsrRequestInterface')
-                ]
-            )
-            ->withMethodCall(
-                'setView',
-                [
-                   $this->get('Twig')
-                ]
-            )
-            ->withMethodCall(
-                'addMiddleware',
-                []
-            );
-
-        $this->add('App\Http\Controllers\Backend\ContentController')
-            ->withMethodCall(
-                'setMiddlewareQueue',
-                [
-                   $this->get('MiddlewareQueue')
-                ]
-            )
-            ->withMethodCall(
-                'setRequest',
-                [
-                   $this->get('PsrRequestInterface')
-                ]
-            )
-            ->withMethodCall(
-                'setView',
-                [
-                   $this->get('Twig')
-                ]
-            )
-            ->withMethodCall(
-                'addMiddleware',
-                []
-            );
-        
 
         // Add additional default error pages here.
         $this->add('template.defaults.404', 'errors/404.twig');
