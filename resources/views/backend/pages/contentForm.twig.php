@@ -24,11 +24,6 @@
         </div>
       
         <div class="form-group">
-          <label>Slug</label>
-          <input name="slug" placeholder="Slug" value="{{ formVars.slug }}" class="input-control" />
-        </div>
-      
-        <div class="form-group">
           <label>Body</label>
           <textarea name="body" placeholder="body" class="input-control"></textarea>
         </div>
