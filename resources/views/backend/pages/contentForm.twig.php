@@ -11,8 +11,7 @@
     <header class="item">
         <h1>Content</h1>
     </header>
-    
-    <form action="/backend/content/create" method="post"> 
+    <form action="{{ action }}" method="{{ method }}"> 
         <div class="form-group">
           <label>Title</label>
           <input name="title" placeholder="Content Title" value="{{ formVars.Title }}" class="input-control" />

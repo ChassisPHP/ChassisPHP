@@ -48,7 +48,9 @@ class ContentController extends Controller
 
     public function create($formVars = null)
     {
-        return $this->view->render('backend/pages/contentForm.twig.php', array('formVars' => $formVars));
+        $formAction = "/backend/content/create";
+        $formMethod = "post";
+        return $this->view->render('backend/pages/contentForm.twig.php', array('formVars' => $formVars, 'action' => $formAction, 'method' => $formMethod));
     }
 
     /**
@@ -84,7 +86,7 @@ class ContentController extends Controller
             return $this->index($message);
         } catch (UniqueConstraintViolationException $e) {
             $message['type'] = 'alert-danger';
-            $message['content'] = "Email has already been registered";
+            $message['content'] = "$title could not be added";
             return $this->create($message, $formVars);
         }
     }
@@ -110,7 +112,12 @@ class ContentController extends Controller
     */
     public function edit($id)
     {
-            //
+        //
+        $contentEntry = $this->entityManager->find('Database\Entities\Content', $id['ID']);
+        $contentId = $id['ID'];
+        $formAction = "/backend/content/update/$contentId";
+        $formMethod = "put";
+        return $this->view->render('backend/pages/contentForm.twig.php', array('contentEntry' => $contentEntry, 'action' => $formAction));
     }
 
     /**
