@@ -14,27 +14,22 @@
     <form action="{{ action }}" method="{{ method }}"> 
         <div class="form-group">
           <label>Title</label>
-          <input name="title" placeholder="Content Title" value="{{ formVars.Title }}" class="input-control" />
+          <input name="title" placeholder="{{ (contentEntry.Title is defined) ? '' : 'Content Title' }}" value="{{ contentEntry.Title }}" class="input-control" />
         </div>
       
         <div class="form-group">
           <label>Position</label>
-          <input name="position" placeholder="Content Position" value="{{ formVars.Position }}" class="input-control" />
-        </div>
-      
-        <div class="form-group">
-          <label>Slug</label>
-          <input name="slug" placeholder="Slug" value="{{ formVars.slug }}" class="input-control" />
+          <input name="position" placeholder="{{ (contentEntry.Position is defined) ? '' : 'Position' }}" value="{{ contentEntry.Position }}" class="input-control" />
         </div>
       
         <div class="form-group">
           <label>Body</label>
-          <textarea name="body" placeholder="body" class="input-control"></textarea>
+          <textarea name="body" placeholder="{{ (contentEntry.Body is defined) ? '' : 'Body' }}" class="input-control">{{ contentEntry.Body }}</textarea>
         </div>
       
         <div class="form-group">
           <label>Author</label>
-          <input name="author" placeholder="Author #" value="{{ formVars.author }}" class="input-control" />
+          <input name="author" placeholder="{{ (contentEntry.Author is defined) ? '' : 'Author' }}" value="{{ contentEntry.Author }}" class="input-control" />
         </div>
 
         <div class="form-group">

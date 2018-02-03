@@ -19,6 +19,8 @@ return [
     ['GET', '/content', ['Backend\ContentController', 'index']],
     ['GET', '/content/create', ['Backend\ContentController', 'create']],
     ['POST', '/content/create', ['Backend\ContentController', 'store']],
+    ['GET', '/content/update/{ID}', ['Backend\ContentController', 'edit']],
+    ['POST', '/content/update/{ID}', ['Backend\ContentController', 'update']],
     ['GET', '/content/{ID}', ['Backend\ContentController', 'select']],
     ['GET', '/content/delete/{ID}', ['Backend\ContentController', 'destroy']],
 
