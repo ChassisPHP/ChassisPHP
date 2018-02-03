@@ -120,7 +120,7 @@ class ContentController extends Controller
     *
     * @param  int  $id
     * @return Response
-
+    */
     public function destroy($id)
     {
         // remove a user from the DB
@@ -134,7 +134,7 @@ class ContentController extends Controller
         $message['content'] = "User $name deleted succesfully";
 
         return $this->index($message);
-    }*/
+    }
 
     /**
      * method to hydrate and persist an entity
