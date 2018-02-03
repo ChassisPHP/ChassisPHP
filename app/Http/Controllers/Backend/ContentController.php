@@ -62,31 +62,11 @@ class ContentController extends Controller
     public function store()
     {
         $formVars = $this->request->getParsedBody();
-        $title = $formVars['title'];
-        $position = $formVars['position'];
-        $body = $formVars['body'];
-        $author = $formVars['author'];
-
-        $timestamp = new \DateTime();
 
         $content = new Content;
-        $content->setTitle($title);
-        $content->setPosition($position);
-        $content->setBody($body);
-        $content->setAuthor($author);
-        $content->setPublicationDate($timestamp);
-
-        try {
-            $this->entityManager->persist($content);
-            $this->entityManager->flush();
-            $message['type'] = 'alert-info';
-            $message['content'] = "$title content added succesfully";
-            return $this->index($message);
-        } catch (UniqueConstraintViolationException $e) {
-            $message['type'] = 'alert-danger';
-            $message['content'] = "$title could not be added";
-            return $this->create($message, $formVars);
-        }
+        
+        $message = $this->hydrateAndPersist($content, $formVars);
+        return $this->index($message);
     }
 
     /**
@@ -98,8 +78,8 @@ class ContentController extends Controller
     public function select($id, $message = null)
     {
         //
-        $contentEntry = $this->entityManager->find('Database\Entities\Content', $id['ID']);
-        return $this->view->render('backend/pages/contentDetails.twig.php', array('entryDetails' => $contentEntry, 'message' => $message, 'loggedInUser' => $this->loggedInUser));
+        $content = $this->entityManager->find('Database\Entities\Content', $id['ID']);
+        return $this->view->render('backend/pages/contentDetails.twig.php', array('content' => $content, 'message' => $message, 'loggedInUser' => $this->loggedInUser));
     }
 
     /**
@@ -111,11 +91,11 @@ class ContentController extends Controller
     public function edit($id)
     {
         //
-        $contentEntry = $this->entityManager->find('Database\Entities\Content', $id['ID']);
+        $content = $this->entityManager->find('Database\Entities\Content', $id['ID']);
         $contentId = $id['ID'];
         $formAction = "/backend/content/update/$contentId";
-        $formMethod = "put";
-        return $this->view->render('backend/pages/contentForm.twig.php', array('contentEntry' => $contentEntry, 'action' => $formAction));
+        $formMethod = "post";
+        return $this->view->render('backend/pages/contentForm.twig.php', array('contentEntry' => $content, 'action' => $formAction, 'method' => $formMethod));
     }
 
     /**
@@ -126,7 +106,13 @@ class ContentController extends Controller
     */
     public function update($id)
     {
-        //
+        $content = $this->entityManager->find('Database\Entities\Content', $id['ID']);
+    
+        $formVars = $this->request->getParsedBody();
+        
+        $this->hydrateAndPersist($content, $formVars);
+
+        return $this->select($id);
     }
  
     /**
@@ -134,7 +120,7 @@ class ContentController extends Controller
     *
     * @param  int  $id
     * @return Response
-
+    */
     public function destroy($id)
     {
         // remove a user from the DB
@@ -148,5 +134,37 @@ class ContentController extends Controller
         $message['content'] = "User $name deleted succesfully";
 
         return $this->index($message);
-    }*/
+    }
+
+    /**
+     * method to hydrate and persist an entity
+     * and prepare it for persistence
+     */
+    private function hydrateAndPersist($content, $formVars)
+    {
+        $title = $formVars['title'];
+        $position = $formVars['position'];
+        $body = $formVars['body'];
+        $author = $formVars['author'];
+
+        $timestamp = new \DateTime();
+
+        $content->setTitle($title);
+        $content->setPosition($position);
+        $content->setBody($body);
+        $content->setAuthor($author);
+        $content->setPublicationDate($timestamp);
+
+        try {
+            $this->entityManager->persist($content);
+            $this->entityManager->flush();
+            $message['type'] = 'alert-info';
+            $message['content'] = "$title content added succesfully";
+            return $message;
+        } catch (UniqueConstraintViolationException $e) {
+            $message['type'] = 'alert-danger';
+            $message['content'] = "$title could not be added";
+            return $this->create($message, $formVars);
+        }
+    }
 }
