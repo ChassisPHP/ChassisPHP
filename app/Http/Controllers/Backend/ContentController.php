@@ -123,15 +123,17 @@ class ContentController extends Controller
     */
     public function destroy($id)
     {
-        // remove a user from the DB
-        $userRepo = $this->entityManager->getRepository('Database\Entities\User');
-        $user = $userRepo->find($id['ID']);
-        $name = $user->getName();
-        $this->entityManager->remove($user);
+        // remove content  from the DB
+        $content = $this->entityManager->find('Database\Entities\Content', $id['ID']);
+        $title = $content->getTitle();
+        if (!$title) {
+            $title = "untitled content";
+        }
+        $this->entityManager->remove($content);
         $this->entityManager->flush();
 
         $message['type'] = 'alert-danger';
-        $message['content'] = "User $name deleted succesfully";
+        $message['content'] = "Content entry \"$title\" deleted succesfully";
 
         return $this->index($message);
     }
