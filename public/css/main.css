@@ -185,6 +185,10 @@ button {
     background: red;
 }
 
+.greenBackground {
+    background: green;
+}
+
 .textGrey {
     color: #f0f0f0;
 }
@@ -194,6 +198,7 @@ button {
     color: white;
     margin: 5px;
     border-radius: 8px;
+    border: .2em solid #f0f0f0;
     padding: 10px 8px;
     font-size: 14px;
     text-align: center;
@@ -206,4 +211,8 @@ button {
 .button:hover {
     background-color: #e7e7e7;
     color: black;
+}
+
+.button-medium {
+    width: 6em;
 }

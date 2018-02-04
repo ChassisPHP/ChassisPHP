@@ -34,8 +34,8 @@
 
         <div class="form-group">
           <label>&nbsp;</label>
-          <button type="submit">Save</button>
-          <button>Cancel</button>
+          <button class="button button-medium greenBackground" type="submit">Save</button>
+          <a href="/backend/content" class="button button-medium redBackground">Cancel</a>
         </div>
     </form>
     
