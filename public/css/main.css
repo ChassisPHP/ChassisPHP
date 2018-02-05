@@ -115,7 +115,7 @@ button {
     list-style: none;
 }
 
-.nav a {
+.nav a, li {
     text-decoration: none;
     display: block;
     padding: 0 1em;
