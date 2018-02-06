@@ -11,7 +11,7 @@
     <header class="item">
         <h1>Content</h1>
     </header>
-    <form action="{{ action }}" method="{{ method }}"> 
+    <form class="item col60" action="{{ action }}" method="{{ method }}"> 
         <div class="form-group">
           <label>Title</label>
           <input name="title" placeholder="{{ (contentEntry.Title is defined) ? '' : 'Content Title' }}" value="{{ contentEntry.Title }}" class="input-control" />
@@ -24,7 +24,7 @@
       
         <div class="form-group">
           <label>Body</label>
-          <textarea name="body" placeholder="{{ (contentEntry.Body is defined) ? '' : 'Body' }}" class="input-control">{{ contentEntry.Body }}</textarea>
+          <textarea rows="12" name="body" placeholder="{{ (contentEntry.Body is defined) ? '' : 'Body' }}" class="input-control">{{ contentEntry.Body }}</textarea>
         </div>
       
         <div class="form-group">
