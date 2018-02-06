@@ -59,4 +59,55 @@ class MiddlewareTest extends TestCase
             $body
         );
     }
+    
+    // confirm that content list page requires log in
+    public function testContentAuth()
+    {
+        $response = $this->http->request('GET', '/backend/content');
+
+        $this->assertEquals(200, $response->getStatusCode());
+
+        $contentType = $response->getHeaders()["Content-Type"][0];
+        $this->assertEquals("text/html; charset=UTF-8", $contentType);
+        $body = $response->getBody();
+        $body = $body->getContents();
+        $this->assertContains(
+            'The page you attempted to access requires that you log in ',
+            $body
+        );
+    }
+    
+    // confirm that content detail page requires log in
+    public function testContentDetailAuth()
+    {
+        $response = $this->http->request('GET', '/backend/content/1');
+
+        $this->assertEquals(200, $response->getStatusCode());
+
+        $contentType = $response->getHeaders()["Content-Type"][0];
+        $this->assertEquals("text/html; charset=UTF-8", $contentType);
+        $body = $response->getBody();
+        $body = $body->getContents();
+        $this->assertContains(
+            'The page you attempted to access requires that you log in ',
+            $body
+        );
+    }
+    
+    // confirm that content update page requires log in
+    public function testContentUpdateDetailAuth()
+    {
+        $response = $this->http->request('GET', '/backend/content/update/1');
+
+        $this->assertEquals(200, $response->getStatusCode());
+
+        $contentType = $response->getHeaders()["Content-Type"][0];
+        $this->assertEquals("text/html; charset=UTF-8", $contentType);
+        $body = $response->getBody();
+        $body = $body->getContents();
+        $this->assertContains(
+            'The page you attempted to access requires that you log in ',
+            $body
+        );
+    }
 }
