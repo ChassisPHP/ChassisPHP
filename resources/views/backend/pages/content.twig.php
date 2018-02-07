@@ -13,7 +13,7 @@
     </header>
     
     <a href="/backend/content/create" class="button blueBackground">Add Content</a>
-    <div class="item">
+    <div class="item col90">
         <div class="Rtable Rtable--7cols center">
             {% for content in contents %}
             <div class="Rtable-cell">{{ content.Position }}</div>
