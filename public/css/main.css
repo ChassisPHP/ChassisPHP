@@ -102,6 +102,10 @@ button {
     width: 60%;
 }
 
+.col90 {
+    width: 90%;
+}
+
 /* Navigation */
 .flexStart {
     justify-content: flex-start;
