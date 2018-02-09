@@ -29,7 +29,8 @@
       
         <div class="form-group">
           <label>Author</label>
-          <input name="author" placeholder="{{ (contentEntry.Author is defined) ? '' : 'Author' }}" value="{{ contentEntry.Author }}" class="input-control" />
+          <input name="authorName" value="{{ author.name }}" class="input-control" readonly />
+          <input type="hidden" name="author" value="{{ author.id }}" />
         </div>
 
         <div class="form-group">
