@@ -15,6 +15,7 @@ class ContentController extends Controller
     private $connection;
     private $entityManager;
     private $loggedInUser;
+    private $loggedInUserId;
 
     public function __construct()
     {
@@ -22,6 +23,7 @@ class ContentController extends Controller
         $this->connection = new Connection;
         $this->entityManager = $this->connection->entityManager;
         $this->loggedInUser = Session::get('name');
+        $this->loggedInUserId = Session::get('user');
     }
 
     public function addMiddleware()
@@ -50,7 +52,10 @@ class ContentController extends Controller
     {
         $formAction = "/backend/content/create";
         $formMethod = "post";
-        return $this->view->render('backend/pages/contentForm.twig.php', array('formVars' => $formVars, 'action' => $formAction, 'method' => $formMethod));
+        $author['name'] = $this->loggedInUser;
+        $author['id'] = $this->loggedInUserId;
+
+        return $this->view->render('backend/pages/contentForm.twig.php', array('formVars' => $formVars, 'action' => $formAction, 'method' => $formMethod, 'loggedInUser' => $this->loggedInUser, 'author' => $author));
     }
 
     /**
@@ -95,7 +100,7 @@ class ContentController extends Controller
         $contentId = $id['ID'];
         $formAction = "/backend/content/update/$contentId";
         $formMethod = "post";
-        return $this->view->render('backend/pages/contentForm.twig.php', array('contentEntry' => $content, 'action' => $formAction, 'method' => $formMethod));
+        return $this->view->render('backend/pages/contentForm.twig.php', array('contentEntry' => $content, 'action' => $formAction, 'method' => $formMethod, 'loggedInUser' => $this->loggedInUser));
     }
 
     /**
