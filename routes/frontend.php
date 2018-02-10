@@ -7,7 +7,8 @@ return [
  * frontend, public-facing routes
  */
     ['GET', '/', ['HomeController', 'index']],
-
+    ['GET', '/about', ['AboutController', 'index']],
+   
     ['GET', '/new', function () {
         return 'This is a test page!';
     }],
