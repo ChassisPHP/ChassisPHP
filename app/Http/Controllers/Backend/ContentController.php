@@ -69,6 +69,9 @@ class ContentController extends Controller
         $formVars = $this->request->getParsedBody();
 
         $content = new Content;
+
+        $timestamp = new \DateTime();
+        $content->setPublicationDate($timestamp);
         
         $message = $this->hydrateAndPersist($content, $formVars);
         return $this->index($message);
@@ -114,6 +117,7 @@ class ContentController extends Controller
         $content = $this->entityManager->find('Database\Entities\Content', $id['ID']);
     
         $formVars = $this->request->getParsedBody();
+        $formVars['updatedBy'] = $this->loggedInUser;
         
         $this->hydrateAndPersist($content, $formVars);
 
@@ -144,9 +148,8 @@ class ContentController extends Controller
     }
 
     /**
-     * method to hydrate and persist an entity
-     * and prepare it for persistence
-     */
+    * method to hydrate and persist an entity
+    */
     private function hydrateAndPersist($content, $formVars)
     {
         $title = $formVars['title'];
@@ -155,12 +158,11 @@ class ContentController extends Controller
         $author = $formVars['author'];
 
         $timestamp = new \DateTime();
-
+        $content->setUpdated($timestamp);
         $content->setTitle($title);
         $content->setPosition($position);
         $content->setBody($body);
         $content->setAuthor($author);
-        $content->setPublicationDate($timestamp);
 
         try {
             $this->entityManager->persist($content);

@@ -98,12 +98,35 @@ button {
     font-size: 4em;
 }
 
+.col5 {
+    width: 5%;
+}
+
+.col10 {
+    width: 10%;
+}
+
+.col20 {
+    width: 20%;
+}
+
 .col60 {
     width: 60%;
 }
 
 .col90 {
     width: 90%;
+}
+
+.cell {
+    box-sizing: border-box;
+    flex-grow: 1;
+    padding: 0.4em .4em;
+    overflow: hidden; // Or flex might break
+    list-style: none;
+    border: solid white;
+    background: #f0f0f0;
+    > h1, > h2, > h3, > h4, > h5, > h6 { margin: 0; }
 }
 
 /* Navigation */
