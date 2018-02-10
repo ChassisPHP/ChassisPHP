@@ -69,11 +69,13 @@ class Container extends LeagueContainer
 
         $this->add('Twig', function () {
             $loader = new \Twig_Loader_Filesystem(dirname(__FILE__, 3) . '/resources/views');
-            return $twig = new \Twig_Environment($loader, array(
-                'cache' => dirname(__FILE__, 3) . '/storage/compiledviews',
-                'auto_reload' => true,
-                'debug' => true,
+            $twig = new \Twig_Environment($loader, array(
+               'cache' => dirname(__FILE__, 3) . '/storage/compiledviews',
+               'auto_reload' => true,
+               'debug' => false,
             ));
+            //$twig->addExtension(new \Twig_Extension_Debug());
+            return $twig;
         }, true);
 
         // Add additional default error pages here.

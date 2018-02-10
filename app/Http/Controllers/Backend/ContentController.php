@@ -103,7 +103,9 @@ class ContentController extends Controller
         $contentId = $id['ID'];
         $formAction = "/backend/content/update/$contentId";
         $formMethod = "post";
-        return $this->view->render('backend/pages/contentForm.twig.php', array('contentEntry' => $content, 'action' => $formAction, 'method' => $formMethod, 'loggedInUser' => $this->loggedInUser));
+        $author['name'] = $this->loggedInUser;
+        $author['id'] = $this->loggedInUserId;
+        return $this->view->render('backend/pages/contentForm.twig.php', array('contentEntry' => $content, 'action' => $formAction, 'method' => $formMethod, 'loggedInUser' => $this->loggedInUser, 'author' => $author));
     }
 
     /**
