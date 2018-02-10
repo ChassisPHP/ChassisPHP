@@ -39,9 +39,14 @@ class Content
     protected $body;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="integer")
      */
     protected $author;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $updatedBy;
 
     /**
      * @ORM\Column(type="datetime")
@@ -51,7 +56,7 @@ class Content
     /**
      * @ORM\Column(type="datetime")
      */
-    protected $updatedDate;
+    protected $updated;
     
     // Entity getters
     public function getId()
@@ -79,14 +84,19 @@ class Content
         return $this->author;
     }
 
+    public function getUpdatedBy()
+    {
+        return $this->updatedBy;
+    }
+
     public function getPublicationDate()
     {
         return $this->publicationDate;
     }
 
-    public function getUpdatedDate()
+    public function getUpdated()
     {
-        return $this->updatedDate;
+        return $this->updated;
     }
     
     // Entity setters
@@ -110,13 +120,18 @@ class Content
         $this->author = $author;
     }
 
+    public function setUpdatedBy($updatedBy)
+    {
+        $this->author = $updatedBy;
+    }
+
     public function setPublicationDate($publicationDate)
     {
         $this->publicationDate = $publicationDate;
     }
 
-    public function setUpdatedDate($updatedDate)
+    public function setUpdated($updated)
     {
-        $this->updatedDate = $updatedDate;
+        $this->updatedDate = $updated;
     }
 }
