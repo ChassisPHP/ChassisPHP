@@ -95,7 +95,8 @@ button {
     display: flex;
     height: 100%;
     text-shadow: .06em .06em .12em #000f00;
-    font-size: 4em;
+    font-size: 3rem;
+    text-align: center;
 }
 
 .col5 {
@@ -127,6 +128,16 @@ button {
     border: solid white;
     background: #f0f0f0;
     > h1, > h2, > h3, > h4, > h5, > h6 { margin: 0; }
+}
+
+.content-inner {
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+#about {
+    background: center center no-repeat,linear-gradient(to bottom,#0060df 7%,#0095ff 100%);
+    color: white;
 }
 
 /* Navigation */
