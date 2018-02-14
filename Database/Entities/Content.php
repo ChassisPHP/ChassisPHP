@@ -24,39 +24,43 @@ class Content
     protected $id;
 
     /**
-     * @ORM\Column(type="string")
-     */
+    * @ORM\Column(type="string")
+    */
     protected $title;
 
     /**
-     * @ORM\Column(type="string", unique=true)
-     */
+    * @ORM\Column(type="string", unique=true)
+    */
     protected $position;
 
     /**
-     * @ORM\Column(type="text")
-     */
+    * @ORM\Column(type="text")
+    */
     protected $body;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    protected $author;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
+    * Many Contents have One User.
+    * @ORM\ManyToOne(targetEntity="User", inversedBy="contents")
+    * @ORM\JoinColumn(name="updatedBy", referencedColumnName="id")
+    */
     protected $updatedBy;
 
     /**
-     * @ORM\Column(type="datetime")
-     */
+    * @ORM\Column(type="datetime")
+    */
     protected $publicationDate;
     
     /**
-     * @ORM\Column(type="datetime")
-     */
+    * @ORM\Column(type="datetime")
+    */
     protected $updated;
+
+    /**
+    * Many Contents have One User.
+    * @ORM\ManyToOne(targetEntity="User", inversedBy="contents")
+    * @ORM\JoinColumn(name="author", referencedColumnName="id")
+    */
+    private $author;
     
     // Entity getters
     public function getId()
@@ -115,14 +119,14 @@ class Content
         $this->body = $body;
     }
 
-    public function setAuthor($author)
+    public function setAuthor(User $author)
     {
         $this->author = $author;
     }
 
-    public function setUpdatedBy($updatedBy)
+    public function setUpdatedBy(User $updatedBy)
     {
-        $this->author = $updatedBy;
+        $this->updatedBy = $updatedBy;
     }
 
     public function setPublicationDate($publicationDate)
