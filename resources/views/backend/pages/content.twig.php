@@ -28,8 +28,8 @@
         <div class="cell col10">{{ content.Position }}</div>
         <div class="cell col20">{{ content.Title }}</div>
         <div class="cell col20">{{ content.Body|length > 50 ? content.Body|slice(0,50) ~ ' ....' : content.Body }}</div>
-        <div class="cell col10">{{ content.Author }}</div>
-        <div class="cell col10">{{ content.upadatedBy }}</div>
+        <div class="cell col10">{{ content.Author.Name }}</div>
+        <div class="cell col10">{{ content.UpdatedBy.Name }}</div>
         <div class="cell col10">{{ content.PublicationDate|date('Y-m-d') }}</div>
         <div class="cell col10">{{ content.Updated|date('Y-m-d') }}</div>
         <div class="cell col5"><a href="/backend/content/{{ content.ID }}">Details</a></div>

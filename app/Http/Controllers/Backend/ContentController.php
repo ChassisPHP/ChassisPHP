@@ -7,6 +7,7 @@ use Lib\Framework\Http\Controller;
 use Lib\Framework\Session;
 use Doctrine\ORM\Query;
 use Database\Entities\Content;
+use Database\Entities\User;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 
 class ContentController extends Controller
@@ -37,8 +38,6 @@ class ContentController extends Controller
         // Display all users from the DB
         $contentRepository = $this->entityManager->getRepository('Database\Entities\Content');
         $content = $contentRepository->findAll();
-        $loggedInUser = Session::get('name');
-               
         return $this->view->render('backend/pages/content.twig.php', array('contents' => $content, 'message' => $message, 'loggedInUser' => $this->loggedInUser));
     }
 
@@ -73,6 +72,8 @@ class ContentController extends Controller
         $timestamp = new \DateTime();
         $content->setPublicationDate($timestamp);
         
+        $author = $this->entityManager->find('Database\Entities\User', $formVars['author']);
+        $content->setAuthor($author);
         $message = $this->hydrateAndPersist($content, $formVars);
         return $this->index($message);
     }
@@ -103,8 +104,9 @@ class ContentController extends Controller
         $contentId = $id['ID'];
         $formAction = "/backend/content/update/$contentId";
         $formMethod = "post";
-        $author['name'] = $this->loggedInUser;
-        $author['id'] = $this->loggedInUserId;
+        $contentAuthor = $this->entityManager->getRepository('Database\Entities\User')->find($content->getAuthor());
+        $author['name'] = $contentAuthor->getName();
+        $author['id'] = $contentAuthor->getId();
         return $this->view->render('backend/pages/contentForm.twig.php', array('contentEntry' => $content, 'action' => $formAction, 'method' => $formMethod, 'loggedInUser' => $this->loggedInUser, 'author' => $author));
     }
 
@@ -119,7 +121,11 @@ class ContentController extends Controller
         $content = $this->entityManager->find('Database\Entities\Content', $id['ID']);
     
         $formVars = $this->request->getParsedBody();
-        $formVars['updatedBy'] = $this->loggedInUser;
+
+        $author = $this->entityManager->find('Database\Entities\User', $formVars['author']);
+        $formVars['author'] = $author;
+        $updatedBy = $this->entityManager->getRepository('Database\Entities\User')->find($this->loggedInUserId);
+        $content->setUpdatedBy($updatedBy);
         
         $this->hydrateAndPersist($content, $formVars);
 
@@ -157,14 +163,14 @@ class ContentController extends Controller
         $title = $formVars['title'];
         $position = $formVars['position'];
         $body = $formVars['body'];
-        $author = $formVars['author'];
+        //$author = $formVars['author'];
 
         $timestamp = new \DateTime();
         $content->setUpdated($timestamp);
         $content->setTitle($title);
         $content->setPosition($position);
         $content->setBody($body);
-        $content->setAuthor($author);
+        //$content->setAuthor($author);
 
         try {
             $this->entityManager->persist($content);

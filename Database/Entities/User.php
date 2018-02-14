@@ -5,6 +5,7 @@ namespace Database\Entities;
 //use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\UniqueConstraint;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -42,6 +43,17 @@ class User
     * @ORM\Column(type="integer")
     **/
     protected $userLevel;
+
+    /**
+    * One User has Many Contents.
+    * @ORM\OneToMany(targetEntity="Content", mappedBy="User")
+    */
+    protected $contents;
+
+    public function __construct()
+    {
+        $this->contents = new ArrayCollection;
+    }
     
     public function getId()
     {
