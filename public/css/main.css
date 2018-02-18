@@ -147,6 +147,7 @@ button {
 
 .flexEnd {
     justify-content: flex-end;
+    margin-right: 5%;
 }
 
 .nav {
