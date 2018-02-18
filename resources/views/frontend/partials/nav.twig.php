@@ -4,9 +4,7 @@
     </ul>
     <ul class="nav container flexEnd">
         <li><a href="/">Home</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Map</a></li>
-        <li><a href="#">Careers</a></li>
+        <li><a href="/about">About</a></li>
     </ul>
 </nav>
 
