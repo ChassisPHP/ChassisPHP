@@ -6,8 +6,9 @@
         <li><a href="/">Home</a></li>
         <li><a href="/backend/users">Users</a></li>
         <li><a href="/backend/content">Content</a></li>
-        <li><a href="#">Careers</a></li>
-        <li><a href="/backend/logout">Logout</a></li>
-        <li>{{ loggedInUser }}</li>
+        {% if loggedInUser is defined %}
+            <li><a href="/backend/logout">Logout</a></li>
+            <li>{{ loggedInUser }}</li>
+        {% endif %}
     </ul>
 </nav>
