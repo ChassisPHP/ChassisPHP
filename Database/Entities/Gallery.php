@@ -32,4 +32,19 @@ class Gallery
     * @Assert\NotBlank()
     **/
     protected $position;
+
+    /**
+    *  @ORM\Column(type="string", length=255)
+    *  @ORM\OneToMany(targetEntity="Images", mappedBy="Gallery")
+    **/
+    protected $images;
+
+    /**
+    * images that belong to a Gallery
+    * in a colection
+     */
+    public function __construct()
+    {
+        $this->images = new ArrayCollection;
+    }
 }

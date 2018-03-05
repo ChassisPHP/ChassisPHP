@@ -14,7 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 *       uniqueConstraints={@UniqueConstraint(name="unique_position", columns={"position", "fileName"})}
 *       )
 */
-class Content
+class Image
 {
     /**
     * @ORM\Id
