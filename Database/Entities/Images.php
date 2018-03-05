@@ -61,8 +61,8 @@ class Content
     protected $updated;
 
     /**
-    * Many Contents have One User.
-    * @ORM\ManyToOne(targetEntity="User", inversedBy="contents")
+    * Many Imagess have One User.
+    * @ORM\ManyToOne(targetEntity="User", inversedBy="imagess")
     * @ORM\JoinColumn(name="author", referencedColumnName="id")
     */
     private $author;
