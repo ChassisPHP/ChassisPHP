@@ -31,7 +31,7 @@ class Gallery
     * @ORM\Column(type="string", length=255, unique=true)
     * @Assert\NotBlank()
     **/
-    protected $position;
+    protected $description;
 
     /**
     *  @ORM\Column(type="string", length=255)
@@ -46,5 +46,32 @@ class Gallery
     public function __construct()
     {
         $this->images = new ArrayCollection;
+    }
+
+    // Entity getters
+    public function getId()
+    {
+        return $this->id;
+    }
+    
+    public function getName()
+    {
+        return $this->name;
+    }
+    
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    //setters
+    public function setName($name)
+    {
+        $this->userName = $name;
+    }
+
+    public function setDescription($description)
+    {
+        $this->userDescription = $description;
     }
 }
