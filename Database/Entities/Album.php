@@ -10,9 +10,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
 * @ORM\Entity
-* @ORM\Table(name="users",uniqueConstraints={@UniqueConstraint(name="postion", columns={"position"})})
+* @ORM\Table(name="albums",uniqueConstraints={@UniqueConstraint(name="name", columns={"name"})})
 */
-class Gallery
+class Album
 {
     /**
     * @ORM\Id
@@ -22,25 +22,25 @@ class Gallery
     protected $id;
 
     /**
-    *  @ORM\Column(type="string", length=255)
+    *  @ORM\Column(type="string", length=45)
     *  @Assert\NotBlank()
     **/
     protected $name;
 
     /**
-    * @ORM\Column(type="string", length=255, unique=true)
+    * @ORM\Column(type="text")
     * @Assert\NotBlank()
     **/
     protected $description;
 
     /**
     *  @ORM\Column(type="string", length=255)
-    *  @ORM\OneToMany(targetEntity="Images", mappedBy="Gallery")
+    *  @ORM\OneToMany(targetEntity="Images", mappedBy="Album")
     **/
     protected $images;
 
     /**
-    * images that belong to a Gallery
+    * images that belong to an Album
     * in a colection
      */
     public function __construct()
