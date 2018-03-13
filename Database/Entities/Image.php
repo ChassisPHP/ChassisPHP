@@ -29,11 +29,6 @@ class Image
     protected $filename;
 
     /**
-    * @ORM\Column(type="string")
-    */
-    protected $title;
-
-    /**
     * @ORM\Column(type="string", unique=true)
     */
     protected $position;
@@ -44,11 +39,11 @@ class Image
     protected $caption;
 
     /**
-    * Many Images have one Gallery.
-    * @ORM\ManyToOne(targetEntity="gallery", inversedBy="images")
-    * @ORM\JoinColumn(name="gallery", referencedColumnName="id")
+    * Many Images have one Album.
+    * @ORM\ManyToOne(targetEntity="Album", inversedBy="Images")
+    * @ORM\JoinColumn(name="album_id", referencedColumnName="id")
     */
-    protected $gallery;
+    protected $album;
 
     /**
     * @ORM\Column(type="datetime")
@@ -61,11 +56,11 @@ class Image
     protected $updated;
 
     /**
-    * Many Imagess have One User.
+    * Many Images have One User.
     * @ORM\ManyToOne(targetEntity="User", inversedBy="imagess")
-    * @ORM\JoinColumn(name="author", referencedColumnName="id")
+    * @ORM\JoinColumn(name="createdBy", referencedColumnName="id")
     */
-    private $author;
+    private $createdBy;
     
     // Entity getters
     public function getId()
@@ -83,24 +78,19 @@ class Image
         return $this->position;
     }
     
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
     public function getCaption()
     {
         return $this->Caption;
     }
 
-    public function getAuthor()
+    public function getCreatedBy()
     {
-        return $this->author;
+        return $this->createdBy;
     }
 
-    public function getGallery()
+    public function getAlbum()
     {
-        return $this->gallery;
+        return $this->album;
     }
 
     public function getPublicationDate()
@@ -119,11 +109,6 @@ class Image
         $this->filename = $filename;
     }
 
-    public function setTitle($title)
-    {
-        $this->title = $title;
-    }
-
     public function setPosition($position)
     {
         $this->position = $position;
@@ -134,14 +119,14 @@ class Image
         $this->caption = $caption;
     }
 
-    public function setAuthor(User $author)
+    public function setCreatedBy(User $createdBy)
     {
-        $this->author = $author;
+        $this->createdBy = $createdBy;
     }
 
-    public function setGallery(Gallery $gallery)
+    public function setGallery(Album $album)
     {
-        $this->gallery = $gallery;
+        $this->album = $album;
     }
 
     public function setPublicationDate($publicationDate)

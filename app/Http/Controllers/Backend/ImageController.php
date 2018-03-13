@@ -10,7 +10,7 @@ use Database\Entities\Image;
 use Database\Entities\User;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 
-class ContentController extends Controller
+class ImageController extends Controller
 {
 
     private $connection;
@@ -37,7 +37,7 @@ class ContentController extends Controller
     {
         // Display all images from the DB
         $imageRepository = $this->entityManager->getRepository('Database\Entities\Image');
-        $images = $contentRepository->findAll();
-        return $this->view->render('backend/pages/image.twig.php', array('images' => $images, 'message' => $message, 'loggedInUser' => $this->loggedInUser));
+        $images = $imageRepository->findAll();
+        return $this->view->render('backend/pages/images.twig.php', array('images' => $images, 'message' => $message, 'loggedInUser' => $this->loggedInUser));
     }
 }
