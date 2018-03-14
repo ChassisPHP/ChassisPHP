@@ -9,15 +9,15 @@
     {% endif %} 
     
     <header class="item">
-        <h1>Content</h1>
+        <h1>Images</h1>
     </header>
     
     <a href="/backend/images/create" class="button blueBackground">Add Image</a>
     <div class="item Rtable col90">
+        <div class="cell col20">Filename</div>
         <div class="cell col10">Position</div>
-        <div class="cell col20">Title</div>
-        <div class="cell col20">Body</div>
-        <div class="cell col10">Author</div>
+        <div class="cell col20">Album</div>
+        <div class="cell col10">Created By</div>
         <div class="cell col10">Updated By</div>
         <div class="cell col10">Pub Date</div>
         <div class="cell col10">Last Updated</div>
@@ -25,8 +25,8 @@
         <div class="cell col5"></div>
         
         {% for content in contents %}
-        <div class="cell col10">{{ content.Position }}</div>
         <div class="cell col20">{{ content.Filename }}</div>
+        <div class="cell col10">{{ content.Position }}</div>
         <div class="cell col20">{{ content.Album }}</div>
         <div class="cell col10">{{ content.CreatedBy.Name }}</div>
         <div class="cell col10">{{ content.UpdatedBy.Name }}</div>
