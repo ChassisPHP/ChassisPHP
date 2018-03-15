@@ -75,6 +75,8 @@ class ImageController extends Controller
         $createdBy = $this->entityManager->find('Database\Entities\User', $formVars['author']);
         $createdBy->setAuthor($author);
         $message = $this->hydrateAndPersist($image, $formVars);
+        $filename = $_FILES["imageFile"]["name"];
+        $this->saveAs('storage/public/img', $filename);
         return $this->index($message);
     }
 
@@ -144,7 +146,7 @@ class ImageController extends Controller
         $image = $this->entityManager->find('Database\Entities\Image', $id['ID']);
         $filename = $filename->getFilename();
         if (!$filename) {
-            //TODO throm exception
+            //TODO throw exception
         }
         $this->entityManager->remove($image);
         $this->entityManager->flush();
@@ -181,6 +183,55 @@ class ImageController extends Controller
             $message['type'] = 'alert-danger';
             $message['content'] = "$title could not be added";
             return $this->create($message, $formVars);
+        }
+    }
+
+        /**
+         * method to save a file
+         * TODO refactor this method
+         * out, and make it available
+         * throughout the entire application
+         */
+    private function saveAs($savePath, $filename)
+    {
+        $filePath = $savePath . basename($filename);
+        $uploadOk = 1;
+        $imageFileType = strtolower(pathinfo($filePath, PATHINFO_EXTENSION));
+        // Check if image file is a actual image or fake image
+        if (isset($_POST["submit"])) {
+            $check = getimagesize($_FILES["imageFile"]["tmp_name"]);
+            if ($check !== false) {
+                $uploadOk = 1;
+            } else {
+                //TODO Throw an error
+                $uploadOk = 0;
+            }
+        }
+        // Check if file already exists
+        if (file_exists($filePath)) {
+            //TODO handle this??? Add confirmation??
+            //$uploadOk = 0;
+        }
+        // Check file size
+        if ($_FILES["fileToUpload"]["size"] > 500000) {
+            //TODO throw an error
+            $uploadOk = 0;
+        }
+        // Allow certain file formats
+        if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
+            // TODO throw an error "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+            $uploadOk = 0;
+        }
+        // Check if $uploadOk is set to 0 by an error
+        if ($uploadOk == 0) {
+            return false;
+            // if everything is ok, try to upload file
+        } else {
+            if (move_uploaded_file($_FILES["imageFile"]["tmp_name"], $filePath)) {
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 }

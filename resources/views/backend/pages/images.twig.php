@@ -25,15 +25,15 @@
         <div class="cell col5"></div>
         
         {% for content in contents %}
-        <div class="cell col20">{{ content.Filename }}</div>
-        <div class="cell col10">{{ content.Position }}</div>
-        <div class="cell col20">{{ content.Album }}</div>
-        <div class="cell col10">{{ content.CreatedBy.Name }}</div>
-        <div class="cell col10">{{ content.UpdatedBy.Name }}</div>
-        <div class="cell col10">{{ content.PublicationDate|date('Y-m-d') }}</div>
-        <div class="cell col10">{{ content.Updated|date('Y-m-d') }}</div>
-        <div class="cell col5"><a href="/backend/content/{{ content.ID }}">Details</a></div>
-        <div class="cell col5"><a href="/backend/content/delete/{{ content.ID }}" onclick="return confirm('Are you sure?')">Delete</a></div>
+        <div class="cell col20">{{ images.Filename }}</div>
+        <div class="cell col10">{{ images.Position }}</div>
+        <div class="cell col20">{{ images.Album }}</div>
+        <div class="cell col10">{{ images.CreatedBy.Name }}</div>
+        <div class="cell col10">{{ images.UpdatedBy.Name }}</div>
+        <div class="cell col10">{{ images.PublicationDate|date('Y-m-d') }}</div>
+        <div class="cell col10">{{ images.Updated|date('Y-m-d') }}</div>
+        <div class="cell col5"><a href="/backend/content/{{ images.ID }}">Details</a></div>
+        <div class="cell col5"><a href="/backend/content/delete/{{ images.ID }}" onclick="return confirm('Are you sure?')">Delete</a></div>
         {% endfor %}
     </div>
 
