@@ -139,6 +139,6 @@ class Core
         // Clean up the session variable
         Session::destroy();
 
-        // other cleanup??
+        //TODO  other cleanup??
     }
 }

@@ -26,7 +26,7 @@ class Image
     /**
     * @ORM\Column(type="string", unique=true)
     */
-    protected $filename;
+    protected $title;
 
     /**
     * @ORM\Column(type="string", unique=true)
@@ -40,7 +40,7 @@ class Image
 
     /**
     * Many Images have one Album.
-    * @ORM\ManyToOne(targetEntity="Album", inversedBy="Images")
+    * @ORM\ManyToOne(targetEntity="Album", inversedBy="Image")
     * @ORM\JoinColumn(name="album_id", referencedColumnName="id")
     */
     protected $album;
@@ -68,9 +68,9 @@ class Image
         return $this->id;
     }
     
-    public function getFilename()
+    public function getTitle()
     {
-        return $this->filename;
+        return $this->title;
     }
     
     public function getPosition()
@@ -104,9 +104,9 @@ class Image
     }
     
     // Entity setters
-    public function setFilename($filename)
+    public function setTitle($title)
     {
-        $this->filename = $filename;
+        $this->title = $title;
     }
 
     public function setPosition($position)
@@ -124,7 +124,7 @@ class Image
         $this->createdBy = $createdBy;
     }
 
-    public function setGallery(Album $album)
+    public function setAlbum(Album $album)
     {
         $this->album = $album;
     }

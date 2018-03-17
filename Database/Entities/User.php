@@ -50,9 +50,16 @@ class User
     */
     protected $contents;
 
+    /**
+    * One User has Many Images.
+    * @ORM\OneToMany(targetEntity="Image", mappedBy="User")
+    */
+    protected $images;
+
     public function __construct()
     {
         $this->contents = new ArrayCollection;
+        $this->images = new ArrayCollection;
     }
     
     public function getId()

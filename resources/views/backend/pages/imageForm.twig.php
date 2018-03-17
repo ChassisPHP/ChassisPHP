@@ -24,11 +24,16 @@
       
         <div class="form-group">
           <label>Caption</label>
-          <textarea rows="12" name="body" placeholder="{{ (image.Caption is defined) ? '' : 'Caption' }}" class="input-control">{{ image.Caption }}</textarea>
+          <textarea name='caption' rows="12" name="body" placeholder="{{ (image.Caption is defined) ? '' : 'Caption' }}" class="input-control">{{ image.Caption }}</textarea>
         </div>
       
         <div class="form-group">
-          <label>Author</label>
+          <label>Album</label>
+          <input type="hidden" name="albumId" value="1" />
+        </div>
+
+        <div class="form-group">
+          <label>Image Added By</label>
           <input name="createdBy" value="{{ createdBy.name }}" class="input-control" readonly />
           <input type="hidden" name="createdById" value="{{ createdBy.id }}" />
         </div>

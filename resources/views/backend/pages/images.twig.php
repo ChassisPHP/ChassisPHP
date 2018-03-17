@@ -14,7 +14,7 @@
     
     <a href="/backend/images/create" class="button blueBackground">Add Image</a>
     <div class="item Rtable col90">
-        <div class="cell col20">Filename</div>
+        <div class="cell col20">Title</div>
         <div class="cell col10">Position</div>
         <div class="cell col20">Album</div>
         <div class="cell col10">Created By</div>
@@ -24,14 +24,14 @@
         <div class="cell col5"></div>
         <div class="cell col5"></div>
         
-        {% for content in contents %}
-        <div class="cell col20">{{ images.Filename }}</div>
-        <div class="cell col10">{{ images.Position }}</div>
-        <div class="cell col20">{{ images.Album }}</div>
-        <div class="cell col10">{{ images.CreatedBy.Name }}</div>
-        <div class="cell col10">{{ images.UpdatedBy.Name }}</div>
-        <div class="cell col10">{{ images.PublicationDate|date('Y-m-d') }}</div>
-        <div class="cell col10">{{ images.Updated|date('Y-m-d') }}</div>
+        {% for image in images%}
+        <div class="cell col20">{{ image.Title }}</div>
+        <div class="cell col10">{{ image.Position }}</div>
+        <div class="cell col20">{{ image.Album }}</div>
+        <div class="cell col10">{{ image.CreatedBy.Name }}</div>
+        <div class="cell col10">{{ image.UpdatedBy.Name }}</div>
+        <div class="cell col10">{{ image.PublicationDate|date('Y-m-d') }}</div>
+        <div class="cell col10">{{ image.Updated|date('Y-m-d') }}</div>
         <div class="cell col5"><a href="/backend/content/{{ images.ID }}">Details</a></div>
         <div class="cell col5"><a href="/backend/content/delete/{{ images.ID }}" onclick="return confirm('Are you sure?')">Delete</a></div>
         {% endfor %}

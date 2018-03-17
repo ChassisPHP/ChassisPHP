@@ -72,11 +72,15 @@ class ImageController extends Controller
         $timestamp = new \DateTime();
         $image->setPublicationDate($timestamp);
         
-        $createdBy = $this->entityManager->find('Database\Entities\User', $formVars['author']);
-        $createdBy->setAuthor($author);
+        $createdBy = $this->entityManager->find('Database\Entities\User', $formVars['createdById']);
+        $image->setCreatedBy($createdBy);
+        
+        $album = $this->entityManager->find('Database\Entities\Album', $formVars['albumId']);
+        $image->setAlbum($album);
+        
+        $formVars['filename'] = $_FILES["imageFile"]["name"];
         $message = $this->hydrateAndPersist($image, $formVars);
-        $filename = $_FILES["imageFile"]["name"];
-        $this->saveAs('storage/public/img', $filename);
+        $this->saveAs('storage/public/img', $formVars['filename']);
         return $this->index($message);
     }
 
@@ -162,7 +166,7 @@ class ImageController extends Controller
     */
     private function hydrateAndPersist($image, $formVars)
     {
-        $filename = $formVars['filename'];
+        $title = $formVars['title'];
         $position = $formVars['position'];
         $caption = $formVars['caption'];
 
@@ -170,14 +174,13 @@ class ImageController extends Controller
         $image->setUpdated($timestamp);
         $image->setTitle($title);
         $image->setPosition($position);
-        $image->setBody($body);
-        //$content->setAuthor($author);
+        $image->setCaption($caption);
 
         try {
             $this->entityManager->persist($image);
             $this->entityManager->flush();
             $message['type'] = 'alert-info';
-            $message['content'] = "$filename added succesfully";
+            $message['content'] = "$title added succesfully";
             return $message;
         } catch (UniqueConstraintViolationException $e) {
             $message['type'] = 'alert-danger';
@@ -194,7 +197,7 @@ class ImageController extends Controller
          */
     private function saveAs($savePath, $filename)
     {
-        $filePath = $savePath . basename($filename);
+        $filePath = $savePath . "/" . basename($filename);
         $uploadOk = 1;
         $imageFileType = strtolower(pathinfo($filePath, PATHINFO_EXTENSION));
         // Check if image file is a actual image or fake image
@@ -213,7 +216,7 @@ class ImageController extends Controller
             //$uploadOk = 0;
         }
         // Check file size
-        if ($_FILES["fileToUpload"]["size"] > 500000) {
+        if ($_FILES["imageFile"]["size"] > 500000) {
             //TODO throw an error
             $uploadOk = 0;
         }
@@ -227,6 +230,8 @@ class ImageController extends Controller
             return false;
             // if everything is ok, try to upload file
         } else {
+            $path = dirname(__FILE__, 5);
+            $filePath = $path . "/" . $filePath;
             if (move_uploaded_file($_FILES["imageFile"]["tmp_name"], $filePath)) {
                 return true;
             } else {

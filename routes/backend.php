@@ -27,6 +27,8 @@ return [
 
     // Images
     ['GET', '/images', ['Backend\ImageController', 'index']],
+    ['GET', '/images/create', ['Backend\ImageController', 'create']],
+    ['POST', '/images/create', ['Backend\ImageController', 'store']],
 
     // Auth
     ['GET', '/login', ['Backend\AuthController', 'index']],
