@@ -34,8 +34,8 @@ class Album
     protected $description;
 
     /**
-    *  @ORM\Column(type="string", length=255)
-    *  @ORM\OneToMany(targetEntity="Images", mappedBy="Album")
+    *  One album has many images
+    *  @ORM\OneToMany(targetEntity="Image", mappedBy="Album")
     **/
     protected $images;
 
