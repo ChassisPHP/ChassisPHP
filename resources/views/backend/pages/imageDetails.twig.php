@@ -12,10 +12,11 @@
         <h1>Image</h1>
     </header>
     
-    <a href="/backend/images" class="button button-medium blueBackground">All Content</a>
+    <a href="/backend/images" class="button button-medium blueBackground">All Images</a>
     <div class="col60">
         <div class="item itemCenter">
-            <img src="storage/public/img/{{ image.Filename }}" />
+            <!-- TODO add ln -sr storage/app/public public/storage to documentation -->
+            <img src="{{ baseURL }}storage/img/{{ image.Filename }}" />
         </div>
         <div class="item itemCenter">
             <h1 class="">{{ image.Filename }}</h1>

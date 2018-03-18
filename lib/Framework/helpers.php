@@ -22,9 +22,18 @@ if (! function_exists('envar')) {
 if (! function_exists('debugVar')) {
     function debugVar($var)
     {
-	$dumper = new HtmlDumper;
-	$cloner = new VarCloner;
-	$dumper->dump($cloner->cloneVar($var));
+        $dumper = new HtmlDumper;
+        $cloner = new VarCloner;
+        $dumper->dump($cloner->cloneVar($var));
         die();
+    }
+}
+
+// Get the site base URL
+if (! function_exists('baseURL')) {
+    function baseURL()
+    {
+        $url = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/';
+        return $url;
     }
 }
