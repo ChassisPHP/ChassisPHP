@@ -37,6 +37,11 @@ class Image
     * @ORM\Column(type="text")
     */
     protected $caption;
+    
+    /**
+    * @ORM\Column(type="string")
+    */
+    protected $filename;
 
     /**
     * Many Images have one Album.
@@ -80,7 +85,12 @@ class Image
     
     public function getCaption()
     {
-        return $this->Caption;
+        return $this->caption;
+    }
+
+    public function getFilename()
+    {
+        return $this->filename;
     }
 
     public function getCreatedBy()
@@ -117,6 +127,11 @@ class Image
     public function setCaption($caption)
     {
         $this->caption = $caption;
+    }
+
+    public function setFilename($filename)
+    {
+        $this->filename = $filename;
     }
 
     public function setCreatedBy(User $createdBy)

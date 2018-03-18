@@ -27,13 +27,13 @@
         {% for image in images%}
         <div class="cell col20">{{ image.Title }}</div>
         <div class="cell col10">{{ image.Position }}</div>
-        <div class="cell col20">{{ image.Album }}</div>
+        <div class="cell col20">{{ image.Album.Name }}</div>
         <div class="cell col10">{{ image.CreatedBy.Name }}</div>
         <div class="cell col10">{{ image.UpdatedBy.Name }}</div>
         <div class="cell col10">{{ image.PublicationDate|date('Y-m-d') }}</div>
         <div class="cell col10">{{ image.Updated|date('Y-m-d') }}</div>
-        <div class="cell col5"><a href="/backend/content/{{ images.ID }}">Details</a></div>
-        <div class="cell col5"><a href="/backend/content/delete/{{ images.ID }}" onclick="return confirm('Are you sure?')">Delete</a></div>
+        <div class="cell col5"><a href="/backend/images/{{ image.ID }}">Details</a></div>
+        <div class="cell col5"><a href="/backend/images/delete/{{ images.ID }}" onclick="return confirm('Are you sure?')">Delete</a></div>
         {% endfor %}
     </div>
 

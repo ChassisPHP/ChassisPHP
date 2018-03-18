@@ -77,6 +77,8 @@ class ImageController extends Controller
         
         $album = $this->entityManager->find('Database\Entities\Album', $formVars['albumId']);
         $image->setAlbum($album);
+
+        $image->setFilename($_FILES["imageFile"]["name"]);
         
         $formVars['filename'] = $_FILES["imageFile"]["name"];
         $message = $this->hydrateAndPersist($image, $formVars);
@@ -94,7 +96,8 @@ class ImageController extends Controller
     {
         //
         $image = $this->entityManager->find('Database\Entities\Image', $id['ID']);
-        return $this->view->render('backend/pages/imageDetails.twig.php', array('image' => $image, 'message' => $message, 'loggedInUser' => $this->loggedInUser));
+        $baseURL = baseURL();
+        return $this->view->render('backend/pages/imageDetails.twig.php', array('image' => $image, 'baseURL' => $baseURL, 'message' => $message, 'loggedInUser' => $this->loggedInUser));
     }
 
     /**
