@@ -30,6 +30,7 @@ return [
     ['GET', '/images/create', ['Backend\ImageController', 'create']],
     ['POST', '/images/create', ['Backend\ImageController', 'store']],
     ['GET', '/images/{ID}', ['Backend\ImageController', 'select']],
+    ['GET', '/images/delete/{ID}', ['Backend\ImageController', 'destroy']],
 
     // Auth
     ['GET', '/login', ['Backend\AuthController', 'index']],
