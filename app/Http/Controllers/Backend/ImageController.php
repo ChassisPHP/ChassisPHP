@@ -151,12 +151,18 @@ class ImageController extends Controller
     {
         // remove content  from the DB
         $image = $this->entityManager->find('Database\Entities\Image', $id['ID']);
-        $filename = $filename->getFilename();
+        $filename = $image->getFilename();
         if (!$filename) {
             //TODO throw exception
         }
         $this->entityManager->remove($image);
         $this->entityManager->flush();
+
+        // Delete the file
+        // TODO add error checking
+        $path = dirname(__FILE__, 5);
+        $filePath = $path . '/storage/public/img/' . $filename;
+        unlink($filePath);
 
         $message['type'] = 'alert-danger';
         $message['content'] = "Content entry \"$filename\" deleted succesfully";
