@@ -38,7 +38,11 @@ class ImageController extends Controller
         // Display all images from the DB
         $imageRepository = $this->entityManager->getRepository('Database\Entities\Image');
         $images = $imageRepository->findAll();
-        return $this->view->render('backend/pages/images.twig.php', array('images' => $images, 'message' => $message, 'loggedInUser' => $this->loggedInUser));
+        return $this->view->render('backend/pages/images.twig.php', array(
+            'images' => $images,
+            'message' => $message,
+            'loggedInUser' => $this->loggedInUser
+        ));
     }
     
     /**
@@ -54,7 +58,13 @@ class ImageController extends Controller
         $createdBy['name'] = $this->loggedInUser;
         $createdBy['id'] = $this->loggedInUserId;
 
-        return $this->view->render('backend/pages/imageForm.twig.php', array('formVars' => $formVars, 'action' => $formAction, 'method' => $formMethod, 'loggedInUser' => $this->loggedInUser, 'createdBy' => $createdBy));
+        return $this->view->render('backend/pages/imageForm.twig.php', array(
+            'formVars' => $formVars,
+            'action' => $formAction,
+            'method' => $formMethod,
+            'loggedInUser' => $this->loggedInUser,
+            'createdBy' => $createdBy
+        ));
     }
 
     /**
@@ -97,7 +107,12 @@ class ImageController extends Controller
         //
         $image = $this->entityManager->find('Database\Entities\Image', $id['ID']);
         $baseURL = baseURL();
-        return $this->view->render('backend/pages/imageDetails.twig.php', array('image' => $image, 'baseURL' => $baseURL, 'message' => $message, 'loggedInUser' => $this->loggedInUser));
+        return $this->view->render('backend/pages/imageDetails.twig.php', array(
+            'image' => $image,
+            'baseURL' => $baseURL,
+            'message' => $message,
+            'loggedInUser' => $this->loggedInUser
+        ));
     }
 
     /**
@@ -116,7 +131,13 @@ class ImageController extends Controller
         $imageCreatedBy = $this->entityManager->getRepository('Database\Entities\User')->find($image->getCreatedBy());
         $createdBy['name'] = $createdByAuthor->getName();
         $createdBy['id'] = $imageCreatedBy->getId();
-        return $this->view->render('backend/pages/imageForm.twig.php', array('imageEntry' => $image, 'action' => $formAction, 'method' => $formMethod, 'loggedInUser' => $this->loggedInUser, 'createdBy' => $createdBy));
+        return $this->view->render('backend/pages/imageForm.twig.php', array(
+            'imageEntry' => $image,
+            'action' => $formAction,
+            'method' => $formMethod,
+            'loggedInUser' => $this->loggedInUser,
+            'createdBy' => $createdBy
+        ));
     }
 
     /**
@@ -198,12 +219,12 @@ class ImageController extends Controller
         }
     }
 
-        /**
-         * method to save a file
-         * TODO refactor this method
-         * out, and make it available
-         * throughout the entire application
-         */
+    /**
+    * method to save a file
+    * TODO refactor this method
+    * out, and make it available
+    * throughout the entire application
+    */
     private function saveAs($savePath, $filename)
     {
         $filePath = $savePath . "/" . basename($filename);
