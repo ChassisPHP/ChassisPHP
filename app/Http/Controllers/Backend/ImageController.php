@@ -126,13 +126,14 @@ class ImageController extends Controller
         //
         $image = $this->entityManager->find('Database\Entities\Image', $id['ID']);
         $imageId = $id['ID'];
-        $formAction = "/backend/content/update/$imageId";
+        $imagCaption = $image->getCaption();
+        $formAction = "/backend/images/update/$imageId";
         $formMethod = "post";
         $imageCreatedBy = $this->entityManager->getRepository('Database\Entities\User')->find($image->getCreatedBy());
-        $createdBy['name'] = $createdByAuthor->getName();
+        $createdBy['name'] = $imageCreatedBy->getName();
         $createdBy['id'] = $imageCreatedBy->getId();
         return $this->view->render('backend/pages/imageForm.twig.php', array(
-            'imageEntry' => $image,
+            'image'   => $image,
             'action' => $formAction,
             'method' => $formMethod,
             'loggedInUser' => $this->loggedInUser,
@@ -157,7 +158,7 @@ class ImageController extends Controller
         $updatedBy = $this->entityManager->getRepository('Database\Entities\User')->find($this->loggedInUserId);
         $image->setUpdatedBy($updatedBy);
         
-        $this->hydrateAndPersist($content, $formVars);
+        $this->hydrateAndPersist($image, $formVars);
 
         return $this->select($id);
     }
@@ -230,7 +231,7 @@ class ImageController extends Controller
         $filePath = $savePath . "/" . basename($filename);
         $uploadOk = 1;
         $imageFileType = strtolower(pathinfo($filePath, PATHINFO_EXTENSION));
-        // Check if image file is a actual image or fake image
+        // Check if image file is an actual image or fake image
         if (isset($_POST["submit"])) {
             $check = getimagesize($_FILES["imageFile"]["tmp_name"]);
             if ($check !== false) {

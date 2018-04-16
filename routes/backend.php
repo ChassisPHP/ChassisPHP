@@ -29,6 +29,8 @@ return [
     ['GET', '/images', ['Backend\ImageController', 'index']],
     ['GET', '/images/create', ['Backend\ImageController', 'create']],
     ['POST', '/images/create', ['Backend\ImageController', 'store']],
+    ['GET', '/images/update/{ID}', ['Backend\ImageController', 'edit']],
+    ['POST', '/images/update/{ID}', ['Backend\ImageController', 'update']],
     ['GET', '/images/{ID}', ['Backend\ImageController', 'select']],
     ['GET', '/images/delete/{ID}', ['Backend\ImageController', 'destroy']],
 

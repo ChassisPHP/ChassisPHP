@@ -62,10 +62,17 @@ class Image
 
     /**
     * Many Images have One User.
-    * @ORM\ManyToOne(targetEntity="User", inversedBy="imagess")
+    * @ORM\ManyToOne(targetEntity="User", inversedBy="images")
     * @ORM\JoinColumn(name="createdBy", referencedColumnName="id")
     */
     private $createdBy;
+
+    /**
+    * Many Images have One updatedby User.
+    * @ORM\ManyToOne(targetEntity="User", inversedBy="images")
+    * @ORM\JoinColumn(name="updatedBy", referencedColumnName="id")
+    */
+    private $updatedBy;
     
     // Entity getters
     public function getId()
@@ -96,6 +103,11 @@ class Image
     public function getCreatedBy()
     {
         return $this->createdBy;
+    }
+
+    public function getUpdatedBy()
+    {
+        return $this->updatedBy;
     }
 
     public function getAlbum()
@@ -137,6 +149,11 @@ class Image
     public function setCreatedBy(User $createdBy)
     {
         $this->createdBy = $createdBy;
+    }
+
+    public function setUpdatedBy(User $updatedBy)
+    {
+        $this->updatedBy = $updatedBy;
     }
 
     public function setAlbum(Album $album)
