@@ -7,3 +7,5 @@ vendor
 public/logs/
 /Database/db.sqlite
 composer.lock
+tags
+.ctags
