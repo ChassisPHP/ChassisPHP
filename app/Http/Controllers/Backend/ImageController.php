@@ -184,12 +184,17 @@ class ImageController extends Controller
         // TODO add error checking
         $path = dirname(__FILE__, 5);
         $filePath = $path . '/storage/public/img/' . $filename;
-        unlink($filePath);
-
-        $message['type'] = 'alert-danger';
-        $message['content'] = "Content entry \"$filename\" deleted succesfully";
-
-        return $this->index($message);
+        if (file_exists($filepath)) {
+            unlink($filePath);
+            $message['type'] = 'alert-danger';
+            $message['content'] = "Content entry \"$filename\" deleted succesfully";
+            return $this->index($message);
+        } else {
+            //TODO throw error
+            $message['type'] = 'alert-danger';
+            $message['content'] = "Image \"$filename\" not found";
+            return $this->index($message);
+        }
     }
 
     /**
