@@ -19,7 +19,7 @@
             <img src="{{ baseURL }}storage/img/{{ image.Filename }}" />
         </div>
         <div class="item itemCenter">
-            <h1 class="">{{ image.Filename }}</h1>
+            <h1 class="">{{ image.Title}}</h1>
             <p>{{ image.Caption }}</p>
             <div class="Rtable-cell">{{ image.PublicationDate|date('Y-m-d H:i:s') }}</div>
             <a href="/backend/images/update/{{ image.ID }}" class="button button-medium blueBackground">Edit</a>

@@ -14,7 +14,7 @@
     <form class="item col60" action="{{ action }}" method="{{ method }}" enctype="multipart/form-data"> 
         <div class="form-group">
           <label>Title</label>
-          <input name="title" placeholder="{{ (image.Filename is defined) ? '' : 'Image Filename' }}" value="{{ image.Filename }}" class="input-control" />
+          <input name="title" placeholder="{{ (image.Title is defined) ? '' : 'Image Title' }}" value="{{ image.Title }}" class="input-control" />
         </div>
       
         <div class="form-group">
