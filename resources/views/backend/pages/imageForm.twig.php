@@ -39,7 +39,7 @@
         </div>
 
         <div class="form-group">
-          <label>Image File</label>
+          <label>Image File {{ (action != "/backend/images/create") ? '(leave blank for no change to file)' : '' }}</label>
           <input type="file" name="imageFile" class="input-control" />
         </div>
       
