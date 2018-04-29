@@ -12,7 +12,7 @@ It's recommended that you use [Composer](https://getcomposer.org/) to install Ch
 * Nodejs/ NPM (Node Package Manager)
 ### Installing
 ```bash
-$ composer require rogercreasy/chassis-php
+$ composer require rogercreasy/chassis-php:dev-master
 ```
 then go to folder and install your dependency using composer (*eg. `cd ChassisPHP`*)
 ```bash
