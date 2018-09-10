@@ -80,6 +80,12 @@ class ControllerServiceProvider extends AbstractServiceProvider
                 ->withMethodCall(
                     'addMiddleware',
                     []
+                )
+                ->withMetodCall(
+                    'setBaseURL',
+                    [
+                        baseURL()
+                    ]
                 );
         }
     }
