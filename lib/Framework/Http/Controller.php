@@ -30,4 +30,10 @@ class Controller
     {
         $this->view = $view;
     }
+
+    //set the BaseURL var
+    public function setBaseURL($url)
+    {
+        $this->baseURL = $url;
+    }
 }
