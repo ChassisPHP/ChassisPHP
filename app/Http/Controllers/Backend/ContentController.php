@@ -38,7 +38,14 @@ class ContentController extends Controller
         // Display all users from the DB
         $contentRepository = $this->entityManager->getRepository('Database\Entities\Content');
         $content = $contentRepository->findAll();
-        return $this->view->render('backend/pages/content.twig.php', array('contents' => $content, 'message' => $message, 'loggedInUser' => $this->loggedInUser));
+        return $this->view->render(
+            'backend/pages/content.twig.php',
+            array(
+                'contents' => $content,
+                'message' => $message,
+                'loggedInUser' => $this->loggedInUser
+            )
+        );
     }
 
     /**
@@ -54,7 +61,16 @@ class ContentController extends Controller
         $author['name'] = $this->loggedInUser;
         $author['id'] = $this->loggedInUserId;
 
-        return $this->view->render('backend/pages/contentForm.twig.php', array('formVars' => $formVars, 'action' => $formAction, 'method' => $formMethod, 'loggedInUser' => $this->loggedInUser, 'author' => $author));
+        return $this->view->render(
+            'backend/pages/contentForm.twig.php',
+            array(
+                'formVars' => $formVars,
+                'action' => $formAction,
+                'method' => $formMethod,
+                'loggedInUser' => $this->loggedInUser,
+                'author' => $author
+            )
+        );
     }
 
     /**
@@ -88,7 +104,14 @@ class ContentController extends Controller
     {
         //
         $content = $this->entityManager->find('Database\Entities\Content', $id['ID']);
-        return $this->view->render('backend/pages/contentDetails.twig.php', array('content' => $content, 'message' => $message, 'loggedInUser' => $this->loggedInUser));
+        return $this->view->render(
+            'backend/pages/contentDetails.twig.php',
+            array(
+                'content' => $content,
+                'message' => $message,
+                'loggedInUser' => $this->loggedInUser
+            )
+        );
     }
 
     /**
@@ -107,7 +130,16 @@ class ContentController extends Controller
         $contentAuthor = $this->entityManager->getRepository('Database\Entities\User')->find($content->getAuthor());
         $author['name'] = $contentAuthor->getName();
         $author['id'] = $contentAuthor->getId();
-        return $this->view->render('backend/pages/contentForm.twig.php', array('contentEntry' => $content, 'action' => $formAction, 'method' => $formMethod, 'loggedInUser' => $this->loggedInUser, 'author' => $author));
+        return $this->view->render(
+            'backend/pages/contentForm.twig.php',
+            array(
+                'contentEntry' => $content,
+                'action' => $formAction,
+                'method' => $formMethod,
+                'loggedInUser' => $this->loggedInUser,
+                'author' => $author
+            )
+        );
     }
 
     /**
