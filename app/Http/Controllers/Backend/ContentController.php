@@ -170,10 +170,10 @@ class ContentController extends Controller
     * @param  int  $id
     * @return Response
     */
-    public function destroy($id)
+    public function destroy($contentId)
     {
         // remove content  from the DB
-        $content = $this->entityManager->find('Database\Entities\Content', $id['ID']);
+        $content = $this->entityManager->find('Database\Entities\Content', $contentId['ID']);
         $title = $content->getTitle();
         if (!$title) {
             $title = "untitled content";
