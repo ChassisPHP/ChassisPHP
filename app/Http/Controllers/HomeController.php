@@ -9,8 +9,9 @@ class HomeController extends Controller
 {
     public function addMiddleware()
     {
-        // TODO change container to check for existence of this method
-        // only do "withmethod if esists
+        /* TODO change container to check for existence of this method
+           only do "withmethod if esists
+        */
     }
 
     public function index()

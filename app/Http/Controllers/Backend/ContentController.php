@@ -63,11 +63,12 @@ class ContentController extends Controller
 
         return $this->view->render(
             'backend/pages/contentForm.twig.php',
-            array('formVars' => $formVars,
-            'action' => $formAction,
-            'method' => $formMethod,
-            'loggedInUser' => $this->loggedInUser,
-            'author' => $author
+            array(
+                'formVars' => $formVars,
+                'action' => $formAction,
+                'method' => $formMethod,
+                'loggedInUser' => $this->loggedInUser,
+                'author' => $author
             )
         );
     }
