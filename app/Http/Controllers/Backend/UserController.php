@@ -38,7 +38,14 @@ class UserController extends Controller
         $users = $userRepository->findAll();
         $loggedInUser = Session::get('name');
                
-        return $this->view->render('backend/pages/users.php', array('users' => $users, 'message' => $message, 'loggedInUser' => $loggedInUser));
+        return $this->view->render(
+            'backend/pages/users.php',
+            array(
+                'users' => $users,
+                'message' => $message,
+                'loggedInUser' => $loggedInUser
+            )
+        );
     }
 
     /**
@@ -49,7 +56,13 @@ class UserController extends Controller
     */
     public function create($message = null, $formVars = null)
     {
-        return $this->view->render('backend/pages/register.twig.php', array('message' => $message, 'formVars' => $formVars));
+        return $this->view->render(
+            'backend/pages/register.twig.php',
+            array(
+                'message' => $message,
+                'formVars' => $formVars
+            )
+        );
     }
 
     /**

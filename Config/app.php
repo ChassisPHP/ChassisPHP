@@ -1,7 +1,7 @@
 <?php
 
 return [
-/* 
+/*
  * Application configurations
  * these are general, application-wide
  * configuration values

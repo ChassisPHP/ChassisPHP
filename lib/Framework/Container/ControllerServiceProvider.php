@@ -42,7 +42,8 @@ class ControllerServiceProvider extends AbstractServiceProvider
             if (is_dir($subElement)) {
                 $subDir = $subElement . "/*.php";
                 foreach (glob($subDir) as $controller) {
-                    $controllerNamespace = $baseNamespace . basename($subElement) . "\\" . basename($controller, ".php");
+                    $controllerNamespace =
+                        $baseNamespace . basename($subElement) . "\\" . basename($controller, ".php");
                     array_push($provides, $controllerNamespace);
                 }
             } else {
@@ -81,7 +82,7 @@ class ControllerServiceProvider extends AbstractServiceProvider
                     'addMiddleware',
                     []
                 )
-                ->withMetodCall(
+                ->withMethodCall(
                     'setBaseURL',
                     [
                         baseURL()
