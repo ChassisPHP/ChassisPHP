@@ -68,7 +68,7 @@ class AuthController extends Controller
                 if (mail($user->getEmail(), "Password Reset Request", implode("\r\n", array(
                     "Hello,",
                     "Please click on the following link to reset your password:",
-                    baseURL() . "reset/$hash"
+                    baseURL() . "backend/reset/" . base64_encode($hash)
                 )))) {
                     Session::setMessage('info', 'Please check your email to continue resetting your password');
                 } else {
@@ -86,7 +86,7 @@ class AuthController extends Controller
     public function resetIndex($get)
     {
 
-        $hash = $get['hash'];
+        $hash = base64_decode($get['hash']);
         $user = $this->entityManager->getRepository('Database\Entities\User')->findoneby(array('forgotPasswd' => $hash));
         if ($user) {
             if ($user->getExpireForgotPasswd() < time()) {

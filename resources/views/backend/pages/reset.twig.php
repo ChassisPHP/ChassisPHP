@@ -18,6 +18,8 @@
         <div class="form-group">
           <label>Password</label>
           <input name="passwd" type="password" class="input-control" />
+        </div>
+        <div class="form-group">
           <label>Confirm Password</label>
           <input name="confirmPasswd" type="password" class="input-control" />
         </div>
