@@ -27,11 +27,17 @@ and start from there - open it in your browser.
 The following steps will help you configure your install of ChassisPHP for the first time.
 1. Copy the `.env.example` file to `.env` and ensure that it is readable by the web server process. The .env file is pre-populated with a standard configuration for the PDO SQLite extension (pdo_sqlite.)
 2. Ensure that your sqlite database is upgraded by running the Doctrine ORM schema update. This can be handled in the following ways:
+
 Unix: `php vendor/bin/doctrine orm:schema-tool:update`
+
 Windows: `php vendor\doctrine\orm\bin\doctrine orm:schema-tool:update` or `vendor\bin\doctrine.bat orm:schema-tool:update`
+
 3. Attempt to login to the `/backend/login` page with the following credentials:
+
 Username: admin@chassis.123
+
 Password: admin
+
 4. After logging in, navigate to `/backend/users` and select "Add User."
 5. Specify your name, email, password, and ensure that you set the user level to `1`. It is **very important** that you create your own unique administrator, so that others cannot circumvent the login protection and login using the default information.
 6. Delete the default administrator by navigating back to `/backend/users` and selecting "Delete."
