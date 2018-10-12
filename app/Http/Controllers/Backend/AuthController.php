@@ -61,7 +61,7 @@ class AuthController extends Controller
         if ($user) {
             $hash = $this->hash->make(microtime() . uniqid(true));
             $user->setForgotPasswd($hash);
-            $user->setExpirePasswd(time() + 60 * 10);
+            $user->setExpireForgotPasswd(time() + 60 * 10);
             try {
                 $this->entityManager->persist($user);
                 $this->entityManager->flush();
