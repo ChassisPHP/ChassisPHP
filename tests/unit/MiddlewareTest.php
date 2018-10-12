@@ -11,13 +11,23 @@ class MiddlewareTest extends TestCase
 {
     private $http;
     private $app;
-    private $process;
+    private static $process;
+
+    public static function setUpBeforeClass()
+    {
+        $public_path = realpath(__DIR__.'/../../public');
+        self::$process = new Process("exec php -S localhost:8890 -t $public_path");
+        self::$process->start();
+        usleep(2000000);
+    }
+
+    public static function tearDownAfterClass()
+    {
+        self::$process->stop();
+    }
 
     public function setUp()
     {
-        $public_path = realpath(__DIR__.'/../../public');
-        $this->process = new Process("php -S localhost:8890 -t $public_path");
-        $this->process->start();
         $this->http = new Client(
             [
                 'base_uri' => 'http://localhost:8890',
@@ -30,7 +40,6 @@ class MiddlewareTest extends TestCase
     public function tearDown()
     {
         $this->http = null;
-        $this->process->stop();
     }
 
     // confirm that user list page requires log in

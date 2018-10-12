@@ -11,20 +11,29 @@ class RoutesTest extends TestCase
 {
     private $http;
     private $app;
-    private $process;
+    private static $process;
 
     public function setUp()
     {
-        $public_path = realpath(__DIR__.'/../../public');
-        $this->process = new Process("php -S localhost:8890 -t public/");
-        $this->process->start();
         $this->http = new Client(['base_uri' => 'http://localhost:8890', 'verify' => false]);
     }
 
     public function tearDown()
     {
         $this->http = null;
-        $this->process->stop();
+    }
+
+    public static function setUpBeforeClass()
+    {
+        $public_path = realpath(__DIR__.'/../../public');
+        self::$process = new Process("exec php -S localhost:8890 -t $public_path");
+        self::$process->start();
+        usleep(2000000);
+    }
+
+    public static function tearDownAfterClass()
+    {
+        self::$process->stop();
     }
 
     public function testGet()
