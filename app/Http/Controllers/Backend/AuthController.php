@@ -23,7 +23,7 @@ class AuthController extends Controller
         $this->hash = new Hash;
         $this->entityManager = $this->connection->entityManager;
     }
-    
+
     public function addMiddleware()
     {
         // Only allow logged in users
@@ -46,6 +46,86 @@ class AuthController extends Controller
     public function create()
     {
         return $this->view->render('backend/partials/register.twig.php');
+    }
+
+    public function forgotIndex($formVars = array())
+    {
+        $message =  Session::getMessage();
+        return $this->view->render('backend/pages/forgot.twig.php', array('message' => $message, 'formVars' => $formVars));
+    }
+
+    public function forgotStore()
+    {
+        $formVars = $this->request->getParsedBody();
+        $user = $this->entityManager->getRepository('Database\Entities\User')->findoneby(array('email' => $formVars['email']));
+        if ($user) {
+            $hash = $this->hash->make(microtime() . uniqid(true));
+            $user->setForgotPasswd($hash);
+            $user->setExpirePasswd(time() + 60 * 10);
+            try {
+                $this->entityManager->persist($user);
+                $this->entityManager->flush();
+                if (mail($user->getEmail(), "Password Reset Request", implode("\r\n", array(
+                    "Hello,",
+                    "Please click on the following link to reset your password:",
+                    baseURL() . "reset/$hash"
+                )))) {
+                    Session::setMessage('info', 'Please check your email to continue resetting your password');
+                } else {
+                    Session::setMessage('warning', 'Could not send your reset password link, please contact support');
+                }
+            } catch (UniqueConstraintViolationException $e) {
+                Session::setMessage('warning', 'Could not reset your password, please contact support');
+            }
+        } else {
+            Session::setMessage('warning', 'Wrong Email, please try again');
+        }
+        return $this->forgotIndex($formVars);
+    }
+
+    public function resetIndex($get)
+    {
+
+        $hash = $get['hash'];
+        $user = $this->entityManager->getRepository('Database\Entities\User')->findoneby(array('forgotPasswd' => $hash));
+        if ($user) {
+            if ($user->getExpireForgotPasswd() < time()) {
+                Session::setMessage('warning', 'Your password reset link has expired, please try again');
+            }
+        } else {
+            Session::setMessage('warning', 'Your password reset link is malformed, please try again');
+        }
+        $message =  Session::getMessage();
+        return $this->view->render('backend/pages/reset.twig.php', array('message' => $message, 'hash' => $hash));
+    }
+
+    public function resetStore($get)
+    {
+        $user = $this->entityManager->getRepository('Database\Entities\User')->findoneby(array('forgotPasswd' => $hash));
+        if ($user) {
+            if ($user->getExpireForgotPasswd() > time()) {
+                $formVars = $this->request->getParsedBody();
+                if ($formVars['passwd'] && $formVars['confirmPasswd'] && (strcmp($formVars['passwd'], $formVars['confirmPasswd'] === 0))) {
+                    $passwd = $this->hash->make($formVars['passwd']);
+                    $user->setPasswd($passwd);
+                    try {
+                        $this->entityManager->persist($user);
+                        $this->entityManager->flush();
+
+                        Session::setMessage('info', 'Your password has been reset');
+                    } catch (UniqueConstraintViolationException $e) {
+                        Session::setMessage('warning', 'Could not reset your password, please contact support');
+                    }
+                } else {
+                    Session::setMessage('warning', 'Your passwords do not match, please try again');
+                }
+            } else {
+                Session::setMessage('warning', 'Your password reset link has expired, please try again');
+            }
+        } else {
+            Session::setMessage('warning', 'Your password reset link is malformed, please try again');
+        }
+        return $this->resetIndex();
     }
 
     /**
@@ -82,7 +162,7 @@ class AuthController extends Controller
         } else {
             //$message['type'] = 'alert-danger';
             Session::setMessage('warning', 'Wrong Email or Password, please try again');
-    
+
             return $this->index();
         }
     }
@@ -99,7 +179,7 @@ class AuthController extends Controller
         $user = $this->entityManager->getRepository('Database\Entities\User')->find($id);
         // TODO add functionality to get user details
     }
- 
+
     /**
     * Show the form for editing the specified resource.
     *
@@ -121,7 +201,7 @@ class AuthController extends Controller
     {
         //
     }
- 
+
     /**
     * Log the current user out and return them to the homepage
     *

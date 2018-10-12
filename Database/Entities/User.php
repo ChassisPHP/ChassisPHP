@@ -40,6 +40,16 @@ class User
     protected $passwd;
 
     /**
+    * @ORM\Column(type="string", length=64)
+    **/
+    protected $forgotPasswd;
+
+    /**
+    * @ORM\Column(type="bigint")
+    **/
+    protected $expireForgotPasswd;
+
+    /**
     * @ORM\Column(type="integer")
     **/
     protected $userLevel;
@@ -61,12 +71,12 @@ class User
         $this->contents = new ArrayCollection;
         $this->images = new ArrayCollection;
     }
-    
+
     public function getId()
     {
         return $this->id;
     }
-    
+
     public function getName()
     {
         return $this->name;
@@ -76,7 +86,7 @@ class User
     {
         $this->name = $name;
     }
-    
+
     public function getEmail()
     {
         return $this->email;
@@ -86,7 +96,7 @@ class User
     {
         $this->email = $email;
     }
-    
+
     public function getPasswd()
     {
         return $this->passwd;
@@ -96,7 +106,27 @@ class User
     {
         $this->passwd = $passwd;
     }
-    
+
+    public function getForgotPasswd()
+    {
+        return $this->forgotPasswd;
+    }
+
+    public function setForgotPasswd($forgotPasswd)
+    {
+        $this->forgotPasswd = $forgotPasswd;
+    }
+
+    public function getExpireForgotPasswd()
+    {
+        return $this->expireForgotPasswd;
+    }
+
+    public function setExpireForgotPasswd($expireForgotPasswd)
+    {
+        $this->expireForgotPasswd = $expireForgotPasswd;
+    }
+
     public function getUserLevel()
     {
         return $this->userLevel;
