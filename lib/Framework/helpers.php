@@ -37,3 +37,14 @@ if (! function_exists('baseURL')) {
         return $url;
     }
 }
+
+// Redirect the user.
+if (! function_exists('redirectPath')) {
+    function redirectPath($path = '/', $code = 301)
+    {
+        $url = sprintf("%s%s", baseURL(), ltrim($path, '/'));
+
+        header("Location: $url", TRUE, ($code !== 301) ? 302 : 301);
+        exit;
+    }
+}
