@@ -5,17 +5,33 @@ namespace Tests\Unit;
 use Tests\TestCase;
 use GuzzleHttp\Client;
 use GuzzleHttp\Cookie\CookieJarInterface;
+use Symfony\Component\Process\Process;
 
 class MiddlewareTest extends TestCase
 {
     private $http;
     private $app;
+    private static $process;
+
+    public static function setUpBeforeClass()
+    {
+        $public_path = realpath(__DIR__.'/../../public');
+        self::$process = new Process("exec php -S localhost:8890 -t $public_path");
+        self::$process->start();
+        usleep(2000000);
+    }
+
+    public static function tearDownAfterClass()
+    {
+        self::$process->stop();
+    }
 
     public function setUp()
     {
         $this->http = new Client(
             [
-                'base_uri' => 'https://chassis.local/',                 'verify' => false,
+                'base_uri' => 'http://localhost:8890',
+                'verify' => false,
                 'cookies' => true,
             ]
         );
@@ -33,7 +49,7 @@ class MiddlewareTest extends TestCase
 
         $this->assertEquals(200, $response->getStatusCode());
 
-        $contentType = $response->getHeaders()["Content-Type"][0];
+        $contentType = $response->getHeader('Content-Type')[0];
         $this->assertEquals("text/html; charset=UTF-8", $contentType);
         $body = $response->getBody();
         $body = $body->getContents();
@@ -50,7 +66,7 @@ class MiddlewareTest extends TestCase
 
         $this->assertEquals(200, $response->getStatusCode());
 
-        $contentType = $response->getHeaders()["Content-Type"][0];
+        $contentType = $response->getHeader('Content-Type')[0];
         $this->assertEquals("text/html; charset=UTF-8", $contentType);
         $body = $response->getBody();
         $body = $body->getContents();
@@ -59,7 +75,7 @@ class MiddlewareTest extends TestCase
             $body
         );
     }
-    
+
     // confirm that content list page requires log in
     public function testContentAuth()
     {
@@ -67,7 +83,7 @@ class MiddlewareTest extends TestCase
 
         $this->assertEquals(200, $response->getStatusCode());
 
-        $contentType = $response->getHeaders()["Content-Type"][0];
+        $contentType = $response->getHeader('Content-Type')[0];
         $this->assertEquals("text/html; charset=UTF-8", $contentType);
         $body = $response->getBody();
         $body = $body->getContents();
@@ -76,7 +92,7 @@ class MiddlewareTest extends TestCase
             $body
         );
     }
-    
+
     // confirm that content detail page requires log in
     public function testContentDetailAuth()
     {
@@ -84,7 +100,7 @@ class MiddlewareTest extends TestCase
 
         $this->assertEquals(200, $response->getStatusCode());
 
-        $contentType = $response->getHeaders()["Content-Type"][0];
+        $contentType = $response->getHeader('Content-Type')[0];
         $this->assertEquals("text/html; charset=UTF-8", $contentType);
         $body = $response->getBody();
         $body = $body->getContents();
@@ -93,7 +109,7 @@ class MiddlewareTest extends TestCase
             $body
         );
     }
-    
+
     // confirm that content update page requires log in
     public function testContentUpdateDetailAuth()
     {
@@ -101,7 +117,7 @@ class MiddlewareTest extends TestCase
 
         $this->assertEquals(200, $response->getStatusCode());
 
-        $contentType = $response->getHeaders()["Content-Type"][0];
+        $contentType = $response->getHeader('Content-Type')[0];
         $this->assertEquals("text/html; charset=UTF-8", $contentType);
         $body = $response->getBody();
         $body = $body->getContents();
