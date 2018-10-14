@@ -10,16 +10,40 @@ use ArrayAccess;
  */
 class ConfigManager implements ArrayAccess
 {
-    /** @var array  */
+    /** @var static */
+    protected static $instance;
+
+    /** @var array */
     private $config = [];
+
+    /**
+     * @return ConfigManager
+     */
+    public static function instance()
+    {
+        if (!static::$instance) {
+            static::$instance = new self;
+        }
+
+        return static::$instance;
+    }
+
+    /**
+     * @param $property
+     * @return mixed|null
+     */
+    public static function get($property)
+    {
+        return static::instance()->getProperty($property);
+    }
 
     /**
      * Config constructor.
      */
-    public function __construct()
+    protected function __construct()
     {
         // Read the config files
-        $configDir =  dirname(__FILE__, 3) . "/Config/*.php";
+        $configDir = dirname(__FILE__, 3) . "/Config/*.php";
 
         foreach (glob($configDir) as $configFile) {
             $configs = include($configFile);
@@ -65,7 +89,7 @@ class ConfigManager implements ArrayAccess
      */
     public function offsetGet($offset)
     {
-         return isset($this->config[$offset]) ? $this->config[$offset] : null;
+        return isset($this->config[$offset]) ? $this->config[$offset] : null;
     }
 
     /**
@@ -74,14 +98,14 @@ class ConfigManager implements ArrayAccess
      * @param $property
      * @return mixed|null
      */
-    public function get($property)
+    protected function getProperty($property)
     {
         $value = $this->config;
         $path = explode('.', $property);
 
-        while(sizeof($path) > 0 && is_array($value)) {
+        while (sizeof($path) > 0 && is_array($value)) {
             $nextKey = array_shift($path);
-            if (! key_exists($nextKey, $value)) {
+            if (!key_exists($nextKey, $value)) {
                 return null;
             }
             $value = $value[$nextKey];
