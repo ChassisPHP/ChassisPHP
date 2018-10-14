@@ -57,7 +57,7 @@ class Container extends LeagueContainer
         });
 
         $this->add('Config', function () {
-            $config = new Config;
+            $config = new ConfigManager;
             return $config;
         });
 

@@ -4,7 +4,7 @@ namespace Lib\Database;
 
 use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
-use Lib\Framework\Config;
+use Lib\Framework\ConfigManager;
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Annotations\AnnotationRegistry;
@@ -17,12 +17,12 @@ class Connection
 
     public function __construct()
     {
-        $this->config = new Config;
+        $this->config = new ConfigManager;
         $driver = envar('DATABASE_DRIVER', 'pdo_mysql');
         $dbType = envar('DATABASE_TYPE', 'mysql');
         switch ($dbType) {
             case "sqlite":
-                $path = dirname(__FILE__, 3) . "/" . $this->config['database'][$dbType]['database'];
+                $path = dirname(__FILE__, 3) . "/" . $this->config->get("database.$dbType.database");
                 $conn = array(
                         'driver' => $driver,
                         'path' => $path,

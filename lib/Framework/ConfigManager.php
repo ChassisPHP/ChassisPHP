@@ -8,7 +8,7 @@ use ArrayAccess;
  * Class Config
  * @package Lib\Framework
  */
-class Config implements ArrayAccess
+class ConfigManager implements ArrayAccess
 {
     /** @var array  */
     private $config = [];
@@ -66,5 +66,28 @@ class Config implements ArrayAccess
     public function offsetGet($offset)
     {
          return isset($this->config[$offset]) ? $this->config[$offset] : null;
+    }
+
+    /**
+     * Takes in path in dot-notation and returns the appropriate value. (e.g. 'app.gcProb')
+     *
+     * @param $property
+     * @return mixed|null
+     */
+    public function get($property)
+    {
+        $value = $this->config;
+        $path = explode('.', $property);
+
+        while(sizeof($path) > 0 && is_array($value)) {
+            $nextKey = array_shift($path);
+            if (! key_exists($nextKey, $value)) {
+                return null;
+            }
+            $value = $value[$nextKey];
+        }
+
+        return $value;
+
     }
 }
