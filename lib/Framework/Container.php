@@ -4,6 +4,7 @@ namespace Lib\Framework;
 
 use League\Container\Container as LeagueContainer;
 use League\Container\ReflectionContainer;
+use Lib\Framework\Log\LogManager;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Dotenv\Dotenv;
@@ -61,8 +62,7 @@ class Container extends LeagueContainer
         });
 
         $this->add('Logger', function () {
-            $log = new Logger('CHASSISPHP');
-            $log->pushHandler(new StreamHandler(dirname(__FILE__, 3) . 'Storage/logs/app.log', LOGGER::DEBUG));
+            return new LogManager($this);
         });
 
         $this->add('Twig', function () {
