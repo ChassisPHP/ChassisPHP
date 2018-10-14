@@ -20,7 +20,7 @@ class Connection
         $dbType = envar('DATABASE_TYPE', 'mysql');
         switch ($dbType) {
             case "sqlite":
-                $path = dirname(__FILE__, 3) . "/" . ConfigManager::get("database.$dbType.database");
+                $path = dirname(__FILE__, 3) . "/" . ConfigManager::get("database.connections.$dbType.database");
                 $conn = array(
                         'driver' => $driver,
                         'path' => $path,
