@@ -112,6 +112,5 @@ class ConfigManager implements ArrayAccess
         }
 
         return $value;
-
     }
 }

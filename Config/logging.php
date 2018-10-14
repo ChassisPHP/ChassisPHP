@@ -21,5 +21,4 @@ return [
         'emergency' => 'emergency.log',
         'debug' => 'debug.log',
     ],
-
 ];
