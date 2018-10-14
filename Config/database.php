@@ -1,4 +1,11 @@
 <?php
+if (!getenv('DATABASE_PATH')) {
+    // crank up the Composer autoloading
+    require __DIR__.'/../vendor/autoload.php';
+
+    // load environment variables
+    \Lib\Framework\EnvVarsLoader::loadEnvVars();
+}
 
 return [
 
@@ -7,7 +14,7 @@ return [
      * Currently only SQLite & mySQL are set up
      * others to come soon
     */
-   
+
     'connections' => [
         'sqlite' => [
             'driver' => 'sqlite',
