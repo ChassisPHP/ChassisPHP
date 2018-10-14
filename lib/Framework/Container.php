@@ -52,14 +52,12 @@ class Container extends LeagueContainer
         });
 
         $this->add('Connection', function () {
-            $config = $this->get('Config');
-            $connection = new Connection($config);
+            $connection = new Connection();
             return $connection;
         });
 
         $this->add('Config', function () {
-            $config = new Config;
-            return $config;
+            return ConfigManager::instance();
         });
 
         $this->add('Logger', function () {
