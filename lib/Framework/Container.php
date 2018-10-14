@@ -57,8 +57,7 @@ class Container extends LeagueContainer
         });
 
         $this->add('Config', function () {
-            $config = new ConfigManager;
-            return $config;
+            return ConfigManager::instance();
         });
 
         $this->add('Logger', function () {
