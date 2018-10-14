@@ -21,7 +21,7 @@ require __DIR__.'/../vendor/autoload.php';
 // set session storage location and
 // start the session
 $config = new \Lib\Framework\Config;
-$gcProb = $config['gcProb'];
+$gcProb = $config['app']['gcProb'];
 ini_set('session.save_path', dirname(__FILE__, 2) . '/storage/sessions');
 ini_set('session.gc_probability', $gcProb);
 session_start();
