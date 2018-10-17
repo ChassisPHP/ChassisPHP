@@ -16,8 +16,8 @@ class User
 {
     /**
     * @ORM\Id
-    * @ORM\Column(type="integer", options={"autoincrement":true})
-    * @ORM\GeneratedValue(strategy="IDENTITY")
+    * @ORM\Column(name="id", type="integer", options={"autoincrement":true})
+    * @ORM\GeneratedValue
     **/
     protected $id;
 
