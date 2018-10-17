@@ -16,8 +16,8 @@ class User
 {
     /**
     * @ORM\Id
-    * @ORM\Column(type="integer")
-    * @ORM\GeneratedValue
+    * @ORM\Column(type="integer", options={"autoincrement":true})
+    * @ORM\GeneratedValue(strategy="IDENTITY")
     **/
     protected $id;
 
@@ -61,12 +61,12 @@ class User
         $this->contents = new ArrayCollection;
         $this->images = new ArrayCollection;
     }
-    
+
     public function getId()
     {
         return $this->id;
     }
-    
+
     public function getName()
     {
         return $this->name;
@@ -76,7 +76,7 @@ class User
     {
         $this->name = $name;
     }
-    
+
     public function getEmail()
     {
         return $this->email;
@@ -86,7 +86,7 @@ class User
     {
         $this->email = $email;
     }
-    
+
     public function getPasswd()
     {
         return $this->passwd;
@@ -96,7 +96,7 @@ class User
     {
         $this->passwd = $passwd;
     }
-    
+
     public function getUserLevel()
     {
         return $this->userLevel;
