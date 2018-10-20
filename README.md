@@ -7,9 +7,8 @@ Yes, another PHP framework. The goal with ChassisPHP is to be a framework that s
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 It's recommended that you use [Composer](https://getcomposer.org/) to install ChassisPHP.
 ### Prerequisites
-* PHP7
+* PHP7.1
 * Composer
-* Nodejs/ NPM (Node Package Manager)
 * pdo_sqlite extension
 ### Installing
 ```bash
@@ -18,9 +17,6 @@ $ composer require rogercreasy/chassis-php:dev-master
 then go to folder and install your dependency using composer (*eg. `cd ChassisPHP`*)
 ```bash
 $ composer install
-```
-```bash
-$ npm install
 ```
 and start from there - open it in your browser.
 ### Configuration

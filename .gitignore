@@ -8,3 +8,5 @@ public/logs/
 composer.lock
 tags
 .ctags
+storage/backup/*
+!storage/backup/.gitkeep

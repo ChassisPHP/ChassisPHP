@@ -37,7 +37,7 @@
         <div class="form-group">
           <label>&nbsp;</label>
           <button type="submit">Save</button>
-          <button>Cancel</button>
+          <button onclick="event.preventDefault(); window.location.href='/backend/users'">Cancel</button>
         </div>
     </form>
 

@@ -7,7 +7,6 @@ return [
  * configuration values
  */
 
-    'app' => [
-        'gcProb' => getEnv('APP_SESSION_GARBAGECOLLECTION', 1),
-    ],
+    'gcProb' => getEnv('APP_SESSION_GARBAGECOLLECTION', 1),
+
 ];
