@@ -96,11 +96,12 @@ class AuthController extends Controller
             Session::setMessage('warning', 'Your password reset link is malformed, please try again');
         }
         $message =  Session::getMessage();
-        return $this->view->render('backend/pages/reset.twig.php', array('message' => $message, 'hash' => $hash));
+        return $this->view->render('backend/pages/reset.twig.php', array('message' => $message, 'hash' => base64_encode($hash)));
     }
 
     public function resetStore($get)
     {
+        $hash = base64_decode($get['hash']);
         $user = $this->entityManager->getRepository('Database\Entities\User')->findoneby(array('forgotPasswd' => $hash));
         if ($user) {
             if ($user->getExpireForgotPasswd() > time()) {
@@ -125,7 +126,7 @@ class AuthController extends Controller
         } else {
             Session::setMessage('warning', 'Your password reset link is malformed, please try again');
         }
-        return $this->resetIndex();
+        return $this->index();
     }
 
     /**
