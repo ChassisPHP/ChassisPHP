@@ -16,8 +16,8 @@ class User
 {
     /**
     * @ORM\Id
-    * @ORM\Column(type="integer")
-    * @ORM\GeneratedValue
+    * @ORM\Column(name="id", type="integer")
+    * @ORM\GeneratedValue(strategy="IDENTITY")
     **/
     protected $id;
 
@@ -126,7 +126,7 @@ class User
     {
         $this->expireForgotPasswd = $expireForgotPasswd;
     }
-
+    
     public function getUserLevel()
     {
         return $this->userLevel;
