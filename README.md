@@ -2,7 +2,7 @@
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 Pronounced Cha-see <br>
 Yes, another PHP framework. The goal with ChassisPHP is to be a framework that simplifies the process of creating a brochure-type website.
-**We are just getting started. This package is not yet production-ready!**
+**We are just getting started. This package is in beta. Use in production with caution**
 ## Getting Started
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 It's recommended that you use [Composer](https://getcomposer.org/) to install ChassisPHP.
@@ -11,14 +11,11 @@ It's recommended that you use [Composer](https://getcomposer.org/) to install Ch
 * Composer
 * pdo_sqlite extension
 ### Installing
+* create a directory for your project
+* from the directory above the project directory, run
 ```bash
-$ composer require rogercreasy/chassis-php:dev-master
+  composer create-project -s dev rogercreasy/chassis-php [project directory name]
 ```
-then go to folder and install your dependency using composer (*eg. `cd ChassisPHP`*)
-```bash
-$ composer install
-```
-and start from there - open it in your browser.
 ### Configuration
 The following steps will help you configure your install of ChassisPHP for the first time.
 1. Copy the `.env.example` file to `.env` and ensure that it is readable by the web server process. The .env file is pre-populated with a standard configuration for the PDO SQLite extension (pdo_sqlite.)
