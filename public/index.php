@@ -20,10 +20,8 @@ require __DIR__.'/../vendor/autoload.php';
 
 // set session storage location and
 // start the session
-$config = new \Lib\Framework\Config;
-$gcProb = $config['gcProb'];
 ini_set('session.save_path', dirname(__FILE__, 2) . '/storage/sessions');
-ini_set('session.gc_probability', $gcProb);
+ini_set('session.gc_probability', \Lib\Framework\ConfigManager::get('app.gcProb'));
 session_start();
 
 // set the timeout for the session
@@ -39,9 +37,14 @@ if (isset($_SESSION['timeout'])) {
         session_start();
     }
 }
-                              
+
 // Update the timout field with the current time.
 $_SESSION['timeout'] = time();
+
+// Handle Fatal Errors
+require __DIR__ . '/../lib/Framework/Handlers/FatalErrorHandler.php';
+$fatalErrorHandler = new \Lib\Framework\Handlers\FatalErrorHandler;
+register_shutdown_function(array($fatalErrorHandler, 'fatalErrorHandler'));
 
 // set up the application
 $app = new \Lib\Framework\Core();

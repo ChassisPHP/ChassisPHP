@@ -15,7 +15,7 @@ return [
     ['GET', '/users/register', ['Backend\UserController', 'create']],
     ['POST', '/users/register', ['Backend\UserController', 'store']],
     ['GET', '/users/delete/{ID}', ['Backend\UserController', 'destroy']],
-    
+
     // Content
     ['GET', '/content', ['Backend\ContentController', 'index']],
     ['GET', '/content/create', ['Backend\ContentController', 'create']],
@@ -35,6 +35,10 @@ return [
     ['GET', '/images/delete/{ID}', ['Backend\ImageController', 'destroy']],
 
     // Auth
+    ['GET', '/forgot', ['Backend\AuthController', 'forgotIndex']],
+    ['POST', '/forgot', ['Backend\AuthController', 'forgotStore']],
+    ['GET', '/reset/{hash}', ['Backend\AuthController', 'resetIndex']],
+    ['POST', '/reset/{hash}', ['Backend\AuthController', 'resetStore']],
     ['GET', '/login', ['Backend\AuthController', 'index']],
     ['POST', '/login', ['Backend\AuthController', 'store']],
     ['GET', '/logout', ['Backend\AuthController', 'logout']],

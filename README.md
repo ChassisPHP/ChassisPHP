@@ -1,27 +1,39 @@
 # ChassisPHP
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 Pronounced Cha-see <br>
-Yes, another PHP framework. The goal with ChassisPHP is to be a framework that simplifies the process of creating a brouchure-type website.
-**We are just getting started. This package is not yet production-ready!**
+Yes, another PHP framework. The goal with ChassisPHP is to be a framework that simplifies the process of creating a brochure-type website.
+**We are just getting started. This package is in beta. Use in production with caution**
 ## Getting Started
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 It's recommended that you use [Composer](https://getcomposer.org/) to install ChassisPHP.
 ### Prerequisites
-* PHP7
+* PHP7.1
 * Composer
-* Nodejs/ NPM (Node Package Manager)
+* pdo_sqlite extension
 ### Installing
+* create a directory for your project
+* from the directory above the project directory, run
 ```bash
-$ composer require rogercreasy/chassis-php:dev-master
+  composer create-project -s dev rogercreasy/chassis-php [project directory name]
 ```
-then go to folder and install your dependency using composer (*eg. `cd ChassisPHP`*)
-```bash
-$ composer install
-```
-```bash
-$ npm install
-```
-and start from there - open it in your browser.
+### Configuration
+The following steps will help you configure your install of ChassisPHP for the first time.
+1. Copy the `.env.example` file to `.env` and ensure that it is readable by the web server process. The .env file is pre-populated with a standard configuration for the PDO SQLite extension (pdo_sqlite.)
+2. Ensure that your sqlite database is upgraded by running the Doctrine ORM schema update. This can be handled in the following ways:
+
+Unix: `php vendor/bin/doctrine orm:schema-tool:update`
+
+Windows: `php vendor\doctrine\orm\bin\doctrine orm:schema-tool:update` or `vendor\bin\doctrine.bat orm:schema-tool:update`
+
+3. Attempt to login to the `/backend/login` page with the following credentials:
+
+Username: admin@chassis.123
+
+Password: admin
+
+4. After logging in, navigate to `/backend/users` and select "Add User."
+5. Specify your name, email, password, and ensure that you set the user level to `1`. It is **very important** that you create your own unique administrator, so that others cannot circumvent the login protection and login using the default information.
+6. Delete the default administrator by navigating back to `/backend/users` and selecting "Delete."
 
 ### Testing
 
@@ -43,6 +55,8 @@ ChassisPHP is not bound to any particular component. **Whenever possible** compo
 
 ## Contributing
 
+If you are new to the ChassisPHP project, check out our newbie guide - [Contribution guidelines for this project](CONTRIBUTING_NEWBIE.md)
+
 We REALLY do want your help. ChassisPHP has grown into a project with real potential! We try to be a helpful, welcoming, and nurturing community. Please look at the code, try it out, and let us know what you want changed. Make a pull request for the change, if you want.
 1. Comment on the issue on which you wish to work (If the issue doesn't exist, create it)
 2. Fork it!
@@ -58,7 +72,7 @@ We REALLY do want your help. ChassisPHP has grown into a project with real poten
 
 ChassisPHP has a quickly growing community of [contributors](CONTRIBUTORS.md). If you want your name added to that list of contributors, see the "Contributing" section above.<br>
 Roger Creasy is the maintainer of the ChassisPHP project, and is its founder.
- 
+
 
 ## License
 [The MIT License (MIT)](LICENSE)
