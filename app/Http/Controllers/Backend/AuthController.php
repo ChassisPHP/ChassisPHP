@@ -145,6 +145,7 @@ class AuthController extends Controller
 
         // Lookup user by email
         $user = $this->entityManager->getRepository('Database\Entities\User')->findoneby(array('email' => $email));
+
         if ($user && $this->hash->check($passwd, $user->getPasswd())) {
             Session::set('user', $user->getId());
             Session::set('name', $user->getName());
@@ -155,11 +156,10 @@ class AuthController extends Controller
             if (Session::get('error')) {
                 Session::clear('error');
             }
-
             // send the user to the page request prior to login
             $URI = Session::get('history');
-            //$location = "Location: ".$URI
-            return header("Location: $URI"); // TODO refactor this to a helper class with more functionality
+
+            redirectPath("backend/users");
         } else {
             //$message['type'] = 'alert-danger';
             Session::setMessage('warning', 'Wrong Email or Password, please try again');
