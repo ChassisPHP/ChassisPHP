@@ -17,10 +17,7 @@ class AuthMiddleware
     {
         $serverProps = $request->getServerParams('REQUEST_URI');
         $URI = $serverProps['REQUEST_URI'];
-        if (!Session::get('authenticated')) {
-            // user is authenticated
-            // TODO refaactor this to a helper class with more functionality
-            // also, add flash message
+        if (! checkAuth()) {
             Session::setMessage('warning', 'The page you attempted to access requires that you log in ');
             Session::set('history', $URI);
             return header('Location: /backend/login');

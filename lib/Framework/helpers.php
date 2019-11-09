@@ -44,7 +44,7 @@ if (! function_exists('redirectPath')) {
     {
         $url = sprintf("%s%s", baseURL(), ltrim($path, '/'));
 
-        header("Location: $url", TRUE, ($code !== 301) ? 302 : 301);
+        header("Location: $url", true, ($code !== 301) ? 302 : 301);
         exit;
     }
 }
@@ -76,5 +76,15 @@ if (! function_exists('logTo')) {
     {
         // TODO avoid creating a new container for every log entry
         (new \Lib\Framework\Container)->get('Logger')->log($level, $message, $context);
+    }
+}
+
+// Check if user is authenticated
+// @return boolean
+if (! function_exists('checkAuth')) {
+    function checkAuth()
+    {
+        $authenticated = \Lib\Framework\Session::get('authenticated');
+        return $authenticated;
     }
 }
