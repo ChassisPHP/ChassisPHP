@@ -51,25 +51,52 @@ class AuthController extends Controller
     public function forgotIndex($formVars = array())
     {
         $message =  Session::getMessage();
-        return $this->view->render('backend/pages/forgot.twig.php', array('message' => $message, 'formVars' => $formVars));
+        return $this->view->render(
+            'backend/pages/forgot.twig.php',
+            array(
+                'message' => $message,
+                'formVars' => $formVars
+            )
+        );
     }
 
     public function forgotStore()
     {
         $formVars = $this->request->getParsedBody();
-        $user = $this->entityManager->getRepository('Database\Entities\User')->findoneby(array('email' => $formVars['email']));
+        $user = $this->entityManager
+                     ->getRepository(
+                         'Database\Entities\User'
+                     )
+                     ->findoneby(
+                         array('email' => $formVars['email'])
+                     );
         if ($user) {
             $hash = $this->hash->make(microtime() . uniqid(true));
             $user->setForgotPasswd($hash);
             $user->setExpireForgotPasswd(time() + 60 * 10);
+
+            $recipient = array($user->getEmail());
+            $subject ="Password Rest Request";
+            $messageBody = array('content' => "Hello, <br>
+                            Someone requested a password reset. If it was not you, ignore this email.
+                            Otherwise, please click the link below to continue.
+                            The link expires in 10 minutes. <br>" .
+                            baseURL() . "backend/reset/" . base64_encode($hash));
+            $fromAddress = "roger@chassisphp.com";
+            $fromName = "Site Admin";
+            $template = "backend/email/passwordReset.twig.php";
+
             try {
                 $this->entityManager->persist($user);
                 $this->entityManager->flush();
-                if (mail($user->getEmail(), "Password Reset Request", implode("\r\n", array(
-                    "Hello,",
-                    "Please click on the following link to reset your password:",
-                    baseURL() . "backend/reset/" . base64_encode($hash)
-                )))) {
+                if ($this->mailer->send(
+                    $recipient,
+                    $subject,
+                    $messageBody,
+                    $fromAddress,
+                    $fromName,
+                    $template
+                )) {
                     Session::setMessage('info', 'Please check your email to continue resetting your password');
                 } else {
                     Session::setMessage('warning', 'Could not send your reset password link, please contact support');
@@ -87,7 +114,9 @@ class AuthController extends Controller
     {
 
         $hash = base64_decode($get['hash']);
-        $user = $this->entityManager->getRepository('Database\Entities\User')->findoneby(array('forgotPasswd' => $hash));
+        $user = $this->entityManager
+                     ->getRepository('Database\Entities\User')
+                     ->findoneby(array('forgotPasswd' => $hash));
         if ($user) {
             if ($user->getExpireForgotPasswd() < time()) {
                 Session::setMessage('warning', 'Your password reset link has expired, please try again');
@@ -96,17 +125,28 @@ class AuthController extends Controller
             Session::setMessage('warning', 'Your password reset link is malformed, please try again');
         }
         $message =  Session::getMessage();
-        return $this->view->render('backend/pages/reset.twig.php', array('message' => $message, 'hash' => base64_encode($hash)));
+        return $this->view->render(
+            'backend/pages/reset.twig.php',
+            array(
+                'message' => $message,
+                'hash' => base64_encode($hash)
+            )
+        );
     }
 
     public function resetStore($get)
     {
         $hash = base64_decode($get['hash']);
-        $user = $this->entityManager->getRepository('Database\Entities\User')->findoneby(array('forgotPasswd' => $hash));
+        $user = $this->entityManager
+                     ->getRepository('Database\Entities\User')
+                     ->findoneby(array('forgotPasswd' => $hash));
         if ($user) {
             if ($user->getExpireForgotPasswd() > time()) {
                 $formVars = $this->request->getParsedBody();
-                if ($formVars['passwd'] && $formVars['confirmPasswd'] && (strcmp($formVars['passwd'], $formVars['confirmPasswd'] === 0))) {
+                if ($formVars['passwd'] &&
+                    $formVars['confirmPasswd'] &&
+                    (strcmp($formVars['passwd'], $formVars['confirmPasswd'] === 0))
+                ) {
                     $passwd = $this->hash->make($formVars['passwd']);
                     $user->setPasswd($passwd);
                     try {
