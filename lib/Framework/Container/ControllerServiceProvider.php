@@ -87,6 +87,12 @@ class ControllerServiceProvider extends AbstractServiceProvider
                     [
                         baseURL()
                     ]
+                )
+                ->withMethodCall(
+                    'setMailer',
+                    [
+                        $this->getContainer()->get('Mailer')
+                    ]
                 );
         }
     }

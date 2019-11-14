@@ -32,7 +32,13 @@ class Container extends LeagueContainer
         // Add developer controllers
         $this->addServiceProvider('Lib\Framework\Container\ControllerServiceProvider');
 
-        $this->share('MiddlewareQueue', new \Lib\Framework\Http\MiddlewareQueue($this->get('PsrRequestInterface'), $this->get('PsrResponseInterface')));
+        $this->share(
+            'MiddlewareQueue',
+            new \Lib\Framework\Http\MiddlewareQueue(
+                $this->get('PsrRequestInterface'),
+                $this->get('PsrResponseInterface')
+            )
+        );
 
         $this->add('Router', function () {
             $request = $this->get('PsrRequestInterface');
@@ -72,9 +78,14 @@ class Container extends LeagueContainer
                'auto_reload' => true,
                'debug' => false,
             ));
-            //$twig->addExtension(new \Twig_Extension_Debug());
+            $twig->addExtension(new \Twig_Extension_Debug());
             return $twig;
         }, true);
+
+        $this->add('Mailer', function () {
+            $mailConfig = $this->get('Config')->get('mail');
+            return new \Lib\Framework\Services\Mailer($this->get('Twig'), $mailConfig);
+        });
 
         // Add additional default error pages here.
         $this->add('template.defaults.404', 'errors/404.twig');
