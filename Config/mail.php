@@ -11,4 +11,5 @@ return [
     'username'       => getEnv('EMAIL_USERNAME'),
     'password'       => getEnv('EMAIL_PASSWORD'),
     'cc'             => getEnv('EMAIL_CC'),
+    'supportAddress' => getenv('EMAIL_SUPPORT_ADRESS'),
 ];
