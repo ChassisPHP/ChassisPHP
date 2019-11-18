@@ -79,6 +79,8 @@ class Container extends LeagueContainer
                'debug' => false,
             ));
             $twig->addExtension(new \Twig_Extension_Debug());
+            $supportAddress = $this->get('Config')->get('mail')['supportAddress'];
+            $twig->addGlobal("supportAddress", $supportAddress);
             return $twig;
         }, true);
 
