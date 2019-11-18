@@ -25,6 +25,10 @@
           <button type="submit">Continue</button>
           <button>Cancel</button>
         </div>
+
+        {% if message.content == 'Could not reset your password, please contact support' %}
+        <a href='mailto:{{ supportAddress }}'>Contact Support</a>
+        {% endif %}
     </form>
 
 </article>

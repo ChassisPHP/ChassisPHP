@@ -13,7 +13,6 @@
       <h1>Log In</h1>
     </header>
 
-
     <form action="/backend/login" method="post">
         <div class="form-group">
           <label>Email</label>

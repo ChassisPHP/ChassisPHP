@@ -77,10 +77,10 @@ class AuthController extends Controller
 
             $recipient = array($user->getEmail());
             $subject ="Password Rest Request";
-            $messageBody = array('content' => "Hello, <br>
+            $messageBody = array('content' => "Hello,
                             Someone requested a password reset. If it was not you, ignore this email.
                             Otherwise, please click the link below to continue.
-                            The link expires in 10 minutes. <br>" .
+                            The link expires in 10 minutes." .
                             baseURL() . "backend/reset/" . base64_encode($hash));
             $fromAddress = "roger@chassisphp.com";
             $fromName = "Site Admin";
@@ -99,7 +99,7 @@ class AuthController extends Controller
                 )) {
                     Session::setMessage('info', 'Please check your email to continue resetting your password');
                 } else {
-                    Session::setMessage('warning', 'Could not send your reset password link, please contact support');
+                    Session::setMessage('warning', 'Could not reset your password, please contact support');
                 }
             } catch (UniqueConstraintViolationException $e) {
                 Session::setMessage('warning', 'Could not reset your password, please contact support');
