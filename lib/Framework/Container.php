@@ -2,18 +2,19 @@
 
 namespace Lib\Framework;
 
-use League\Container\Container as LeagueContainer;
-use League\Container\ReflectionContainer;
-use Lib\Framework\Log\LogManager;
-use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Message\ResponseInterface;
 use Dotenv\Dotenv;
-use Dotenv\Exception\InvalidPathException;
-use Lib\Database\Connection;
 use Monolog\Logger;
+use Lib\Database\Connection;
+use Lib\Framework\Log\LogManager;
 use Monolog\Handler\StreamHandler;
 use Lib\Framework\Http\Controller;
+use \PHPMailer\PHPMailer\PHPMailer;
+use Psr\Http\Message\ResponseInterface;
+use League\Container\ReflectionContainer;
+use Dotenv\Exception\InvalidPathException;
+use Psr\Http\Message\ServerRequestInterface;
 use App\Http\Controllers\Backend\AuthController;
+use League\Container\Container as LeagueContainer;
 
 class Container extends LeagueContainer
 {
@@ -86,7 +87,8 @@ class Container extends LeagueContainer
 
         $this->add('Mailer', function () {
             $mailConfig = $this->get('Config')->get('mail');
-            return new \Lib\Framework\Services\Mailer($this->get('Twig'), $mailConfig);
+            $phpMailer = new PHPMailer(true);
+            return new \Lib\Framework\Services\Mailer($this->get('Twig'), $mailConfig, $phpMailer);
         });
 
         // Add additional default error pages here.
