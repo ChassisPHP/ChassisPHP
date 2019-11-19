@@ -14,12 +14,12 @@ class Mailer
 
     public function __construct($view, $mailConfig, $phpMailer)
     {
-        $this->view = $view;
+        $this->view   = $view;
         $this->config = $mailConfig;
-        $this->mail = $phpMailer;
+        $this->mail   = $phpMailer;
 
         $this->mail->isSMTP();
-        $this->mail->Host = $this->config['host'];
+        $this->mail->Host     = $this->config['host'];
         $this->mail->SMTPAuth = true;
 
         // debug/testing
