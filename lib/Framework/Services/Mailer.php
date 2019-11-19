@@ -12,11 +12,11 @@ class Mailer
     private $view;
     private $config;
 
-    public function __construct($view, $mailConfig)
+    public function __construct($view, $mailConfig, $phpMailer)
     {
         $this->view = $view;
         $this->config = $mailConfig;
-        $this->mail = new PHPMailer(true);
+        $this->mail = $phpMailer;
 
         $this->mail->isSMTP();
         $this->mail->Host = $this->config['host'];
