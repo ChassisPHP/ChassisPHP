@@ -23,7 +23,7 @@
         <div class="form-group">
           <label>&nbsp;</label>
           <button type="submit">Continue</button>
-          <button>Cancel</button>
+          <a href="/backend/login" class="button button-medium redBackground">Cancel</a>
         </div>
 
         {% if message.content == 'Could not reset your password, please contact support' %}
