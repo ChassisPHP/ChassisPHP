@@ -8,7 +8,7 @@ return [
  */
     ['GET', '/', ['HomeController', 'index']],
     ['GET', '/about', ['AboutController', 'index']],
-   
+
     ['GET', '/new', function () {
         return 'This is a test page!';
     }],
@@ -23,4 +23,7 @@ return [
         return 'Dude - there aint no setch page<br>That\'s a 404';
     }],
 
+    ['GET', '/errors/general', function () {
+        return $this->container->get('Twig')->render('/errors/error.html');
+    }],
 ];
