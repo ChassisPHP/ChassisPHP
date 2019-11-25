@@ -92,6 +92,6 @@ class Container extends LeagueContainer
         });
 
         // Add additional default error pages here.
-        $this->add('template.defaults.404', 'errors/404.twig');
+        $this->add('template.defaults.404', 'errors/404.html');
     }
 }

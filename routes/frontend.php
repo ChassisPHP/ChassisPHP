@@ -20,7 +20,7 @@ return [
     ['GET', '/name/{name}', ['NameController', 'show']],
 
     ['GET', '/errors/404', function () {
-        return 'Dude - there aint no setch page<br>That\'s a 404';
+        return $this->container->get('Twig')->render('/errors/404.html');
     }],
 
     ['GET', '/errors/general', function () {
