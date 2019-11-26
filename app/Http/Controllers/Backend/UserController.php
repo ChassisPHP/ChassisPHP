@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Backend;
 
-use Lib\Database\Connection;
-use Lib\Framework\Hash;
-use Lib\Framework\Http\Controller;
-use Lib\Framework\Session;
 use Doctrine\ORM\Query;
+use Lib\Framework\Hash;
+use Lib\Framework\Session;
 use Database\Entities\User;
+use Lib\Database\Connection;
+use Lib\Framework\Http\Controller;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 
 class UserController extends Controller
@@ -37,7 +37,7 @@ class UserController extends Controller
         $userRepository = $this->entityManager->getRepository('Database\Entities\User');
         $users = $userRepository->findAll();
         $loggedInUser = Session::get('name');
-               
+
         return $this->view->render(
             'backend/pages/users.php',
             array(
@@ -111,7 +111,7 @@ class UserController extends Controller
         $user = $this->entityManager->getRepository('Database\Entities\User')->find($id);
         // TODO add functionality to get user details
     }
- 
+
     /**
     * Show the form for editing the specified resource.
     *
@@ -133,7 +133,7 @@ class UserController extends Controller
     {
         //
     }
- 
+
     /**
     * Remove the specified resource from storage.
     *
@@ -148,10 +148,10 @@ class UserController extends Controller
         $name = $user->getName();
         $this->entityManager->remove($user);
         $this->entityManager->flush();
-        
+
         $message['type'] = 'alert-danger';
         $message['content'] = "User $name deleted succesfully";
-    
+
         return $this->index($message);
     }
 }
