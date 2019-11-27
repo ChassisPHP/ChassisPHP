@@ -11,11 +11,13 @@ class Mailer
     private $body;
     private $view;
     private $config;
+    private $logger;
 
-    public function __construct($view, $mailConfig, $phpMailer)
+    public function __construct($view, $mailConfig, $phpMailer, $logger)
     {
         $this->view   = $view;
         $this->config = $mailConfig;
+        $this->logger = $logger;
         $this->mail   = $phpMailer;
 
         $this->mail->isSMTP();
@@ -54,7 +56,6 @@ class Mailer
         $archiveLocation = null
     ) {
 
-        // TODO catch needs to handle the error rather than echo
         // TODO add else to test generate email
         if ($this->config['send'] != 'false') {
             try {
@@ -75,7 +76,9 @@ class Mailer
                 }
                 return true;
             } catch (\Exception $e) {
-                echo $e->getMessage();
+                $message = $e->getMessage();
+                $this->logger->error('Mailer threw an exception ' .  $message);
+                $this->view->render('errors/error.html');
             }
         }
     }

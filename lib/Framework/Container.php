@@ -88,7 +88,8 @@ class Container extends LeagueContainer
         $this->add('Mailer', function () {
             $mailConfig = $this->get('Config')->get('mail');
             $phpMailer = new PHPMailer(true);
-            return new \Lib\Framework\Services\Mailer($this->get('Twig'), $mailConfig, $phpMailer);
+            $logger = $this->get('Logger');
+            return new \Lib\Framework\Services\Mailer($this->get('Twig'), $mailConfig, $phpMailer, $logger);
         });
 
         // Add additional default error pages here.
