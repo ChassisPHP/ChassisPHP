@@ -2,25 +2,24 @@
 
 namespace App\Http\Controllers\Backend;
 
-use Lib\Database\Connection;
 use Lib\Framework\Hash;
-use Lib\Framework\Session;
-use Lib\Framework\Http\Controller;
 use Doctrine\ORM\Query;
+use Lib\Framework\Session;
 use Database\Entities\User;
+use Lib\Database\Connection;
+use Lib\Framework\Http\Controller;
 
 class AuthController extends Controller
 {
-
+    private $hash;
     private $connection;
     private $entityManager;
-    private $hash;
 
     public function __construct()
     {
         // Set up DB connection and entity
-        $this->connection = new Connection;
-        $this->hash = new Hash;
+        $this->connection    = new Connection;
+        $this->hash          = new Hash;
         $this->entityManager = $this->connection->entityManager;
     }
 
@@ -129,7 +128,7 @@ class AuthController extends Controller
             'backend/pages/reset.twig.php',
             array(
                 'message' => $message,
-                'hash' => base64_encode($hash)
+                'hash'    => base64_encode($hash)
             )
         );
     }
@@ -178,8 +177,8 @@ class AuthController extends Controller
     public function store()
     {
         $formVars = $this->request->getParsedBody();
-        $email = $formVars['email'];
-        $passwd = $formVars['passwd'];
+        $email    = $formVars['email'];
+        $passwd   = $formVars['passwd'];
 
         //TODO Validation
 
