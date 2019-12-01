@@ -188,6 +188,7 @@ class AuthController extends Controller
         if ($user && $this->hash->check($passwd, $user->getPasswd())) {
             Session::set('user', $user->getId());
             Session::set('name', $user->getName());
+            Session::set('level', $user->getUserLevel());
             Session::set('authenticated', true);
 
             // if the user has attempted to access a restricted
@@ -213,11 +214,12 @@ class AuthController extends Controller
     * @param  int  $id
     * @return Response
     */
-    public function show($id)
+    public function show($getVar)
     {
-        //
+        $id = $getVar['ID'];
         $user = $this->entityManager->getRepository('Database\Entities\User')->find($id);
         // TODO add functionality to get user details
+        //
     }
 
     /**
