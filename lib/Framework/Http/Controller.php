@@ -12,6 +12,7 @@ class Controller
     protected $middlewareQueue;
     protected $middleware;
     protected $request;
+    protected $logger;
     protected $mailer;
     protected $view;
 
@@ -43,5 +44,11 @@ class Controller
     public function setMailer($mailer)
     {
         $this->mailer = $mailer;
+    }
+
+    // inject the Logger
+    public function setLogger($logger)
+    {
+        $this->logger = $logger;
     }
 }

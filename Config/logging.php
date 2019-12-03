@@ -19,6 +19,8 @@ return [
     // Where to persist logging output
     'output' => [
         'emergency' => 'emergency.log',
-        'debug' => 'debug.log',
+        'debug'     => 'debug.log',
+        'error'     => 'error.log',
+        'info'      => 'info.log',
     ],
 ];
