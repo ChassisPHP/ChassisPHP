@@ -93,6 +93,12 @@ class ControllerServiceProvider extends AbstractServiceProvider
                     [
                         $this->getContainer()->get('Mailer')
                     ]
+                )
+                ->withMethodCall(
+                    'setLogger',
+                    [
+                        $this->getContainer()->get('Logger')
+                    ]
                 );
         }
     }

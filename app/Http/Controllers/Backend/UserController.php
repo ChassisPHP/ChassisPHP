@@ -143,11 +143,13 @@ class UserController extends Controller
     public function destroy($id)
     {
         $userLevel = Session::get('level');
+
+        $userRepo = $this->entityManager->getRepository('Database\Entities\User');
+        $user = $userRepo->find($id['ID']);
+        $name = $user->getName();
+
         if ($userLevel && $userLevel == 1) {
         // remove a user from the DB
-            $userRepo = $this->entityManager->getRepository('Database\Entities\User');
-            $user = $userRepo->find($id['ID']);
-            $name = $user->getName();
             $this->entityManager->remove($user);
             $this->entityManager->flush();
 
@@ -156,6 +158,10 @@ class UserController extends Controller
         } else {
             $message['type'] = 'alert-danger';
             $message['content'] = "You are not authorized to delete user accounts. Please contact a site adminsitrator";
+
+            $loggedInUser = Session::get('name');
+            $logMessage = $loggedInUser . " attempted to delete user " . $name;
+            $this->logger->info($logMessage);
         }
             return $this->index($message);
     }
