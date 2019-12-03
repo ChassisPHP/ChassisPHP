@@ -18,7 +18,7 @@
     "type": "project",
     "require": {
         "php": "^7.1",
-        "symfony/http-foundation": "^3.3",
+        "symfony/http-foundation": "^3.4.35",
         "symfony/http-kernel": "^3.3",
         "symfony/var-dumper": "^3.3",
         "league/container": "~2.0",
