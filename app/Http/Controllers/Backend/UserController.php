@@ -148,7 +148,9 @@ class UserController extends Controller
         $user = $userRepo->find($id['ID']);
         $name = $user->getName();
 
-        if ($userLevel && $userLevel == 1) {
+        // Check that logged in user has permission
+        // Disallow self delete
+        if ($userLevel && $userLevel == 1 && $id['ID'] != Session::get('user')) {
         // remove a user from the DB
             $this->entityManager->remove($user);
             $this->entityManager->flush();
@@ -156,9 +158,14 @@ class UserController extends Controller
             $message['type'] = 'alert-danger';
             $message['content'] = "User $name deleted succesfully";
         } else {
-            $message['type'] = 'alert-danger';
-            $message['content'] = "You are not authorized to delete user accounts. Please contact a site adminsitrator";
-
+            if ($id['ID'] == Session::get('user')) {
+                $message['type'] = 'alert-danger';
+                $message['content'] = "You cannot delete yourself. Have an administrator delete your account";
+            } else {
+                $message['type'] = 'alert-danger';
+                $message['content'] =
+                    "You are not authorized to delete user accounts. Please contact a site adminsitrator";
+            }
             $loggedInUser = Session::get('name');
             $logMessage = $loggedInUser . " attempted to delete user " . $name;
             $this->logger->info($logMessage);
