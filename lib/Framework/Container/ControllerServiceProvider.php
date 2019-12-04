@@ -60,41 +60,41 @@ class ControllerServiceProvider extends AbstractServiceProvider
     {
         foreach ($this->provides as $controller) {
             $this->getContainer()->add($controller)
-                ->withMethodCall(
+                ->addMethodCall(
                     'setMiddlewareQueue',
                     [
                        $this->getContainer()->get('MiddlewareQueue')
                     ]
                 )
-                ->withMethodCall(
+                ->addMethodCall(
                     'setRequest',
                     [
                        $this->getContainer()->get('PsrRequestInterface')
                     ]
                 )
-                ->withMethodCall(
+                ->addMethodCall(
                     'setView',
                     [
                        $this->getContainer()->get('Twig')
                     ]
                 )
-                ->withMethodCall(
+                ->addMethodCall(
                     'addMiddleware',
                     []
                 )
-                ->withMethodCall(
+                ->addMethodCall(
                     'setBaseURL',
                     [
                         baseURL()
                     ]
                 )
-                ->withMethodCall(
+                ->addMethodCall(
                     'setMailer',
                     [
                         $this->getContainer()->get('Mailer')
                     ]
                 )
-                ->withMethodCall(
+                ->addMethodCall(
                     'setLogger',
                     [
                         $this->getContainer()->get('Logger')
