@@ -1,14 +1,13 @@
 <?php
 
-/*
- *  ServiceProvider to implement PSR-7 request object
- */
-
-namespace App\ServiceProviders;
+namespace Lib\Framework\ServiceProviders;
 
 use League\Container\ServiceProvider\AbstractServiceProvider;
 use Zend\Diactoros\ServerRequestFactory;
 
+/*
+ *  ServiceProvider to implement PSR-7 request object
+ */
 class RequestServiceProvider extends AbstractServiceProvider
 {
     protected $provides = ['PsrRequestInterface'];

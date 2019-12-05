@@ -27,8 +27,8 @@ class Container extends LeagueContainer
             new ReflectionContainer
         );
 
-        $this->addServiceProvider('App\ServiceProviders\ResponseServiceProvider');
-        $this->addServiceProvider('App\ServiceProviders\RequestServiceProvider');
+        $this->addServiceProvider('Lib\Framework\ServiceProviders\ResponseServiceProvider');
+        $this->addServiceProvider('Lib\Framework\ServiceProviders\RequestServiceProvider');
 
         // Add developer controllers
         $this->addServiceProvider('Lib\Framework\Container\ControllerServiceProvider');

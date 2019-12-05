@@ -1,14 +1,13 @@
 <?php
 
-/*
- *  ServiceProvider to implement PSR-7 response object
- */
-
-namespace App\ServiceProviders;
+namespace Lib\Framework\ServiceProviders;
 
 use League\Container\ServiceProvider\AbstractServiceProvider;
 use Zend\Diactoros\Response;
 
+/*
+ *  ServiceProvider to implement PSR-7 response object
+ */
 class ResponseServiceProvider extends AbstractServiceProvider
 {
     protected $provides = ['PsrResponseInterface'];
