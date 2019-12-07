@@ -31,7 +31,10 @@ class Container extends LeagueContainer
         $this->addServiceProvider('Lib\Framework\ServiceProviders\RequestServiceProvider');
 
         // Add developer controllers
-        $this->addServiceProvider('Lib\Framework\Container\ControllerServiceProvider');
+        //$this->addServiceProvider('Lib\Framework\Container\ControllerServiceProvider');
+
+        // Add Developer Service Providers
+        $this->addDevServiceProviders();
 
         $this->share(
             'MiddlewareQueue',
@@ -94,5 +97,16 @@ class Container extends LeagueContainer
 
         // Add additional default error pages here.
         $this->add('template.defaults.404', 'errors/404.html');
+    }
+
+    private function addDevServiceProviders()
+    {
+        $baseDir = dirname(__FILE__, 3);
+        $providerDir = $baseDir . '/app/ServiceProviders/*';
+        $providerNamespace = 'App\ServiceProviders\\';
+        foreach (glob($providerDir) as $provider) {
+            $namespace = $providerNamespace . basename($provider, '.php');
+            $this->addServiceProvider($namespace);
+        }
     }
 }
