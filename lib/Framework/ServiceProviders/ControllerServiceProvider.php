@@ -1,6 +1,6 @@
 <?php
 
-namespace Lib\Framework\Container;
+namespace Lib\Framework\ServiceProviders;
 
 use League\Container\ServiceProvider\AbstractServiceProvider;
 
