@@ -31,7 +31,7 @@ class Container extends LeagueContainer
         $this->addServiceProvider('Lib\Framework\ServiceProviders\RequestServiceProvider');
 
         // Add developer controllers
-        $this->addServiceProvider('Lib\Framework\Container\ControllerServiceProvider');
+        $this->addServiceProvider('Lib\Framework\ServiceProviders\ControllerServiceProvider');
 
         // Add Developer Service Providers
         $this->addDevServiceProviders();
