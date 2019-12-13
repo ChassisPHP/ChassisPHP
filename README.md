@@ -58,15 +58,16 @@ ChassisPHP is not bound to any particular component. **Whenever possible** compo
 If you are new to the ChassisPHP project, check out our newbie guide - [Contribution guidelines for this project](CONTRIBUTING_NEWBIE.md)
 
 We REALLY do want your help. ChassisPHP has grown into a project with real potential! We try to be a helpful, welcoming, and nurturing community. Please look at the code, try it out, and let us know what you want changed. Make a pull request for the change, if you want.
-1. Comment on the issue on which you wish to work (If the issue doesn't exist, create it)
-2. Fork it!
-3. Clone the repo: `git clone [insert link]`
-4. Create your feature branch: `git checkout -b my-new-feature`
-5. Commit your changes: `git commit -am 'Add some feature'`
-6. Push to the branch: `git push origin my-new-feature`
-7. Submit a pull request :D
-8. Make any requested changes
-9. Profit
+1.  Comment on the issue on which you wish to work (If the issue doesn't exist, create it)
+2.  Fork it!
+3.  Clone the repo: `git clone https://github.com/RogerCreasy/ChassisPHP.git`
+4.  Switch to the current active development branch - currently 0.1.x
+5.  Create your feature branch: `git checkout -b my-new-feature`
+6.  Commit your changes: `git commit -am 'Add some feature'`
+7.  Push to the branch: `git push origin my-new-feature`
+8.  Submit a pull request :D
+9.  Make any requested changes
+10. Profit
 
 ## Author
 
