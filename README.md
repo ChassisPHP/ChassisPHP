@@ -55,7 +55,7 @@ ChassisPHP is not bound to any particular component. **Whenever possible** compo
 
 ## Contributing
 
-If you are new to the ChassisPHP project, check out our newbie guide - [Contribution guidelines for this project](CONTRIBUTING_NEWBIE.md)
+If you are new to the ChassisPHP project, check out our newbie guide - [Contribution guidelines for this project](CONTRIBUTING_NEWBIE.md). Also be sure to read through our [Code of Conduct](CODE_OF_CONDUCT.md)
 
 We REALLY do want your help. ChassisPHP has grown into a project with real potential! We try to be a helpful, welcoming, and nurturing community. Please look at the code, try it out, and let us know what you want changed. Make a pull request for the change, if you want.
 1.  Comment on the issue on which you wish to work (If the issue doesn't exist, create it)
