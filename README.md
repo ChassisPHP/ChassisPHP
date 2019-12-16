@@ -2,6 +2,7 @@
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 Pronounced Cha-see <br>
 Yes, another PHP framework. The goal with ChassisPHP is to be a framework that simplifies the process of creating a brochure-type website.
+Be sure to visit our new site [ChassisPHP.com](https://chassisphp.com/) It is very new and needs additional info. We would love your help wita the docs! See the repo at [ChassisPHP-site repo](https://github.com/ChassisPHP/ChassisPHP-Website).
 **We are just getting started. This package is in beta. Use in production with caution**
 ## Getting Started
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
