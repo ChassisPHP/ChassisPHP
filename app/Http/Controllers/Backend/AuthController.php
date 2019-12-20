@@ -201,7 +201,9 @@ class AuthController extends Controller
 
             redirectPath("backend/users");
         } else {
-            //$message['type'] = 'alert-danger';
+            $now = date('Y-m-d H:i:s');
+            $userip = $_SERVER['REMOTE_ADDR'];
+            $this->logger->info(' ip: ' . $userip . ' Failed login attempt for user: ' . $email);
             Session::setMessage('warning', 'Wrong Email or Password, please try again');
 
             return $this->index();
