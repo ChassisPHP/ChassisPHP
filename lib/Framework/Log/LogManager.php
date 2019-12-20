@@ -51,7 +51,8 @@ class LogManager implements LoggerInterface
     {
         $logger = new Logger('CHASSISPHP');
         foreach ($this->config->get('logging.output') as $level => $name) {
-            $prefix = date($this->config->get('logging.prefix.format')) . $this->config->get('logging.prefix.separator');
+            $prefix = date($this->config->get('logging.prefix.format'))
+                . $this->config->get('logging.prefix.separator');
             $logPath = $this->config->get('logging.folder') . DIRECTORY_SEPARATOR . $prefix . $name;
             $logLevel = (new \ReflectionClass(Logger::class))->getConstant(strtoupper($level));
             $logger->pushHandler(new StreamHandler(storagePath($logPath), $logLevel));
