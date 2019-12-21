@@ -42,8 +42,8 @@ if (isset($_SESSION['timeout'])) {
 $_SESSION['timeout'] = time();
 
 // Handle Fatal Errors
-require __DIR__ . '/../lib/Framework/Handlers/FatalErrorHandler.php';
-$fatalErrorHandler = new \Lib\Framework\Handlers\FatalErrorHandler;
+require __DIR__ . '/../app/Handlers/FatalErrorHandler.php';
+$fatalErrorHandler = new \App\Handlers\FatalErrorHandler;
 register_shutdown_function(array($fatalErrorHandler, 'fatalErrorHandler'));
 
 // set up the application
