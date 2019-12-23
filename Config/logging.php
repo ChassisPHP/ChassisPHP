@@ -12,7 +12,7 @@ return [
 
     // Datetime format to generate new log files for arbitrary time periods
     'prefix' => [
-        'format' => 'Y-m-d',
+        'format' => 'Y-m-d H:i:s',
         'separator' => '_',
     ],
 
