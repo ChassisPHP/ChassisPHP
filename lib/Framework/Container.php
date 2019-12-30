@@ -3,7 +3,7 @@
 namespace Lib\Framework;
 
 use Dotenv\Dotenv;
-use Monolog\Logger;
+use Monolog\Logger as Monolog;
 use Lib\Database\Connection;
 use Lib\Framework\Log\LogManager;
 use Monolog\Handler\StreamHandler;
@@ -72,7 +72,8 @@ class Container extends LeagueContainer
         });
 
         $this->add('Logger', function () {
-            return new LogManager($this);
+            $monolog = new Monolog('CHASSISPHP');
+            return new LogManager($this->get('Config'), $monolog);
         });
 
         $this->add('Twig', function () {

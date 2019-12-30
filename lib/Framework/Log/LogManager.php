@@ -21,6 +21,8 @@ use Psr\Log\LoggerInterface;
  */
 class LogManager implements LoggerInterface
 {
+    protected $monolog;
+
     /** @var ConfigManager */
     protected $config;
 
@@ -30,12 +32,14 @@ class LogManager implements LoggerInterface
     /**
      * LogManager constructor.
      *
-     * @param \Lib\Framework\Container $container
+     * @param $config
+     * @param $monolog
      * @throws \ReflectionException
      */
-    public function __construct(Container $container)
+    public function __construct($config, $monolog)
     {
-        $this->config = $container->get('Config');
+        $this->config = $config;
+        $this->monolog = $monolog;
         $this->logger = $this->bootstrap();
     }
 
@@ -49,7 +53,7 @@ class LogManager implements LoggerInterface
      */
     public function bootstrap()
     {
-        $logger = new Logger('CHASSISPHP');
+        $logger = $this->monolog;
         foreach ($this->config->get('logging.output') as $level => $name) {
             $prefix = date($this->config->get('logging.prefix.format'))
                 . $this->config->get('logging.prefix.separator');
