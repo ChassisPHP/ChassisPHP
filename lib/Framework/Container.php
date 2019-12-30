@@ -3,8 +3,8 @@
 namespace Lib\Framework;
 
 use Dotenv\Dotenv;
-use Monolog\Logger as Monolog;
 use Lib\Database\Connection;
+use Monolog\Logger as Monolog;
 use Lib\Framework\Log\LogManager;
 use Monolog\Handler\StreamHandler;
 use Lib\Framework\Http\Controller;

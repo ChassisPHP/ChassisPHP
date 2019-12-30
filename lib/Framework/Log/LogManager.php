@@ -8,11 +8,11 @@
 
 namespace Lib\Framework\Log;
 
-use Lib\Framework\ConfigManager;
-use Lib\Framework\Container;
-use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
+use Lib\Framework\Container;
 use Psr\Log\LoggerInterface;
+use Lib\Framework\ConfigManager;
+use Monolog\Handler\StreamHandler;
 
 /**
  * Registers log handlers
