@@ -2,13 +2,13 @@
 
 /**
  * This configuration allows to configure multiple files for different log level output.
- * Logging output is per default placed in the storage folder.
+ * Logging output is per default placed in the storage directory.
  *
  * Only a debug path needs to be specified.
  */
 return [
 
-    'folder' => 'logs',
+    'directory' => 'logs',
 
     // Datetime format to generate new log files for arbitrary time periods
     'prefix' => [
