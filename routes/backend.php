@@ -34,6 +34,15 @@ return [
     ['GET', '/images/{ID}', ['Backend\ImageController', 'select']],
     ['GET', '/images/delete/{ID}', ['Backend\ImageController', 'destroy']],
 
+    // Albums
+    ['GET', '/albums', ['Backend\AlbumController', 'index']],
+    ['GET', '/albums/create', ['Backend\AlbumController', 'create']],
+    ['POST', '/albums/create', ['Backend\AlbumController', 'store']],
+    ['GET', '/albums/update/{ID}', ['Backend\AlbumController', 'edit']],
+    ['POST', '/albums/update/{ID}', ['Backend\AlbumController', 'update']],
+    ['GET', '/albums/{ID}', ['Backend\AlbumController', 'select']],
+    ['GET', '/albums/delete/{ID}', ['Backend\AlbumController', 'destroy']],
+
     // Auth
     ['GET', '/forgot', ['Backend\AuthController', 'forgotIndex']],
     ['POST', '/forgot', ['Backend\AuthController', 'forgotStore']],
