@@ -6,7 +6,7 @@
  * Time: 8:15 AM
  */
 
-namespace Lib\Framework\Log;
+namespace Lib\Framework\Services;
 
 use Monolog\Logger;
 use Lib\Framework\Container;
