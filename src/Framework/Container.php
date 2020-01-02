@@ -3,12 +3,12 @@
 namespace Lib\Framework;
 
 use Dotenv\Dotenv;
-use Monolog\Logger;
 use Lib\Database\Connection;
-use Lib\Framework\Log\LogManager;
+use Monolog\Logger as Monolog;
 use Monolog\Handler\StreamHandler;
 use Lib\Framework\Http\Controller;
 use \PHPMailer\PHPMailer\PHPMailer;
+use Lib\Framework\Services\LogManager;
 use Psr\Http\Message\ResponseInterface;
 use League\Container\ReflectionContainer;
 use Dotenv\Exception\InvalidPathException;
@@ -72,7 +72,8 @@ class Container extends LeagueContainer
         });
 
         $this->add('Logger', function () {
-            return new LogManager($this);
+            $monolog = new Monolog('CHASSISPHP');
+            return new LogManager($this->get('Config'), $monolog);
         });
 
         $this->add('Twig', function () {
