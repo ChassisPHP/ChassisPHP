@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Backend;
 use Doctrine\ORM\Query;
 use Lib\Framework\Session;
 use Database\Entities\User;
-use Database\Entities\Image;
+use Database\Entities\Album;
 use Lib\Database\Connection;
 use Lib\Framework\Http\Controller;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
@@ -35,7 +35,7 @@ class AlbumController extends Controller
 
     public function index($message = null)
     {
-        // Display all images from the DB
+        // Display all albums from the DB
         $albumRepository = $this->entityManager->getRepository('Database\Entities\Album');
         $albums = $albumRepository->findAll();
         return $this->view->render('backend/pages/albums.twig.php', array(
@@ -77,13 +77,14 @@ class AlbumController extends Controller
     {
         $formVars = $this->request->getParsedBody();
 
-        $image = new Image;
+        $album = new Album;
 
         $timestamp = new \DateTime();
-        $image->setPublicationDate($timestamp);
+        $album->setCreatedDate($timestamp);
 
         $createdBy = $this->entityManager->find('Database\Entities\User', $formVars['createdById']);
-        $image->setCreatedBy($createdBy);
+        $album->setCreatedBy($createdBy);
+        $album->setUpdatedBy($createdBy);
 
         $message = $this->hydrateAndPersist($album, $formVars);
         return $this->index($message);
@@ -117,14 +118,14 @@ class AlbumController extends Controller
     public function edit($id)
     {
         //
-        $image = $this->entityManager->find('Database\Entities\Album', $id['ID']);
+        $album = $this->entityManager->find('Database\Entities\Album', $id['ID']);
         $albumId = $id['ID'];
         $albumName = $album->getName();
         $formAction = "/backend/albums/update/$albumId";
         $formMethod = "post";
-        $albumCreatedBy = $this->entityManager->getRepository('Database\Entities\User')->find($image->getCreatedBy());
-        $createdBy['name'] = $imageCreatedBy->getName();
-        $createdBy['id'] = $imageCreatedBy->getId();
+        $albumCreatedBy = $this->entityManager->getRepository('Database\Entities\User')->find($album->getCreatedBy());
+        $createdBy['name'] = $albumCreatedBy->getName();
+        $createdBy['id'] = $albumCreatedBy->getId();
         return $this->view->render('backend/pages/albumForm.twig.php', array(
             'album'   => $album,
             'action' => $formAction,
@@ -188,8 +189,8 @@ class AlbumController extends Controller
 
         $timestamp = new \DateTime();
         $album->setUpdated($timestamp);
-        $album->setName($name);
-        $album->setCaption($description);
+        $album->setName($albumName);
+        $album->setDescription($description);
 
         try {
             $this->entityManager->persist($album);

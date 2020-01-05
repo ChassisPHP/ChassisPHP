@@ -40,6 +40,30 @@ class Album
     protected $images;
 
     /**
+    * Many Albums have One User.
+    * @ORM\ManyToOne(targetEntity="User", inversedBy="albums")
+    * @ORM\JoinColumn(name="createdBy", referencedColumnName="id")
+    */
+    private $createdBy;
+
+    /**
+    * Many Albums have One updatedby User.
+    * @ORM\ManyToOne(targetEntity="User", inversedBy="albums")
+    * @ORM\JoinColumn(name="updatedBy", referencedColumnName="id")
+    */
+    private $updatedBy;
+
+    /**
+    * @ORM\Column(type="datetime")
+    */
+    protected $createdDate;
+
+    /**
+    * @ORM\Column(type="datetime")
+    */
+    protected $updated;
+
+    /**
     * images that belong to an Album
     * in a colection
      */
@@ -53,25 +77,66 @@ class Album
     {
         return $this->id;
     }
-    
+
     public function getName()
     {
         return $this->name;
     }
-    
+
     public function getDescription()
     {
         return $this->description;
     }
 
+    public function getCreatedDate()
+    {
+        return $this->createdDate;
+    }
+
+    public function getUpdated()
+    {
+        return $this->updated;
+    }
+
+    public function getCreatedBy()
+    {
+        return $this->createdBy;
+    }
+
+    public function getUpdatedBy()
+    {
+        return $this->updatedBy;
+    }
+
     //setters
     public function setName($name)
     {
-        $this->userName = $name;
+        $this->name = $name;
     }
 
     public function setDescription($description)
     {
-        $this->userDescription = $description;
+        $this->description = $description;
+    }
+
+    public function setCreatedBy(User $createdBy)
+    {
+        $this->createdBy = $createdBy;
+    }
+
+    public function setUpdatedBy(User $updatedBy)
+    {
+        $this->updatedBy = $updatedBy;
+    }
+
+
+    public function setCreatedDate($publicationDate)
+    {
+        $this->createdDate = $createdDate;
+    }
+
+    public function setUpdated($updated)
+    {
+        $this->updatedDate = $updated;
     }
 }
