@@ -16,7 +16,7 @@
     <div class="col60">
         <div class="item itemCenter">
             <h1 class="">{{ album.Name }}</h1>
-            <p>{{ album.Caption }}</p>
+            <p>{{ album.Description }}</p>
             <div class="Rtable-cell">{{ album.PublicationDate|date('Y-m-d H:i:s') }}</div>
             <a href="/backend/albums/update/{{ album.ID }}" class="button button-medium blueBackground">Edit</a>
             <a href="/backend/albums/delete/{{ album.ID }}" class="button button-medium redBackground" onclick="return confirm('Are you sure?')">DELETE</a>
