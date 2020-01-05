@@ -17,12 +17,11 @@
           <input name="name" placeholder="{{ (album.Name is defined) ? '' : 'Album Name' }}" value="{{ album.Name }}" class="input-control" />
         </div>
 
-<!--
         <div class="form-group">
-          <label>Caption</label>
-          <textarea name='caption' rows="12" name="body" placeholder="{{ (album.Caption is defined) ? '' : 'Caption' }}" class="input-control">{{ album.Caption }}</textarea>
+          <label>Description</label>
+          <textarea name='caption' rows="12" name="body" placeholder="{{ (album.Description is defined) ? '' : 'Description' }}" class="input-control">{{ album.Description }}</textarea>
         </div>
--->
+
         <div class="form-group">
           <label>Album Added By</label>
           <input name="createdBy" value="{{ createdBy.name }}" class="input-control" readonly />
