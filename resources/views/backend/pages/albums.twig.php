@@ -26,7 +26,7 @@
         <div class="cell col20">{{ album.name }}</div>
         <div class="cell col10">{{ album.CreatedBy.Name }}</div>
         <div class="cell col10">{{ album.UpdatedBy.Name }}</div>
-        <div class="cell col10">{{ album.PublicationDate|date('Y-m-d') }}</div>
+        <div class="cell col10">{{ album.CreatedDate|date('Y-m-d') }}</div>
         <div class="cell col10">{{ album.Updated|date('Y-m-d') }}</div>
         <div class="cell col5"><a href="/backend/albums/{{ album.ID }}">Details</a></div>
         <div class="cell col5"><a href="/backend/albums/delete/{{ album.ID }}" onclick="return confirm('Are you sure?')">Delete</a></div>
