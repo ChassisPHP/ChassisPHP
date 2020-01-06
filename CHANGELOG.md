@@ -1,5 +1,22 @@
 Changelog
 
+## 0.1.3 - 2020-01-05
+
+#### Added
+
+- [436](https://github.com/ChassisPHP/ChassisPHP/pull/436) Add modified and created times to album entity
+- [432](https://github.com/ChassisPHP/ChassisPHP/pull/432) Add Twig Templates for albums
+- [424](https://github.com/ChassisPHP/ChassisPHP/pull/424) Add routes for album management
+- [423](https://github.com/ChassisPHP/ChassisPHP/pull/423) Change terminology - folder to directory
+- [422](https://github.com/ChassisPHP/ChassisPHP/pull/422) Remove `new` of Monolog
+- [419](https://github.com/ChassisPHP/ChassisPHP/pull/419) Add Album controller
+- [416](https://github.com/ChassisPHP/ChassisPHP/pull/416) Add Images link to backend nav
+- [413](https://github.com/ChassisPHP/ChassisPHP/pull/413) Update DB to include Albums table
+- [409](https://github.com/ChassisPHP/ChassisPHP/pull/409) Add time to log entrie
+
+#### Moved
+- [425](https://github.com/ChassisPHP/ChassisPHP/pull/425) move LogManager class
+
 ## 0.1.2 - 2019-12-22
 
 #### Added
