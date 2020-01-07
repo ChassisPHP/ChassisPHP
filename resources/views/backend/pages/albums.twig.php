@@ -14,22 +14,23 @@
 
     <a href="/backend/albums/create" class="button blueBackground">Add Album</a>
     <div class="item Rtable col90">
-        <div class="cell col20">Name</div>
-        <div class="cell col10">Created By</div>
-        <div class="cell col10">Updated By</div>
-        <div class="cell col10">Pub Date</div>
-        <div class="cell col10">Last Updated</div>
+        <div class="cell col20 bg-grey">Name</div>
+        <div class="cell col10 bg-grey">Created By</div>
+        <div class="cell col10 bg-grey">Updated By</div>
+        <div class="cell col10 bg-grey">Pub Date</div>
+        <div class="cell col10 bg-grey">Last Updated</div>
         <div class="cell col5"></div>
         <div class="cell col5"></div>
-
+    </div>
+    <div class="item Rtable col90">
         {% for album in albums%}
-        <div class="cell col20">{{ album.name }}</div>
-        <div class="cell col10">{{ album.CreatedBy.Name }}</div>
-        <div class="cell col10">{{ album.UpdatedBy.Name }}</div>
-        <div class="cell col10">{{ album.CreatedDate|date('Y-m-d') }}</div>
-        <div class="cell col10">{{ album.Updated|date('Y-m-d') }}</div>
-        <div class="cell col5"><a href="/backend/albums/{{ album.ID }}">Details</a></div>
-        <div class="cell col5"><a href="/backend/albums/delete/{{ album.ID }}" onclick="return confirm('Are you sure?')">Delete</a></div>
+        <div class="Rtable-cell col20">{{ album.name }}</div>
+        <div class="Rtable-cell col10">{{ album.CreatedBy.Name }}</div>
+        <div class="Rtable-cell col10">{{ album.UpdatedBy.Name }}</div>
+        <div class="Rtable-cell col10">{{ album.CreatedDate|date('Y-m-d') }}</div>
+        <div class="Rtable-cell col10">{{ album.Updated|date('Y-m-d') }}</div>
+        <div class="Rtable-cell col5"><a href="/backend/albums/{{ album.ID }}">Details</a></div>
+        <div class="Rtable-cell col5"><a href="/backend/albums/delete/{{ album.ID }}" onclick="return confirm('Are you sure?')">Delete</a></div>
         {% endfor %}
     </div>
 

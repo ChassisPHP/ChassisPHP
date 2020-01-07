@@ -126,7 +126,6 @@ button {
     overflow: hidden; // Or flex might break
     list-style: none;
     border: solid white;
-    background: #f0f0f0;
     > h1, > h2, > h3, > h4, > h5, > h6 { margin: 0; }
 }
 
@@ -192,32 +191,36 @@ button {
 .Rtable {
    display: flex;
    flex-wrap: wrap;
-   margin: 0 0 3em 0;
    padding: 0;
 }
 
 .Rtable-cell {
     box-sizing: border-box;
     flex-grow: 1;
-    width: 100%;  // Default to full width
-    padding: 0.8em 1.2em;
+    padding: 0.6em;
     overflow: hidden; // Or flex might break
     list-style: none;
     border: solid white;
-    background: #f0f0f0;
     > h1, > h2, > h3, > h4, > h5, > h6 { margin: 0; }
 }
 
-.Rtable--2cols > .Rtable-cell  { width: 50%; }
-.Rtable--3cols > .Rtable-cell  { width: 33.33%; }
-.Rtable--4cols > .Rtable-cell  { width: 25%; }
-.Rtable--5cols > .Rtable-cell  { width: 20%; }
-.Rtable--6cols > .Rtable-cell  { width: 16.6%; }
-.Rtable--7cols > .Rtable-cell  { width: 14.27%; }
+.Rtable-2cols > .Rtable-cell  { width: 50%; }
+.Rtable-3cols > .Rtable-cell  { width: 33.33%; }
+.Rtable-4cols > .Rtable-cell  { width: 25%; }
+.Rtable-5cols {
+    @extend .Rtable-cell;
+    width: 20%;
+}
+.Rtable-6cols > .Rtable-cell  { width: 16.6%; }
+.Rtable-7cols > .Rtable-cell  { width: 14.27%; }
 
 /* Colors */
 .blueBackground {
     background: #71adf7;
+}
+
+.bg-grey {
+    background: #f0f0f0;
 }
 
 .redBackground {
