@@ -190,7 +190,7 @@ class AlbumController extends Controller
         $timestamp = new \DateTime();
         $album->setUpdated($timestamp);
         $album->setName($albumName);
-        $album->setDescription($description);
+        $album->setDescription($albumDescription);
 
         try {
             $this->entityManager->persist($album);

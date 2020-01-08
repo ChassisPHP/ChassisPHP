@@ -19,7 +19,7 @@
 
         <div class="form-group">
           <label>Description</label>
-          <textarea name='caption' rows="12" name="body" placeholder="{{ (album.Description is defined) ? '' : 'Description' }}" class="input-control">{{ album.Description }}</textarea>
+          <textarea name='description' rows="12" name="body" placeholder="{{ (album.Description is defined) ? '' : 'Description' }}" class="input-control">{{ album.Description }}</textarea>
         </div>
 
         <div class="form-group">

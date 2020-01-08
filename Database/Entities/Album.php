@@ -130,13 +130,13 @@ class Album
     }
 
 
-    public function setCreatedDate($publicationDate)
+    public function setCreatedDate($createdDate)
     {
         $this->createdDate = $createdDate;
     }
 
     public function setUpdated($updated)
     {
-        $this->updatedDate = $updated;
+        $this->updated = $updated;
     }
 }

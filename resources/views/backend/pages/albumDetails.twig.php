@@ -17,7 +17,8 @@
         <div class="item itemCenter">
             <h1 class="">{{ album.Name }}</h1>
             <p>{{ album.Description }}</p>
-            <div class="Rtable-cell">{{ album.createdDate|date('Y-m-d H:i:s') }}</div>
+            <div class="Rtable-cell">Created: {{ album.createdDate|date('Y-m-d H:i:s') }}</div>
+            <div class="Rtable-cell">Updated: {{ album.updated|date('Y-m-d H:i:s') }}</div>
             <a href="/backend/albums/update/{{ album.ID }}" class="button button-medium blueBackground">Edit</a>
             <a href="/backend/albums/delete/{{ album.ID }}" class="button button-medium redBackground" onclick="return confirm('Are you sure?')">DELETE</a>
             </div>
