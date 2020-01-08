@@ -22,8 +22,9 @@
         <div class="cell col5"></div>
         <div class="cell col5"></div>
     </div>
+
+    {% for album in albums%}
     <div class="item Rtable col90">
-        {% for album in albums%}
         <div class="Rtable-cell col20">{{ album.name }}</div>
         <div class="Rtable-cell col10">{{ album.CreatedBy.Name }}</div>
         <div class="Rtable-cell col10">{{ album.UpdatedBy.Name }}</div>
@@ -31,8 +32,8 @@
         <div class="Rtable-cell col10">{{ album.Updated|date('Y-m-d') }}</div>
         <div class="Rtable-cell col5"><a href="/backend/albums/{{ album.ID }}">Details</a></div>
         <div class="Rtable-cell col5"><a href="/backend/albums/delete/{{ album.ID }}" onclick="return confirm('Are you sure?')">Delete</a></div>
-        {% endfor %}
     </div>
+    {% endfor %}
 
 </article>
 {% endblock %}
