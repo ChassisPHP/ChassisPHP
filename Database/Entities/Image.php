@@ -45,7 +45,7 @@ class Image
 
     /**
     * Many Images have one Album.
-    * @ORM\ManyToOne(targetEntity="Album", inversedBy="Image")
+    * @ORM\ManyToOne(targetEntity="Album", inversedBy="images")
     * @ORM\JoinColumn(name="album", referencedColumnName="id")
     */
     protected $album;
