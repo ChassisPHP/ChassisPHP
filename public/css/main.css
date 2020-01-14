@@ -111,6 +111,18 @@ button {
     width: 20%;
 }
 
+.col30 {
+    width: 30%;
+}
+
+.col40 {
+    width: 40%;
+}
+
+.col50 {
+    width: 50%;
+}
+
 .col60 {
     width: 60%;
 }

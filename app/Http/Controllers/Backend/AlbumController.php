@@ -98,13 +98,14 @@ class AlbumController extends Controller
     */
     public function select($id, $message = null)
     {
-        //
         $album = $this->entityManager->find('Database\Entities\Album', $id['ID']);
+        $images = $album->getImages();
         $baseURL = baseURL();
         return $this->view->render('backend/pages/albumDetails.twig.php', array(
-            'album' => $album,
-            'baseURL' => $baseURL,
-            'message' => $message,
+            'album'        => $album,
+            'images'       => $images,
+            'baseURL'      => $baseURL,
+            'message'      => $message,
             'loggedInUser' => $this->loggedInUser
         ));
     }

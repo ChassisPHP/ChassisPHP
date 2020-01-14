@@ -44,7 +44,7 @@ class ImageController extends Controller
             'loggedInUser' => $this->loggedInUser
         ));
     }
-    
+
     /**
     * Show the form for creating a new resource.
     *
@@ -81,15 +81,16 @@ class ImageController extends Controller
 
         $timestamp = new \DateTime();
         $image->setPublicationDate($timestamp);
-        
+
         $createdBy = $this->entityManager->find('Database\Entities\User', $formVars['createdById']);
         $image->setCreatedBy($createdBy);
-        
+        $image->setUpdatedBy($createdBy);
+
         $album = $this->entityManager->find('Database\Entities\Album', $formVars['albumId']);
         $image->setAlbum($album);
 
         $image->setFilename($_FILES["imageFile"]["name"]);
-        
+
         $formVars['filename'] = $_FILES["imageFile"]["name"];
         $message = $this->hydrateAndPersist($image, $formVars);
         $this->saveAs('storage/public/img', $formVars['filename']);
@@ -150,19 +151,19 @@ class ImageController extends Controller
     public function update($id)
     {
         $image = $this->entityManager->find('Database\Entities\Image', $id['ID']);
-    
+
         $formVars = $this->request->getParsedBody();
 
         $createdBy = $this->entityManager->find('Database\Entities\User', $formVars['createdBy']);
         $formVars['createdBy'] = $createdBy;
         $updatedBy = $this->entityManager->getRepository('Database\Entities\User')->find($this->loggedInUserId);
         $image->setUpdatedBy($updatedBy);
-        
+
         $this->hydrateAndPersist($image, $formVars);
 
         return $this->select($id);
     }
- 
+
     /**
     * Remove the specified resource from storage.
     *

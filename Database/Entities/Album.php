@@ -34,8 +34,8 @@ class Album
     protected $description;
 
     /**
-    *  One album has many images
-    *  @ORM\OneToMany(targetEntity="Image", mappedBy="Album")
+     *  One album has many images
+     *  @ORM\OneToMany(targetEntity="Image", mappedBy="album")
     **/
     protected $images;
 
@@ -86,6 +86,11 @@ class Album
     public function getDescription()
     {
         return $this->description;
+    }
+
+    public function getImages()
+    {
+        return $this->images;
     }
 
     public function getCreatedDate()

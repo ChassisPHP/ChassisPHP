@@ -45,10 +45,13 @@ class Connection
 
         $connectionConfig = Setup::createConfiguration($this->isDevMode);
         $connectionDriver = new AnnotationDriver(new AnnotationReader(), dirname(__FILE__, 3)."/Database/Entities");
-        
+
         // registering noop annotation autoloader - allow all annotations by default
         AnnotationRegistry::registerLoader('class_exists');
         $connectionConfig->setMetadataDriverImpl($connectionDriver);
+
+        // debugging
+        //$connectionConfig->setSQLLogger(new \Doctrine\DBAL\Logging\EchoSQLLogger());
 
         // obtaining the entity manager
         $this->entityManager = EntityManager::create($conn, $connectionConfig);
