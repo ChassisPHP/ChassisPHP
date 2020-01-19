@@ -1,5 +1,14 @@
 Changelog
 
+## 0.1.4 - 2020-01-19
+
+#### Added
+
+- [450](https://github.com/ChassisPHP/ChassisPHP/pull/450) Handle unique file or position violation on create image
+- [444](https://github.com/ChassisPHP/ChassisPHP/pull/444) Display images on album detail
+- [442](https://github.com/ChassisPHP/ChassisPHP/pull/442) Fix Album description
+- [440](https://github.com/ChassisPHP/ChassisPHP/pull/440) Fix Album list layout
+
 ## 0.1.3 - 2020-01-05
 
 #### Added
