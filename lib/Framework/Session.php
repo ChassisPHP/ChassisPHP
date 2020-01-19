@@ -53,15 +53,17 @@ class Session
 
     // message handling
     // get message
-    public static function getMessage()
+    public static function getMessage($unset = true)
     {
         if (isset($_SESSION['message']['content'])) {
             $message = array(
                 'type' => $_SESSION['message']['type'],
                 'content' => $_SESSION['message']['content'],
             );
-            unset($_SESSION['message']['type']);
-            unset($_SESSION['message']['content']);
+            if ($unset) {
+                unset($_SESSION['message']['type']);
+                unset($_SESSION['message']['content']);
+            }
             return $message;
         } else {
             return false;
