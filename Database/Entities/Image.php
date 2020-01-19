@@ -2,10 +2,10 @@
 
 namespace Database\Entities;
 
-use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Index;
+use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\UniqueConstraint;
-use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
 
 /**
 * @ORM\Entity
@@ -29,7 +29,7 @@ class Image
     protected $title;
 
     /**
-    * @ORM\Column(type="string", unique=true)
+     * @ORM\Column(type="string", unique=true)
     */
     protected $position;
 
