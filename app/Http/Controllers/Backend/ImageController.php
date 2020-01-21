@@ -52,7 +52,7 @@ class ImageController extends Controller
 
     public function create($formVars = null)
     {
-        $message =  Session::getMessage('false');
+        $message =  Session::getMessage();
         $formAction = "/backend/images/create";
         $formMethod = "post";
         $createdBy['name'] = $this->loggedInUser;
@@ -225,8 +225,7 @@ class ImageController extends Controller
 
         try {
             $this->entityManager->flush();
-            $message['type'] = 'alert-info';
-            $message['content'] = "$title added succesfully";
+            Session::setMessage('alert-info', "$title added succesfully");
             return true;
         } catch (UniqueConstraintViolationException $e) {
             Session::setMessage('alert-danger', "$title could not be added. Filename and Position must be unique.");
