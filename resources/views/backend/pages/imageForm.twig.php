@@ -28,7 +28,7 @@
 
         <div class="form-group">
           <label>Album</label>
-          <input type="hidden" name="albumId" value="1" />
+          <input name="albumId" placeholder="{{ (formVars.albumId is defined) ? '' : 'Album' }}" value="{{ formVars.albumId }}" class="input-control" />
         </div>
 
         <div class="form-group">
