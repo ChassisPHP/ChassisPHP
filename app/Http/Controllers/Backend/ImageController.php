@@ -52,6 +52,9 @@ class ImageController extends Controller
 
     public function create($formVars = null)
     {
+        $albumRepository = $this->entityManager->getRepository('Database\Entities\Album');
+        $albums = $albumRepository->findAll();
+
         $message =  Session::getMessage();
         $formAction = "/backend/images/create";
         $formMethod = "post";
@@ -59,6 +62,7 @@ class ImageController extends Controller
         $createdBy['id'] = $this->loggedInUserId;
 
         return $this->view->render('backend/pages/imageForm.twig.php', array(
+            'albums'       => $albums,
             'formVars'     => $formVars,
             'action'       => $formAction,
             'method'       => $formMethod,
@@ -77,7 +81,6 @@ class ImageController extends Controller
     public function store()
     {
         $formVars = $this->request->getParsedBody();
-
         $image = new Image;
 
         $timestamp = new \DateTime();
