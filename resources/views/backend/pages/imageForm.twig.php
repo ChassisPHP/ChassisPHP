@@ -8,7 +8,7 @@
     {% endif %}
 
     <header class="item">
-        <h1>Content</h1>
+        <h1>Image</h1>
     </header>
     <form class="item col60" action="{{ action }}" method="{{ method }}" enctype="multipart/form-data">
         <div class="form-group">
