@@ -28,7 +28,12 @@
 
         <div class="form-group">
           <label>Album</label>
-          <input name="albumId" placeholder="{{ (formVars.albumId is defined) ? '' : 'Album' }}" value="{{ formVars.albumId }}" class="input-control" />
+          <select class="input-control" name="albumId">
+            {% for album in albums %}
+            <option value="{{ album.id }}"{% if (formVars.albumId is defined) and (formVars.albumId == album.id) %}selected{% endif %}>{{ album.name }}</option>
+            {% endfor %}
+          </select>
+          <br>
         </div>
 
         <div class="form-group">
