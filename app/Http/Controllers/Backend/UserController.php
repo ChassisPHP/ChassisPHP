@@ -6,7 +6,7 @@ use Doctrine\ORM\Query;
 use Lib\Framework\Hash;
 use Lib\Framework\Session;
 use Database\Entities\User;
-use Lib\Database\Connection;
+use Lib\Framework\Connection;
 use Lib\Framework\Http\Controller;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 

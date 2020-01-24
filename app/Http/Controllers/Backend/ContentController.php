@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Backend;
 
-use Lib\Database\Connection;
-use Lib\Framework\Http\Controller;
-use Lib\Framework\Session;
 use Doctrine\ORM\Query;
-use Database\Entities\Content;
+use Lib\Framework\Session;
 use Database\Entities\User;
+use Lib\Framework\Connection;
+use Database\Entities\Content;
+use Lib\Framework\Http\Controller;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 
 class ContentController extends Controller
@@ -87,7 +87,7 @@ class ContentController extends Controller
 
         $timestamp = new \DateTime();
         $content->setPublicationDate($timestamp);
-        
+
         $author = $this->entityManager->find('Database\Entities\User', $formVars['author']);
         $content->setAuthor($author);
         $message = $this->hydrateAndPersist($content, $formVars);
@@ -151,19 +151,19 @@ class ContentController extends Controller
     public function update($id)
     {
         $content = $this->entityManager->find('Database\Entities\Content', $id['ID']);
-    
+
         $formVars = $this->request->getParsedBody();
 
         $author = $this->entityManager->find('Database\Entities\User', $formVars['author']);
         $formVars['author'] = $author;
         $updatedBy = $this->entityManager->getRepository('Database\Entities\User')->find($this->loggedInUserId);
         $content->setUpdatedBy($updatedBy);
-        
+
         $this->hydrateAndPersist($content, $formVars);
 
         return $this->select($id);
     }
- 
+
     /**
     * Remove the specified resource from storage.
     *

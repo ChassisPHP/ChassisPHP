@@ -35,10 +35,10 @@
     },
     "autoload": {
         "files": [
-            "lib/Framework/helpers.php"
+            "src/Framework/helpers.php"
         ],
         "psr-4": {
-            "Lib\\": "lib/",
+            "Lib\\": "src/",
             "Http\\": "app/Http/",
             "Database\\": "Database/",
             "App\\": "app/"
