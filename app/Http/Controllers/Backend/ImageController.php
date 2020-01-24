@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Backend;
 use Doctrine\ORM\Query;
 use Lib\Framework\Session;
 use Database\Entities\User;
-use Lib\Database\Connection;
 use Database\Entities\Image;
+use Lib\Framework\Connection;
 use Lib\Framework\Http\Controller;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 

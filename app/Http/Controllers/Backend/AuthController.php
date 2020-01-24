@@ -6,7 +6,7 @@ use Lib\Framework\Hash;
 use Doctrine\ORM\Query;
 use Lib\Framework\Session;
 use Database\Entities\User;
-use Lib\Database\Connection;
+use Lib\Framework\Connection;
 use Lib\Framework\Http\Controller;
 
 class AuthController extends Controller
