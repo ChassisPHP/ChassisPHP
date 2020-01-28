@@ -6,24 +6,27 @@
  * Date:   Saturday, July 15, 2017 05:47
  */
 
-namespace Lib\Framework;
+namespace ChassisPHP\Framework;
 
-use FastRoute\RouteCollector;
 use FastRoute\Dispatcher;
-use Psr\Http\Message\ServerRequestInterface;
+use FastRoute\RouteCollector;
 use Psr\Http\Message\ResponseInterface;
-use Lib\Framework\Http\MiddlewareQueue;
+use Psr\Http\Message\ServerRequestInterface;
+use ChassisPHP\Framework\Http\MiddlewareQueue;
 
 class Router
 {
-    
+
     private $dispatcher;
     private $request;
     private $response;
     protected $middlewareQueue;
 
-    public function __construct(ServerRequestInterface $request, ResponseInterface $response, MiddlewareQueue $middlewareQueue)
-    {
+    public function __construct(
+        ServerRequestInterface $request,
+        ResponseInterface $response,
+        MiddlewareQueue $middlewareQueue
+    ) {
         $this->request = $request;
         $this->response = $response;
         $this->middlewareQueue = $middlewareQueue;
@@ -55,7 +58,7 @@ class Router
     public function dispatch($request, $routeDefinitionCallback, $container)
     {
         $routeInfo = $this->getRouteInfo($request, $routeDefinitionCallback);
-        
+
         switch ($routeInfo[0]) {
             case Dispatcher::NOT_FOUND:
                 return $this->response->withStatus(404);
@@ -83,7 +86,7 @@ class Router
         }
 
         $this->addCoreMiddleware();
-        
+
         // call the middlewareQueue
         $this->response = $this->middlewareQueue->callMiddleware($request, $this->response);
         return $this->response;
@@ -94,6 +97,9 @@ class Router
     // can be added here
     private function addCoreMiddleware()
     {
-        $this->middlewareQueue->addMiddleware('SessionMiddleware', '\Lib\Framework\Http\Middleware\\');
+        $this->middlewareQueue->addMiddleware(
+            'SessionMiddleware',
+            '\ChassisPHP\Framework\Http\Middleware\\'
+        );
     }
 }

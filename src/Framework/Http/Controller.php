@@ -1,16 +1,17 @@
 <?php
 
-namespace Lib\Framework\Http;
+namespace ChassisPHP\Framework\Http;
 
-use Lib\Framework\Http\MiddlewareQueue;
-use Lib\Framework\Services\Mailer;
-use Lib\Framework\Container;
-use Lib\Framework\Session;
+use ChassisPHP\Framework\Http\MiddlewareQueue;
+use ChassisPHP\Framework\Services\Mailer;
+use ChassisPHP\Framework\Container;
+use ChassisPHP\Framework\Session;
 
 class Controller
 {
     protected $middlewareQueue;
     protected $middleware;
+    protected $connection;
     protected $request;
     protected $logger;
     protected $mailer;
@@ -50,5 +51,11 @@ class Controller
     public function setLogger($logger)
     {
         $this->logger = $logger;
+    }
+
+    // inject the DB connection
+    public function setConnection($connection)
+    {
+        $this->connection = $connection;
     }
 }

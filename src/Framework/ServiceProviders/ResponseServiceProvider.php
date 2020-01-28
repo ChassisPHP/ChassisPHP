@@ -1,9 +1,9 @@
 <?php
 
-namespace Lib\Framework\ServiceProviders;
+namespace ChassisPHP\Framework\ServiceProviders;
 
-use League\Container\ServiceProvider\AbstractServiceProvider;
 use Zend\Diactoros\Response;
+use League\Container\ServiceProvider\AbstractServiceProvider;
 
 /*
  *  ServiceProvider to implement PSR-7 response object

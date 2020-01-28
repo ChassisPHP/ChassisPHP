@@ -1,11 +1,11 @@
 <?php
 
-namespace Lib\Framework\Http;
+namespace ChassisPHP\Framework\Http;
 
 use SplDoublyLinkedList;
+use ChassisPHP\Framework\ResponseBody;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Lib\Framework\ResponseBody;
 
 class MiddlewareQueue
 {
@@ -58,7 +58,7 @@ class MiddlewareQueue
     public function addController($classResponse)
     {
         // add string content to response via controllerMiddleware object
-        $controller = '\Lib\Framework\Http\Middleware\ControllerMiddleware';
+        $controller = '\ChassisPHP\Framework\Http\Middleware\ControllerMiddleware';
         $callable = new $controller($classResponse);
         array_unshift($this->queue, $callable);
     }
@@ -69,9 +69,9 @@ class MiddlewareQueue
 
         $middlewareStack->rewind();
         $start = $middlewareStack->top();
-        
+
         $response = $start($request, $response);
-    
+
         return $response;
     }
 
@@ -85,7 +85,7 @@ class MiddlewareQueue
                 $stack->rewind();
                 $next = $stack->top();
             }
-            
+
             $stack->push(function (
                 ServerRequestInterface $request,
                 ResponseInterface $response

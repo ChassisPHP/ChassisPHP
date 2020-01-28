@@ -6,18 +6,18 @@
  * Time: 8:15 AM
  */
 
-namespace Lib\Framework\Services;
+namespace ChassisPHP\Framework\Services;
 
 use Monolog\Logger;
-use Lib\Framework\Container;
+use ChassisPHP\Framework\Container;
 use Psr\Log\LoggerInterface;
-use Lib\Framework\ConfigManager;
+use ChassisPHP\Framework\ConfigManager;
 use Monolog\Handler\StreamHandler;
 
 /**
  * Registers log handlers
  * Class LogManager
- * @package Lib\Framework\Log
+ * @package ChassisPHP\Framework\Log
  */
 class LogManager implements LoggerInterface
 {

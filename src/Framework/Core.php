@@ -1,10 +1,10 @@
 <?php
 
-namespace Lib\Framework;
+namespace ChassisPHP\Framework;
 
 use FastRoute\RouteCollector;
+use ChassisPHP\Framework\Container;
 use Psr\Http\Message\ResponseInterface;
-use Lib\Framework\Container\ControllerServiveProvider;
 
 class Core
 {
@@ -21,7 +21,7 @@ class Core
 
     public function __construct()
     {
-        $this->container = new Container;
+        $this->container = new Container();
         $this->request = $this->container->get('PsrRequestInterface');
         $this->baseDir = $this->container->get('BaseDir');
         $this->dotenv = $this->container->get('Dotenv');
@@ -63,7 +63,7 @@ class Core
         foreach (glob($routesDir) as $routeFile) {
             $routes = include($routeFile);
             $routeGroup = "/" . basename($routeFile, ".php");
-        
+
             foreach ($routes as $route) {
                 if ($routeGroup != "/frontend") {
                     $route[1] = $routeGroup . $route[1];

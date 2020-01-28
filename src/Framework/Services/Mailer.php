@@ -1,6 +1,6 @@
 <?php
 
-namespace Lib\Framework\Services;
+namespace ChassisPHP\Framework\Services;
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;

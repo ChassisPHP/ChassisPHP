@@ -1,10 +1,10 @@
 <?php
 
-namespace Lib\Framework;
+namespace ChassisPHP\Framework;
 
 use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
-use Lib\Framework\ConfigManager;
+use ChassisPHP\Framework\ConfigManager;
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Annotations\AnnotationRegistry;
@@ -20,7 +20,7 @@ class Connection
         $dbType = envar('DATABASE_TYPE', 'mysql');
         switch ($dbType) {
             case "sqlite":
-                $path = dirname(__FILE__, 3) . "/" . ConfigManager::get("database.connections.$dbType.database");
+                $path = APP_ROOT . "/" . ConfigManager::get("database.connections.$dbType.database");
                 $conn = array(
                         'driver' => $driver,
                         'path' => $path,
@@ -44,7 +44,7 @@ class Connection
         }
 
         $connectionConfig = Setup::createConfiguration($this->isDevMode);
-        $connectionDriver = new AnnotationDriver(new AnnotationReader(), dirname(__FILE__, 3)."/Database/Entities");
+        $connectionDriver = new AnnotationDriver(new AnnotationReader(), APP_ROOT."/Database/Entities");
 
         // registering noop annotation autoloader - allow all annotations by default
         AnnotationRegistry::registerLoader('class_exists');

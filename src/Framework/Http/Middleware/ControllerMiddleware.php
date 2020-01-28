@@ -1,8 +1,8 @@
 <?php
 
-namespace Lib\Framework\Http\Middleware;
+namespace ChassisPHP\Framework\Http\Middleware;
 
-use Lib\Framework\ResponseBody;
+use ChassisPHP\Framework\ResponseBody;
 
 class ControllerMiddleware
 {

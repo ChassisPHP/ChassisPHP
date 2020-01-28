@@ -1,12 +1,12 @@
 <?php
 
-namespace Lib\Framework;
+namespace ChassisPHP\Framework;
 
 use ArrayAccess;
 
 /**
  * Class Config
- * @package Lib\Framework
+ * @package ChassisPHP\Framework
  */
 class ConfigManager implements ArrayAccess
 {
