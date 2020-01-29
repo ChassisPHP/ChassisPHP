@@ -43,7 +43,7 @@ class ConfigManager implements ArrayAccess
     protected function __construct()
     {
         // Read the config files
-        $configDir = dirname(__FILE__, 3) . "/Config/*.php";
+        $configDir = APP_ROOT . "/Config/*.php";
 
         foreach (glob($configDir) as $configFile) {
             $configs = include($configFile);
