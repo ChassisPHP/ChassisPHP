@@ -1,5 +1,7 @@
 # ChassisPHP
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
+## ATTENTION!<br>
+Beginning with version 0.5.0 There is a separation between the framework and developerland. We have developed a skeleton app which uses the new version. This skeleton is available in the repo ChassisPHP/ChassisPHP-skeleton.<br><br>
 Pronounced Cha-see <br>
 Yes, another PHP framework. The goal with ChassisPHP is to be a framework that simplifies the process of creating a brochure-type website.
 Be sure to visit our new site [ChassisPHP.com](https://chassisphp.com/) It is very new and needs additional info. We would love your help wita the docs! See the repo at [ChassisPHP-site repo](https://github.com/ChassisPHP/ChassisPHP-Website).
