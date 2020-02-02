@@ -75,7 +75,7 @@ if (! function_exists('logTo')) {
     function logTo($level, $message, $context = [])
     {
         // TODO avoid creating a new container for every log entry
-        (new \Lib\Framework\Container)->get('Logger')->log($level, $message, $context);
+        (new \ChassisPHP\Framework\Container)->get('Logger')->log($level, $message, $context);
     }
 }
 
@@ -84,7 +84,7 @@ if (! function_exists('logTo')) {
 if (! function_exists('checkAuth')) {
     function checkAuth()
     {
-        $authenticated = \Lib\Framework\Session::get('authenticated');
+        $authenticated = \ChassisPHP\Framework\Session::get('authenticated');
         return $authenticated;
     }
 }

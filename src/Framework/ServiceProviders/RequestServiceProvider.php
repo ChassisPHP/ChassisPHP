@@ -1,6 +1,6 @@
 <?php
 
-namespace Lib\Framework\ServiceProviders;
+namespace ChassisPHP\Framework\ServiceProviders;
 
 use League\Container\ServiceProvider\AbstractServiceProvider;
 use Zend\Diactoros\ServerRequestFactory;

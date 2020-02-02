@@ -1,6 +1,6 @@
 <?php
 
-namespace Lib\Framework;
+namespace ChassisPHP\Framework;
 
 use Dotenv\Dotenv;
 
@@ -11,7 +11,7 @@ class EnvVarsLoader
     public static function loadEnvVars()
     {
         if (static::$envVars === null) {
-            $path = dirname(__FILE__, 3);
+            $path = APP_ROOT;
             $loader = new Dotenv($path . DIRECTORY_SEPARATOR);
             static::$envVars = $loader->load();
         }

@@ -38,10 +38,7 @@
             "src/Framework/helpers.php"
         ],
         "psr-4": {
-            "Lib\\": "src/",
-            "Http\\": "app/Http/",
-            "Database\\": "Database/",
-            "App\\": "app/"
+            "ChassisPHP\\": "src/"
         }
     },
     "autoload-dev": {

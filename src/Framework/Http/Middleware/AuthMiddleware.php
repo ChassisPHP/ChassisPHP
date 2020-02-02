@@ -1,8 +1,8 @@
 <?PHP
 
-namespace Lib\Framework\Http\Middleware;
+namespace ChassisPHP\Framework\Http\Middleware;
 
-use Lib\Framework\Session;
+use ChassisPHP\Framework\Session;
 
 class AuthMiddleware
 {

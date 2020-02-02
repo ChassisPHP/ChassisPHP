@@ -1,6 +1,6 @@
 <?php
 
-namespace Lib\Framework\ServiceProviders;
+namespace ChassisPHP\Framework\ServiceProviders;
 
 use League\Container\ServiceProvider\AbstractServiceProvider;
 
@@ -33,9 +33,8 @@ class ControllerServiceProvider extends AbstractServiceProvider
     private function readInControllers()
     {
         $provides = [];
-        $baseDir = dirname(__FILE__, 4);
         $baseNamespace = "App\Http\Controllers\\";
-        $controllerDir = $baseDir . "/app/Http/Controllers/*";
+        $controllerDir = APP_ROOT . "/app/Http/Controllers/*";
         foreach (glob($controllerDir) as $subElement) {
             // if our subElement is a directory
             // we need to explore its contents
@@ -98,6 +97,12 @@ class ControllerServiceProvider extends AbstractServiceProvider
                     'setLogger',
                     [
                         $this->getContainer()->get('Logger')
+                    ]
+                )
+                ->addMethodCall(
+                    'setConnection',
+                    [
+                        $this->getContainer()->get('Connection')
                     ]
                 );
         }

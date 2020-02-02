@@ -1,6 +1,6 @@
 <?php
 
-namespace lib\Framework;
+namespace ChassisPHP\Framework;
 
 class Hash
 {

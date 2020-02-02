@@ -1,6 +1,6 @@
 <?php
 
-namespace Lib\Framework;
+namespace ChassisPHP\Framework;
 
 class Session
 {
