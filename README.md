@@ -1,3 +1,5 @@
+## ATTENTION!<br>
+Beginning with version 0.5.0 There is a separation between the framework and developerland. We have developed a skeleton app which uses the new version. This skeleton is available in the repo ChassisPHP/ChassisPHP-skeleton.<br><br>
 # ChassisPHP
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 Pronounced Cha-see <br>
