@@ -1,5 +1,20 @@
 Changelog
 
+## 0.5.x - 2020-02-02
+
+#### Added
+- [462](https://github.com/ChassisPHP/ChassisPHP/pull/462) Breaking changes for framework separation
+- [460](https://github.com/ChassisPHP/ChassisPHP/pull/460) Change vendor name from RogerCreasy to chassisphp
+
+## 0.1.5 - 2020-02-02
+
+#### Bug Fixes
+- [459](https://github.com/ChassisPHP/ChassisPHP/pull/459) Rename lib to src in prep for separation
+- [458](https://github.com/ChassisPHP/ChassisPHP/pull/458) Fix album form heading
+- [457](https://github.com/ChassisPHP/ChassisPHP/pull/457) Add albums to backend nav
+- [456](https://github.com/ChassisPHP/ChassisPHP/pull/456) Add albums as select in image form
+- [453](https://github.com/ChassisPHP/ChassisPHP/pull/453) Fix bug in album creation
+
 ## 0.1.4 - 2020-01-19
 
 #### Added
