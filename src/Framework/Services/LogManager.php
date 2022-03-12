@@ -9,10 +9,10 @@
 namespace ChassisPHP\Framework\Services;
 
 use Monolog\Logger;
-use ChassisPHP\Framework\Container;
 use Psr\Log\LoggerInterface;
-use ChassisPHP\Framework\ConfigManager;
 use Monolog\Handler\StreamHandler;
+use ChassisPHP\Framework\Container;
+use ChassisPHP\Framework\ConfigManager;
 
 /**
  * Registers log handlers
