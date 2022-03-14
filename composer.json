@@ -26,12 +26,18 @@
         "psr/http-message": "^1.0",
         "vlucas/phpdotenv": "^2.4",
         "doctrine/orm": "^2.5",
+        "doctrine/cache": "1.11",
         "symfony/yaml": "^3.3",
-        "monolog/monolog": "^1.23",
+        "monolog/monolog": "^2.0",
         "twig/twig": "^2.0",
         "zendframework/zend-diactoros": "^1.6",
         "symfony/validator": "^3.3",
         "phpmailer/phpmailer": "^6.1"
+    },
+    "config": {
+        "allow-plugins": {
+            "ocramius/package-versions": true
+        }
     },
     "autoload": {
         "files": [
