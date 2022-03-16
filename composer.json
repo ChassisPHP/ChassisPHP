@@ -36,7 +36,8 @@
     },
     "config": {
         "allow-plugins": {
-            "ocramius/package-versions": true
+            "ocramius/package-versions": true,
+            "composer/package-versions-deprecated": true
         }
     },
     "autoload": {
