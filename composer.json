@@ -32,11 +32,12 @@
         "twig/twig": "^2.0",
         "zendframework/zend-diactoros": "^1.6",
         "symfony/validator": "^3.3",
-        "phpmailer/phpmailer": "^6.1"
+        "phpmailer/phpmailer": "^6.5"
     },
     "config": {
         "allow-plugins": {
-            "ocramius/package-versions": true
+            "ocramius/package-versions": true,
+            "composer/package-versions-deprecated": true
         }
     },
     "autoload": {
