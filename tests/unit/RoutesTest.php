@@ -13,17 +13,17 @@ class RoutesTest extends TestCase
     private $app;
     private static $process;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->http = new Client(['base_uri' => 'http://localhost:8890', 'verify' => false]);
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         $this->http = null;
     }
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         $public_path = realpath(__DIR__.'/../../public');
         self::$process = new Process("exec php -S localhost:8890 -t $public_path");
@@ -31,7 +31,7 @@ class RoutesTest extends TestCase
         usleep(2000000);
     }
 
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass(): void
     {
         self::$process->stop();
     }

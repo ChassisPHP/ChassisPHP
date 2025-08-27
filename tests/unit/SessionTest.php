@@ -10,7 +10,7 @@ class SessionTest extends TestCase
     private $testValue;
     private $session;
 
-    public function setup()
+    public function setup(): void
     {
         $this->session = new Session;
         $this->testValue = 'Value Test';

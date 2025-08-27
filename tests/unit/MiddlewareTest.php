@@ -13,7 +13,7 @@ class MiddlewareTest extends TestCase
     private $app;
     private static $process;
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         $public_path = realpath(__DIR__.'/../../public');
         self::$process = new Process("exec php -S localhost:8890 -t $public_path");
@@ -21,12 +21,12 @@ class MiddlewareTest extends TestCase
         usleep(2000000);
     }
 
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass(): void
     {
         self::$process->stop();
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->http = new Client(
             [
@@ -37,7 +37,7 @@ class MiddlewareTest extends TestCase
         );
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         $this->http = null;
     }
