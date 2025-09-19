@@ -3,7 +3,7 @@
 namespace Tests;
 
 use Tests\TestCase;
-use Lib\Framework\Session;
+use ChassisPHP\Framework\Session;
 
 class SessionTest extends TestCase
 {

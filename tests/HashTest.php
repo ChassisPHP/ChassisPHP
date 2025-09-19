@@ -3,7 +3,7 @@
 namespace Tests;
 
 use Tests\TestCase;
-use Lib\Framework\Hash;
+use ChassisPHP\Framework\Hash;
 
 class HashTest extends TestCase
 {
