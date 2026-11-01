@@ -38,6 +38,20 @@
         "allow-plugins": {
             "ocramius/package-versions": true,
             "composer/package-versions-deprecated": true
+        },
+        "policy": {
+            "advisories": {
+                "ignore": {
+                    "symfony/http-foundation": "Unused by the framework; removed in deps-symfony-prune",
+                    "symfony/http-kernel": "Unused by the framework; removed in deps-symfony-prune",
+                    "symfony/validator": "Unused by the framework; removed in deps-symfony-prune",
+                    "symfony/yaml": "Unused by the framework; removed in deps-symfony-prune",
+                    "twig/twig": "Twig 2 has no fixed release; upgraded in deps-twig3",
+                    "symfony/process": "Dev-only PHP 7 test dependency; removed in php83-floor",
+                    "guzzlehttp/guzzle": "Dev-only PHP 7 test dependency; removed in php83-floor",
+                    "guzzlehttp/psr7": "Dev-only PHP 7 test dependency; removed in php83-floor"
+                }
+            }
         }
     },
     "autoload": {
