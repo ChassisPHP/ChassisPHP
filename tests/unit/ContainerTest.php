@@ -86,6 +86,7 @@ class ContainerTest extends TestCase
         $connection = $this->container->get('Connection');
 
         $this->assertInstanceOf(Connection::class, $connection);
+        $this->assertTrue(property_exists(Connection::class, 'entityManager'));
         $this->assertInstanceOf(EntityManager::class, $connection->entityManager);
     }
 

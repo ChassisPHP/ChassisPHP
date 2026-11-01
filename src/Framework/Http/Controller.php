@@ -16,6 +16,7 @@ class Controller
     protected $logger;
     protected $mailer;
     protected $view;
+    protected $baseURL;
 
     // inject the Request
     public function setRequest($request)

@@ -18,6 +18,8 @@ use League\Container\Container as LeagueContainer;
 
 class Container extends LeagueContainer
 {
+    protected $baseDir;
+
     public function __construct()
     {
         $this->baseDir = APP_ROOT;

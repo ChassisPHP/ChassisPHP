@@ -1,5 +1,23 @@
 Changelog
 
+## Unreleased
+
+#### Added
+- Characterization test suite running in a PHP-version-parameterized container, with GitHub Actions CI
+
+#### Bug Fixes
+- Router: a request with the wrong HTTP method crashed instead of returning 405; it now returns 405 with an `Allow` header
+- Core: error statuses without a `template.defaults.<status>` entry no longer throw when rendering the error page
+- `storagePath()` now resolves to the application's `storage/` directory (APP_ROOT). It previously pointed inside the framework package, so logs written with `logTo()` ended up under `vendor/`
+- `logTo()` reuses one logger instead of building a new container for every entry
+- `Session::$sessionStarted` is now set by `Session::start()` and reset by `Session::destroy()`
+- `Connection::$entityManager`, `Container::$baseDir`, `Controller::$baseURL` and `Core::$routes` are declared properties (dynamic properties are deprecated in PHP 8.2)
+- `ConfigManager` `ArrayAccess` methods are marked `#[\ReturnTypeWillChange]` for PHP 8.1
+
+#### Removed
+- Broken `cli-config.php`, which referenced a nonexistent `\Lib\Database\Connection`. A working Doctrine CLI entry point is planned for 0.7
+- Unused private methods `Core::addCoreMiddleware()` and `MiddlewareQueue::startQueue()`
+
 ## 0.5.x - 2020-02-02
 
 #### Added
