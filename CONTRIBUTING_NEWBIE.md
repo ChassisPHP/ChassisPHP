@@ -17,6 +17,16 @@ At ChassisPHP we want the community to be welcoming to all. We want to make cont
 4. Install PHP dependencies
    `composer install`
 
+## Editor and IDE files
+Please don't commit files your editor creates for its own settings. The `.gitignore` already covers the common ones:
+* VS Code: the `.vscode/` folder and workspace files (`*.code-workspace`, whatever you name them)
+* PhpStorm and other JetBrains IDEs: the `.idea/` folder
+* Vim swap files: `*.swp`, `*.swo`
+
+If your editor creates other files, add them to your global gitignore instead of the project's, so the project file doesn't fill up with every editor's entries:
+   `git config --global core.excludesFile ~/.gitignore_global`
+   Then list the files to ignore in `~/.gitignore_global`.
+
 ## Git Workflow
 1. Make sure you have all recent changes to ChassisPHP
    `git fetch origin`
