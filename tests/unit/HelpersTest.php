@@ -40,14 +40,28 @@ class HelpersTest extends TestCase
         $this->assertSame('https://example.com/', baseURL());
     }
 
-    public function testStoragePath()
+    public function testStoragePathIsInsideAppRoot()
     {
-        // Current behavior: resolves relative to the framework package, not APP_ROOT.
-        // When installed under vendor/ this points inside the package.
-        $root = dirname(__DIR__, 2);
+        $storage = APP_ROOT . DIRECTORY_SEPARATOR . 'storage';
 
-        $this->assertSame($root . DIRECTORY_SEPARATOR . 'storage', storagePath());
-        $this->assertSame($root . DIRECTORY_SEPARATOR . 'storage' . DIRECTORY_SEPARATOR . 'logs', storagePath('logs'));
+        $this->assertSame($storage, storagePath());
+        $this->assertSame($storage . DIRECTORY_SEPARATOR . 'logs', storagePath('logs'));
+    }
+
+    public function testLogToWritesToAppStorage()
+    {
+        $logFile = storagePath('logs' . DIRECTORY_SEPARATOR . date('Y-m-d') . '_error.log');
+        @unlink($logFile);
+
+        logTo('error', 'logTo test entry');
+        logTo('error', 'second entry');
+
+        $this->assertFileExists($logFile);
+        $contents = file_get_contents($logFile);
+        $this->assertStringContainsString('logTo test entry', $contents);
+        $this->assertStringContainsString('second entry', $contents);
+
+        unlink($logFile);
     }
 
     public function testCheckAuth()

@@ -59,7 +59,7 @@ if (! function_exists('storagePath')) {
      */
     function storagePath($path = '')
     {
-        $basePath = dirname(__DIR__, 2);
+        $basePath = defined('APP_ROOT') ? APP_ROOT : dirname(__DIR__, 2);
         return $basePath . DIRECTORY_SEPARATOR . 'storage' . ($path ? DIRECTORY_SEPARATOR . $path : $path);
     }
 }
@@ -74,8 +74,13 @@ if (! function_exists('logTo')) {
      */
     function logTo($level, $message, $context = [])
     {
-        // TODO avoid creating a new container for every log entry
-        (new \ChassisPHP\Framework\Container)->get('Logger')->log($level, $message, $context);
+        static $logger;
+
+        if ($logger === null) {
+            $logger = (new \ChassisPHP\Framework\Container)->get('Logger');
+        }
+
+        $logger->log($level, $message, $context);
     }
 }
 

@@ -66,7 +66,12 @@ class RouterTest extends TestCase
 
     public function testDispatchMethodNotAllowed()
     {
-        $this->markTestSkipped('Known bug: the 405 branch uses an undefined $response; fixed in bugfixes-php8-compat');
+        $request = $this->request('GET', '/form');
+
+        $response = $this->router($request)->dispatch($request, $this->routes(), null);
+
+        $this->assertSame(405, $response->getStatusCode());
+        $this->assertSame('POST', $response->getHeaderLine('Allow'));
     }
 
     public function testDispatchControllerRouteThroughContainer()

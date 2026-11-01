@@ -55,6 +55,22 @@ class CoreTest extends TestCase
      * @runInSeparateProcess
      * @preserveGlobalState disabled
      */
+    public function testRunWithoutDefaultTemplateSendsEmptyBody()
+    {
+        // there is no template.defaults.405, so nothing is rendered
+        $_SERVER['REQUEST_METHOD'] = 'GET';
+        $_SERVER['REQUEST_URI'] = '/form';
+
+        ob_start();
+        $this->createApplication()->run();
+
+        $this->assertSame('', ob_get_clean());
+    }
+
+    /**
+     * @runInSeparateProcess
+     * @preserveGlobalState disabled
+     */
     public function testBackendRoutesArePrefixedWithFileName()
     {
         $_SERVER['REQUEST_METHOD'] = 'GET';

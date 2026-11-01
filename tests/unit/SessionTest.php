@@ -13,6 +13,7 @@ class SessionTest extends TestCase
             session_destroy();
         }
         $_SESSION = [];
+        Session::$sessionStarted = false;
     }
 
     public function testSetGet()
@@ -64,8 +65,20 @@ class SessionTest extends TestCase
     {
         Session::start();
         $this->assertSame(PHP_SESSION_ACTIVE, session_status());
+        $this->assertTrue(Session::$sessionStarted);
 
         Session::destroy();
         $this->assertSame(PHP_SESSION_NONE, session_status());
+        $this->assertFalse(Session::$sessionStarted);
+    }
+
+    public function testStartMarksAlreadyActiveSessionAsStarted()
+    {
+        // the skeleton's index.php calls session_start() itself
+        session_start();
+
+        Session::start();
+
+        $this->assertTrue(Session::$sessionStarted);
     }
 }

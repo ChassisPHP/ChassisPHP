@@ -27,23 +27,11 @@ class MiddlewareQueue
     // add middleware to the queue
     public function addMiddleware($middleware, $middlewareDir = '\App\Http\Middleware\\')
     {
-        //if the queue is empty, handle it
-       // if (empty($this->queue)) {
-         //   $this->startQueue();
-       // }
-
         $middleware = $middlewareDir . $middleware;
         $callable = new $middleware;
         array_push($this->queue, $callable);
 
         return $this->queue;
-    }
-
-    private function startQueue()
-    {
-        $this->queue[0] = null;
-
-        return;
     }
 
     public function getQueue()
