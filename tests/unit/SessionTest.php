@@ -1,47 +1,71 @@
 <?php
 
-namespace Tests;
+namespace Tests\Unit;
 
 use Tests\TestCase;
-use Lib\Framework\Session;
+use ChassisPHP\Framework\Session;
 
 class SessionTest extends TestCase
 {
-    private $testValue;
-    private $session;
-
-    public function setup()
+    public function setUp(): void
     {
-        $this->session = new Session;
-        $this->testValue = 'Value Test';
+        if (session_status() === PHP_SESSION_ACTIVE) {
+            session_destroy();
+        }
+        $_SESSION = [];
     }
-
-    /*
-     * phpunit sends headers..so, this test errors
-     * "headers already sent"
-     * TODO workaround?
-    public function testStartSession()
-    {
-        $this->session->start();
-        $this->assertSame(session_status(), PHP_SESSION_NONE);
-    }
-     */
 
     public function testSetGet()
     {
-        $this->session->set('testKey', $this->testValue);
-        $test = $this->session->get('testKey');
-        $this->assertSame($test, $this->testValue);
+        Session::set('testKey', 'Value Test');
+
+        $this->assertSame('Value Test', Session::get('testKey'));
     }
 
-    /*
-     * same problem as testStartSession above
-     *
-    public function testDestroy()
+    public function testGetMissingKeyReturnsFalse()
     {
-        $this->session->start();
-        $this->session->destroy();
-        $this->assertNull(session_status());
+        $this->assertFalse(Session::get('missing'));
+        $this->assertFalse(Session::get('missing', 'child'));
     }
-     */
+
+    public function testGetChildKey()
+    {
+        Session::set('user', ['name' => 'Roger']);
+
+        $this->assertSame('Roger', Session::get('user', 'name'));
+        $this->assertFalse(Session::get('user', 'email'));
+    }
+
+    public function testClear()
+    {
+        Session::set('testKey', 'value');
+        Session::clear('testKey');
+
+        $this->assertFalse(Session::get('testKey'));
+    }
+
+    public function testGetMessageUnsetsByDefault()
+    {
+        Session::setMessage('warning', 'Careful');
+
+        $this->assertSame(['type' => 'warning', 'content' => 'Careful'], Session::getMessage());
+        $this->assertFalse(Session::getMessage());
+    }
+
+    public function testGetMessageCanKeepMessage()
+    {
+        Session::setMessage('info', 'Kept');
+
+        Session::getMessage(false);
+        $this->assertSame(['type' => 'info', 'content' => 'Kept'], Session::getMessage());
+    }
+
+    public function testStartAndDestroy()
+    {
+        Session::start();
+        $this->assertSame(PHP_SESSION_ACTIVE, session_status());
+
+        Session::destroy();
+        $this->assertSame(PHP_SESSION_NONE, session_status());
+    }
 }

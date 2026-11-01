@@ -11,3 +11,4 @@ tags
 .ctags
 storage/backup/*
 !storage/backup/.gitkeep
+!tests/fixtures/app/.env

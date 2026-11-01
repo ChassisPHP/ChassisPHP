@@ -2,4 +2,11 @@
 <ruleset name="PSR2">
     <!-- Include the whole PSR-2 standard, then exclude some-->
     <rule ref="PSR2"/>
+    <file>src</file>
+    <file>tests</file>
+    <exclude-pattern>tests/fixtures/app/storage/*</exclude-pattern>
+    <!-- The test bootstrap defines constants and runs setup by design -->
+    <rule ref="PSR1.Files.SideEffects">
+        <exclude-pattern>tests/bootstrap.php</exclude-pattern>
+    </rule>
 </ruleset>

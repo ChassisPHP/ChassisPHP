@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches: ['0.5.x', '0.7.x']
+  pull_request:
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # The current dependency set only installs on PHP 7.
+        # The matrix moves to 8.3 / 8.4 / 8.5 with the php83-floor branch.
+        php: ['7.4']
+    name: PHP ${{ matrix.php }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: pdo_sqlite
+          coverage: none
+
+      - run: composer update --no-interaction --no-progress --prefer-dist
+
+      - run: composer test
+
+      - run: composer cs

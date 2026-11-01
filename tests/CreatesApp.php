@@ -10,12 +10,8 @@ trait CreatesApp
      **/
     public function createApplication()
     {
-
-        //crank up the Composer autoloading
-        require dirname(__FILE__, 2) . '/vendor/autoload.php';
-
         //set up the application
-        $app = new \Lib\Framework\Core();
+        $app = new \ChassisPHP\Framework\Core();
 
         return $app;
     }
