@@ -1,5 +1,7 @@
 .DS_Store
 .idea/
+.vscode/
+*.code-workspace
 .git/
 .env
 *.swp
@@ -11,3 +13,4 @@ tags
 .ctags
 storage/backup/*
 !storage/backup/.gitkeep
+!tests/fixtures/app/.env

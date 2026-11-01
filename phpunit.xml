@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit backupGlobals="false"
-   backupStaticAttributes="false"
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
    bootstrap="tests/bootstrap.php"
    colors="true"
-   convertErrorsToExceptions="true"
-   convertNoticesToExceptions="true"
-   convertWarningsToExceptions="true"
-   processIsolation="false"
+   failOnWarning="true"
    stopOnFailure="false">
    <testsuites>
        <testsuite name="ChassisPHP Unit Tests">
            <directory suffix="Test.php">./tests</directory>
+           <!-- These need the skeleton's public/ directory; they move to the skeleton repo -->
+           <exclude>./tests/unit/MiddlewareTest.php</exclude>
+           <exclude>./tests/unit/RoutesTest.php</exclude>
        </testsuite>
    </testsuites>
 </phpunit>

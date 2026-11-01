@@ -40,13 +40,20 @@ Password: admin
 
 ### Testing
 
-To run a test, use:
+To run the tests and the coding standard check, use:
 
 ```bash
-$ phpunit
+$ composer test
+$ composer cs
 ```
 
-*if your environment isn't set up yet, find phpunit at `.\vendor\bin\phpunit`*
+To run the suite in a container against a specific PHP version (requires [Podman](https://podman.io/)):
+
+```bash
+$ tests/scripts/run-tests.sh 7.4
+```
+
+The tests run against a minimal fixture application in `tests/fixtures/app`.
 
 ## Style, etc.
 
