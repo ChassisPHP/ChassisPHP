@@ -11,9 +11,9 @@ class Session
     {
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
-        } else {
-            // TODO add exception
         }
+
+        static::$sessionStarted = session_status() == PHP_SESSION_ACTIVE;
     }
 
     // set a session key value
@@ -75,5 +75,6 @@ class Session
     {
             session_unset();
             session_destroy();
+            static::$sessionStarted = false;
     }
 }

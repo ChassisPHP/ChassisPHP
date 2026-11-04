@@ -11,7 +11,7 @@ use Doctrine\Common\Annotations\AnnotationRegistry;
 
 class Connection
 {
-    public $entitymanager;
+    public $entityManager;
     private $isDevMode = true;
 
     public function __construct()

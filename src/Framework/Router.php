@@ -64,9 +64,10 @@ class Router
                 return $this->response->withStatus(404);
 
             case Dispatcher::METHOD_NOT_ALLOWED:
-                $response->setContent('405 - Method not allowed');
-                $response->setStatusCode(405);
-                break;
+                return $this->response
+                    ->withStatus(405)
+                    ->withHeader('Allow', implode(', ', $routeInfo[1]));
+
             case Dispatcher::FOUND:
                 if (is_array($routeInfo[1])) {
                     $classname = $routeInfo[1][0];
