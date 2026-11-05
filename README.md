@@ -10,7 +10,7 @@ Be sure to visit our new site [ChassisPHP.com](https://chassisphp.com/) It is ve
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 It's recommended that you use [Composer](https://getcomposer.org/) to install ChassisPHP.
 ### Prerequisites
-* PHP >= 7.1
+* PHP >= 8.3
 * Composer
 * pdo_sqlite extension
 ### Installing
@@ -50,7 +50,7 @@ $ composer cs
 To run the suite in a container against a specific PHP version (requires [Podman](https://podman.io/)):
 
 ```bash
-$ tests/scripts/run-tests.sh 7.4
+$ tests/scripts/run-tests.sh 8.3
 ```
 
 The tests run against a minimal fixture application in `tests/fixtures/app`.

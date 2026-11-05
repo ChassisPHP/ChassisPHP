@@ -1,12 +1,12 @@
 # Test container for the ChassisPHP framework.
 # Uses real Composer dependencies so upgrades are tested against the actual libraries.
 #
-#   podman build --build-arg PHP_VERSION=7.4 -f tests/containers/unit.Dockerfile -t chassisphp:test-7.4 .
-#   podman run --rm -v "$PWD":/src:ro,Z chassisphp:test-7.4
+#   podman build --build-arg PHP_VERSION=8.3 -f tests/containers/unit.Dockerfile -t chassisphp:test-8.3 .
+#   podman run --rm -v "$PWD":/src:ro,Z chassisphp:test-8.3
 #
-# or simply: tests/scripts/run-tests.sh 7.4
+# or simply: tests/scripts/run-tests.sh 8.3
 
-ARG PHP_VERSION=7.4
+ARG PHP_VERSION=8.3
 FROM php:${PHP_VERSION}-cli-alpine
 
 RUN apk add --no-cache git unzip

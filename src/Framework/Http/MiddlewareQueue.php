@@ -28,7 +28,7 @@ class MiddlewareQueue
     public function addMiddleware($middleware, $middlewareDir = '\App\Http\Middleware\\')
     {
         $middleware = $middlewareDir . $middleware;
-        $callable = new $middleware;
+        $callable = new $middleware();
         array_push($this->queue, $callable);
 
         return $this->queue;
@@ -65,7 +65,7 @@ class MiddlewareQueue
 
     private function traverseMiddleware()
     {
-        $stack = new SplDoublyLinkedList;
+        $stack = new SplDoublyLinkedList();
         foreach ($this->queue as $key => $middleware) {
             if ($key == 0) {
                 $next = null;

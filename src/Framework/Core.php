@@ -8,7 +8,6 @@ use Psr\Http\Message\ResponseInterface;
 
 class Core
 {
-
     protected $container;
     protected $router;
     protected $request;
@@ -85,7 +84,8 @@ class Core
 
         // render the default template for error statuses that have one
         $errorTemplate = 'template.defaults.' . $response->getStatusCode();
-        if (($response->getStatusCode() < 200 || $response->getStatusCode() >= 400)
+        if (
+            ($response->getStatusCode() < 200 || $response->getStatusCode() >= 400)
             && $this->container->has($errorTemplate)
         ) {
             $response = $response->withBody(

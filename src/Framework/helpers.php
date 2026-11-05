@@ -22,8 +22,8 @@ if (! function_exists('envar')) {
 if (! function_exists('debugVar')) {
     function debugVar($var)
     {
-        $dumper = new HtmlDumper;
-        $cloner = new VarCloner;
+        $dumper = new HtmlDumper();
+        $cloner = new VarCloner();
         $dumper->dump($cloner->cloneVar($var));
         die();
     }
@@ -77,7 +77,7 @@ if (! function_exists('logTo')) {
         static $logger;
 
         if ($logger === null) {
-            $logger = (new \ChassisPHP\Framework\Container)->get('Logger');
+            $logger = (new \ChassisPHP\Framework\Container())->get('Logger');
         }
 
         $logger->log($level, $message, $context);

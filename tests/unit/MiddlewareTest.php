@@ -15,7 +15,7 @@ class MiddlewareTest extends TestCase
 
     public static function setUpBeforeClass()
     {
-        $public_path = realpath(__DIR__.'/../../public');
+        $public_path = realpath(__DIR__ . '/../../public');
         self::$process = new Process("exec php -S localhost:8890 -t $public_path");
         self::$process->start();
         usleep(2000000);

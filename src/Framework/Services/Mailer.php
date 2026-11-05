@@ -40,7 +40,7 @@ class Mailer
 
         /* Set the SMTP port. */
         $this->mail->Port = (int) $this->config['port'];
-        if ($this->config['cc']!= '') {
+        if ($this->config['cc'] != '') {
             $this->mail->addCC($this->config['cc']);
         }
     }

@@ -3,7 +3,7 @@
 namespace Tests\RoutesTest;
 
 use Tests\TestCase;
-use Zend\Diactoros\ServerRequestFactory;
+use Laminas\Diactoros\ServerRequestFactory;
 use GuzzleHttp\Client;
 use Symfony\Component\Process\Process;
 
@@ -25,7 +25,7 @@ class RoutesTest extends TestCase
 
     public static function setUpBeforeClass()
     {
-        $public_path = realpath(__DIR__.'/../../public');
+        $public_path = realpath(__DIR__ . '/../../public');
         self::$process = new Process("exec php -S localhost:8890 -t $public_path");
         self::$process->start();
         usleep(2000000);

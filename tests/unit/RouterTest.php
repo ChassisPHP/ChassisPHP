@@ -4,8 +4,8 @@ namespace Tests\Unit;
 
 use Tests\TestCase;
 use FastRoute\RouteCollector;
-use Zend\Diactoros\Response;
-use Zend\Diactoros\ServerRequest;
+use Laminas\Diactoros\Response;
+use Laminas\Diactoros\ServerRequest;
 use ChassisPHP\Framework\Router;
 use ChassisPHP\Framework\Container;
 use ChassisPHP\Framework\Http\MiddlewareQueue;
@@ -38,6 +38,26 @@ class RouterTest extends TestCase
     public function testGetRouteInfoStripsTrailingSlash()
     {
         $request = $this->request('GET', '/hello/World/');
+
+        $routeInfo = $this->router($request)->getRouteInfo($request, $this->routes());
+
+        $this->assertSame(\FastRoute\Dispatcher::FOUND, $routeInfo[0]);
+        $this->assertSame(['name' => 'World'], $routeInfo[2]);
+    }
+
+    public function testGetRouteInfoIgnoresQueryString()
+    {
+        $request = $this->request('GET', '/hello/World?greeting=hi&x=1');
+
+        $routeInfo = $this->router($request)->getRouteInfo($request, $this->routes());
+
+        $this->assertSame(\FastRoute\Dispatcher::FOUND, $routeInfo[0]);
+        $this->assertSame(['name' => 'World'], $routeInfo[2]);
+    }
+
+    public function testGetRouteInfoStripsTrailingSlashBeforeQueryString()
+    {
+        $request = $this->request('GET', '/hello/World/?x=1');
 
         $routeInfo = $this->router($request)->getRouteInfo($request, $this->routes());
 

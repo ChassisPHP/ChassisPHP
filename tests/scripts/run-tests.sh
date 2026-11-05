@@ -1,12 +1,12 @@
 #!/bin/bash
 # Run the framework test suite in a podman container.
-# Usage: tests/scripts/run-tests.sh [PHP_VERSION ...]   (default: 7.4)
+# Usage: tests/scripts/run-tests.sh [PHP_VERSION ...]   (default: 8.3)
 # Set FORCE_BUILD=true to rebuild the image.
 
 set -e
 
 PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-VERSIONS=("${@:-7.4}")
+VERSIONS=("${@:-8.3}")
 
 if ! command -v podman &> /dev/null; then
     echo "Podman not found. See https://podman.io/getting-started/installation"

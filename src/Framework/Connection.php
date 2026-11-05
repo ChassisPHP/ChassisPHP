@@ -44,7 +44,7 @@ class Connection
         }
 
         $connectionConfig = Setup::createConfiguration($this->isDevMode);
-        $connectionDriver = new AnnotationDriver(new AnnotationReader(), APP_ROOT."/Database/Entities");
+        $connectionDriver = new AnnotationDriver(new AnnotationReader(), APP_ROOT . "/Database/Entities");
 
         // registering noop annotation autoloader - allow all annotations by default
         AnnotationRegistry::registerLoader('class_exists');

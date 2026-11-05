@@ -11,9 +11,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # The current dependency set only installs on PHP 7.
-        # The matrix moves to 8.3 / 8.4 / 8.5 with the php83-floor branch.
-        php: ['7.4']
+        php: ['8.3', '8.4', '8.5']
     name: PHP ${{ matrix.php }}
     steps:
       - uses: actions/checkout@v5

@@ -4,6 +4,8 @@ namespace Tests\Unit;
 
 use Tests\TestCase;
 use ChassisPHP\Framework\Container;
+use PHPUnit\Framework\Attributes\PreserveGlobalState;
+use PHPUnit\Framework\Attributes\RunInSeparateProcess;
 
 class CoreTest extends TestCase
 {
@@ -21,10 +23,8 @@ class CoreTest extends TestCase
         $this->createApplication()->notAMethod();
     }
 
-    /**
-     * @runInSeparateProcess
-     * @preserveGlobalState disabled
-     */
+    #[RunInSeparateProcess]
+    #[PreserveGlobalState(false)]
     public function testRunSendsRouteResponse()
     {
         $_SERVER['REQUEST_METHOD'] = 'GET';
@@ -36,10 +36,8 @@ class CoreTest extends TestCase
         $this->assertSame('Hello World', ob_get_clean());
     }
 
-    /**
-     * @runInSeparateProcess
-     * @preserveGlobalState disabled
-     */
+    #[RunInSeparateProcess]
+    #[PreserveGlobalState(false)]
     public function testRunRendersDefaultTemplateForNotFound()
     {
         $_SERVER['REQUEST_METHOD'] = 'GET';
@@ -51,10 +49,8 @@ class CoreTest extends TestCase
         $this->assertSame("Not found\n", ob_get_clean());
     }
 
-    /**
-     * @runInSeparateProcess
-     * @preserveGlobalState disabled
-     */
+    #[RunInSeparateProcess]
+    #[PreserveGlobalState(false)]
     public function testRunWithoutDefaultTemplateSendsEmptyBody()
     {
         // there is no template.defaults.405, so nothing is rendered
@@ -67,10 +63,8 @@ class CoreTest extends TestCase
         $this->assertSame('', ob_get_clean());
     }
 
-    /**
-     * @runInSeparateProcess
-     * @preserveGlobalState disabled
-     */
+    #[RunInSeparateProcess]
+    #[PreserveGlobalState(false)]
     public function testBackendRoutesArePrefixedWithFileName()
     {
         $_SERVER['REQUEST_METHOD'] = 'GET';

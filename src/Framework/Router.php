@@ -16,7 +16,6 @@ use ChassisPHP\Framework\Http\MiddlewareQueue;
 
 class Router
 {
-
     private $dispatcher;
     private $request;
     private $response;
@@ -38,8 +37,15 @@ class Router
         $requestURI = $params['REQUEST_URI'];
         $dispatcher = $this->dispatcher($routeDefinitionCallback);
 
+        // the query string is not part of the route; it stays available
+        // through the request's getQueryParams()
+        $queryStart = strpos($requestURI, '?');
+        if ($queryStart !== false) {
+            $requestURI = substr($requestURI, 0, $queryStart);
+        }
+
         // if the route has a trailing /, remove it
-        if (strlen($requestURI)>1) {
+        if (strlen($requestURI) > 1) {
             $requestURI = rtrim($requestURI, "/");
         }
 

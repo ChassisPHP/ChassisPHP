@@ -3,8 +3,8 @@
 namespace Tests\Unit;
 
 use Tests\TestCase;
-use Zend\Diactoros\Response;
-use Zend\Diactoros\ServerRequest;
+use Laminas\Diactoros\Response;
+use Laminas\Diactoros\ServerRequest;
 use ChassisPHP\Framework\Http\MiddlewareQueue;
 
 class MiddlewareQueueTest extends TestCase

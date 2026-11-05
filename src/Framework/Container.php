@@ -5,7 +5,7 @@ namespace ChassisPHP\Framework;
 use Dotenv\Dotenv;
 use Monolog\Logger as Monolog;
 use Monolog\Handler\StreamHandler;
-use \PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\PHPMailer;
 use ChassisPHP\Framework\Connection;
 use Psr\Http\Message\ResponseInterface;
 use League\Container\ReflectionContainer;
@@ -27,7 +27,7 @@ class Container extends LeagueContainer
 
         // register the reflection container as a delegate to enable auto wiring
         $this->delegate(
-            new ReflectionContainer
+            new ReflectionContainer()
         );
 
         $this->addServiceProvider('ChassisPHP\Framework\ServiceProviders\ResponseServiceProvider');
