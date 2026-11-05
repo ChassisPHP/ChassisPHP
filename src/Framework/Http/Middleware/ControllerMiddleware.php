@@ -2,8 +2,6 @@
 
 namespace ChassisPHP\Framework\Http\Middleware;
 
-use ChassisPHP\Framework\ResponseBody;
-
 class ControllerMiddleware
 {
     private $classResponse;
@@ -26,7 +24,7 @@ class ControllerMiddleware
      **/
     public function __invoke($request, $response, $next = null)
     {
-        $response->getBody()->write(ResponseBody::createFromString($this->classResponse));
+        $response->getBody()->write((string) $this->classResponse);
         return $response;
     }
 }

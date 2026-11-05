@@ -22,7 +22,7 @@ class ConfigManager implements ArrayAccess
     public static function instance()
     {
         if (!static::$instance) {
-            static::$instance = new self;
+            static::$instance = new self();
         }
 
         return static::$instance;

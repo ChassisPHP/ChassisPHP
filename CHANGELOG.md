@@ -5,7 +5,14 @@ Changelog
 #### Added
 - Characterization test suite running in a PHP-version-parameterized container, with GitHub Actions CI
 
+#### Changed
+- **Breaking:** PHP 8.3 is now the minimum version. CI runs on 8.3, 8.4 and 8.5
+- **Breaking:** `zendframework/zend-diactoros` is replaced by `laminas/laminas-diactoros` ^3, and `psr/http-message` moves to ^2. Application code that imports `Zend\Diactoros` must import `Laminas\Diactoros`
+- The Composer package type is now `library`, and `dev-0.7.x` is aliased to `0.7.x-dev`
+- Tests run on PHPUnit 12, and the coding standard moves from PSR-2 to PSR-12
+
 #### Bug Fixes
+- Router: URLs with a query string now match their route instead of returning 404. Read the values with the request's `getQueryParams()`
 - Router: a request with the wrong HTTP method crashed instead of returning 405; it now returns 405 with an `Allow` header
 - Core: error statuses without a `template.defaults.<status>` entry no longer throw when rendering the error page
 - `storagePath()` now resolves to the application's `storage/` directory (APP_ROOT). It previously pointed inside the framework package, so logs written with `logTo()` ended up under `vendor/`

@@ -2,7 +2,7 @@
 
 namespace ChassisPHP\Framework;
 
-use Zend\Diactoros\Stream;
+use Laminas\Diactoros\Stream;
 
 class ResponseBody extends Stream
 {

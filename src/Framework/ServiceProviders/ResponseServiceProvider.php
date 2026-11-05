@@ -2,7 +2,7 @@
 
 namespace ChassisPHP\Framework\ServiceProviders;
 
-use Zend\Diactoros\Response;
+use Laminas\Diactoros\Response;
 use League\Container\ServiceProvider\AbstractServiceProvider;
 
 /*

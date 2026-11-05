@@ -3,7 +3,7 @@
 namespace ChassisPHP\Framework\ServiceProviders;
 
 use League\Container\ServiceProvider\AbstractServiceProvider;
-use Zend\Diactoros\ServerRequestFactory;
+use Laminas\Diactoros\ServerRequestFactory;
 
 /*
  *  ServiceProvider to implement PSR-7 request object

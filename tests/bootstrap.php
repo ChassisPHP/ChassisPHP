@@ -1,4 +1,5 @@
 <?php
+
 error_reporting(E_ALL);
 
 // PHPUnit knows which autoloader it was started with
@@ -20,7 +21,6 @@ spl_autoload_register(function ($class) {
 
 // Sessions in the CLI: don't try to send cookies or cache headers
 ini_set('session.use_cookies', '0');
-ini_set('session.use_only_cookies', '0');
 ini_set('session.cache_limiter', '');
 ini_set('session.save_path', sys_get_temp_dir());
 
