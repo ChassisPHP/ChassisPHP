@@ -40,6 +40,41 @@ class MiddlewareQueueTest extends TestCase
         $this->assertSame('second;first;content', (string) $response->getBody());
     }
 
+    public function testControllerClosureRunsAfterMiddleware()
+    {
+        $this->queue->addMiddleware('FirstMiddleware', '\Tests\Support\Middleware\\');
+        $this->queue->addController(function () {
+            return 'content';
+        });
+
+        $response = $this->queue->callMiddleware($this->request, $this->response);
+
+        $this->assertSame('first;content', (string) $response->getBody());
+    }
+
+    public function testMiddlewareCanStopControllerFromRunning()
+    {
+        $controllerRan = false;
+        $this->queue->addMiddleware('BlockingMiddleware', '\Tests\Support\Middleware\\');
+        $this->queue->addController(function () use (&$controllerRan) {
+            $controllerRan = true;
+        });
+
+        $response = $this->queue->callMiddleware($this->request, $this->response);
+
+        $this->assertFalse($controllerRan);
+        $this->assertSame(403, $response->getStatusCode());
+    }
+
+    public function testStringResponseThatNamesAFunctionIsNotCalled()
+    {
+        $this->queue->addController('phpversion');
+
+        $response = $this->queue->callMiddleware($this->request, $this->response);
+
+        $this->assertSame('phpversion', (string) $response->getBody());
+    }
+
     public function testAddMiddlewareReturnsQueue()
     {
         $queue = $this->queue->addMiddleware('FirstMiddleware', '\Tests\Support\Middleware\\');

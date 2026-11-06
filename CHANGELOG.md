@@ -11,7 +11,11 @@ Changelog
 - The Composer package type is now `library`, and `dev-0.7.x` is aliased to `0.7.x-dev`
 - Tests run on PHPUnit 12, and the coding standard moves from PSR-2 to PSR-12
 
+#### Security
+- Controllers now run after middleware. They previously ran first, so protected actions executed for anonymous visitors before `AuthMiddleware` redirected them
+
 #### Bug Fixes
+- `AuthMiddleware` returns a 302 response instead of the null from `header()`, which crashed `Core::run()` on every login redirect
 - Router: URLs with a query string now match their route instead of returning 404. Read the values with the request's `getQueryParams()`
 - Router: a request with the wrong HTTP method crashed instead of returning 405; it now returns 405 with an `Allow` header
 - Core: error statuses without a `template.defaults.<status>` entry no longer throw when rendering the error page

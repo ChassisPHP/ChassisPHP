@@ -7,6 +7,7 @@ use FastRoute\RouteCollector;
 use Laminas\Diactoros\Response;
 use Laminas\Diactoros\ServerRequest;
 use ChassisPHP\Framework\Router;
+use ChassisPHP\Framework\Session;
 use ChassisPHP\Framework\Container;
 use ChassisPHP\Framework\Http\MiddlewareQueue;
 
@@ -92,6 +93,56 @@ class RouterTest extends TestCase
 
         $this->assertSame(405, $response->getStatusCode());
         $this->assertSame('POST', $response->getHeaderLine('Allow'));
+    }
+
+    private function protectedRoute(&$controllerRan)
+    {
+        return function (RouteCollector $r) use (&$controllerRan) {
+            $r->addRoute('POST', '/protected', function ($vars) use (&$controllerRan) {
+                $controllerRan = true;
+                return 'protected content';
+            });
+        };
+    }
+
+    private function protectedRouter($request)
+    {
+        $response = new Response();
+        $queue = new MiddlewareQueue($request, $response);
+        $queue->addMiddleware('AuthMiddleware', '\ChassisPHP\Framework\Http\Middleware\\');
+
+        return new Router($request, $response, $queue);
+    }
+
+    public function testProtectedRouteDoesNotRunForAnonymousVisitor()
+    {
+        unset($_SESSION['authenticated']);
+        $controllerRan = false;
+        $request = $this->request('POST', '/protected');
+
+        $response = $this->protectedRouter($request)
+            ->dispatch($request, $this->protectedRoute($controllerRan), null);
+
+        $this->assertFalse($controllerRan);
+        $this->assertSame(302, $response->getStatusCode());
+        $this->assertSame('/backend/login', $response->getHeaderLine('Location'));
+        $this->assertSame('', (string) $response->getBody());
+    }
+
+    public function testProtectedRouteRunsForLoggedInUser()
+    {
+        Session::start();
+        $_SESSION['authenticated'] = true;
+        $controllerRan = false;
+        $request = $this->request('POST', '/protected');
+
+        $response = $this->protectedRouter($request)
+            ->dispatch($request, $this->protectedRoute($controllerRan), null);
+
+        unset($_SESSION['authenticated']);
+        $this->assertTrue($controllerRan);
+        $this->assertSame(200, $response->getStatusCode());
+        $this->assertSame('protected content', (string) $response->getBody());
     }
 
     public function testDispatchControllerRouteThroughContainer()
