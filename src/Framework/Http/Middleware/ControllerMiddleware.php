@@ -26,7 +26,13 @@ class ControllerMiddleware
      **/
     public function __invoke($request, $response, $next = null)
     {
-        $response->getBody()->write(ResponseBody::createFromString($this->classResponse));
+        $classResponse = $this->classResponse;
+
+        if ($classResponse instanceof \Closure) {
+            $classResponse = $classResponse();
+        }
+
+        $response->getBody()->write(ResponseBody::createFromString($classResponse));
         return $response;
     }
 }

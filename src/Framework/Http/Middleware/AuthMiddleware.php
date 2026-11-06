@@ -20,7 +20,7 @@ class AuthMiddleware
         if (! checkAuth()) {
             Session::setMessage('warning', 'The page you attempted to access requires that you log in ');
             Session::set('history', $URI);
-            return header('Location: /backend/login');
+            return $response->withStatus(302)->withHeader('Location', '/backend/login');
         }
         $response = $next($request, $response);
         return $response;

@@ -75,14 +75,19 @@ class Router
                     $method = $routeInfo[1][1];
                     $vars = $routeInfo[2];
                     $class = $container->get($classname);
-                    $classResponse = $class->$method($vars);
-                    $this->middlewareQueue->addController($classResponse);
+                    $controller = function () use ($class, $method, $vars) {
+                        return $class->$method($vars);
+                    };
                 } else {
                     $handler = $routeInfo[1];
                     $vars = $routeInfo[2];
-                    $classResponse = call_user_func($handler, $vars);
-                    $this->middlewareQueue->addController($classResponse);
+                    $controller = function () use ($handler, $vars) {
+                        return call_user_func($handler, $vars);
+                    };
                 }
+
+                // the controller runs last, so middleware can stop the request first
+                $this->middlewareQueue->addController($controller);
                 break;
         }
 
