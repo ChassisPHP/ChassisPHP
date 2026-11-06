@@ -1,5 +1,13 @@
 Changelog
 
+## 0.5.6 - 2026-11-06
+
+#### Security
+- Controllers now run after middleware. They previously ran first, so protected actions executed for anonymous visitors before `AuthMiddleware` redirected them
+
+#### Bug Fixes
+- `AuthMiddleware` returns a 302 response instead of the null from `header()`, which crashed `Core::run()` on every login redirect
+
 ## 0.5.5 - 2026-11-04
 
 #### Bug Fixes
