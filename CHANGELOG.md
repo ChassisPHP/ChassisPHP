@@ -11,6 +11,7 @@ Changelog
 - The Composer package type is now `library`, and `dev-0.7.x` is aliased to `0.7.x-dev`
 - **Breaking:** Twig moves from 2 to 3. Application code that uses the `Twig_*` class names must use the namespaced classes, and templates must not use the tags Twig 3 removed
 - **Breaking:** `vlucas/phpdotenv` moves from 2 to 5. `.env` values still reach `getenv()` and `envar()`, and existing values are still not overwritten. Application code that calls Dotenv directly must use `Dotenv::createUnsafeImmutable()`. This removes the `auto_detect_line_endings` deprecation, which phpdotenv 2 printed before headers on PHP 8, breaking sessions and redirects when `display_errors` was on
+- `symfony/var-dumper`, which `debugVar()` uses, moves from 3 to 7.4
 - Tests run on PHPUnit 12, and the coding standard moves from PSR-2 to PSR-12
 
 #### Security
@@ -28,6 +29,7 @@ Changelog
 - `ConfigManager` `ArrayAccess` methods are marked `#[\ReturnTypeWillChange]` for PHP 8.1
 
 #### Removed
+- **Breaking:** the unused `symfony/http-foundation`, `symfony/http-kernel`, `symfony/validator` and `symfony/yaml` dependencies, which had unfixed security advisories. Applications that use them must require them directly. Entities with `@Assert` annotations must drop them or require `symfony/validator`, because Doctrine's annotation reader fails on annotation classes it cannot load
 - Broken `cli-config.php`, which referenced a nonexistent `\Lib\Database\Connection`. A working Doctrine CLI entry point is planned for 0.7
 - Unused private methods `Core::addCoreMiddleware()` and `MiddlewareQueue::startQueue()`
 
