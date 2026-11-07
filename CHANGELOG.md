@@ -10,6 +10,7 @@ Changelog
 - **Breaking:** `zendframework/zend-diactoros` is replaced by `laminas/laminas-diactoros` ^3, and `psr/http-message` moves to ^2. Application code that imports `Zend\Diactoros` must import `Laminas\Diactoros`
 - The Composer package type is now `library`, and `dev-0.7.x` is aliased to `0.7.x-dev`
 - **Breaking:** Twig moves from 2 to 3. Application code that uses the `Twig_*` class names must use the namespaced classes, and templates must not use the tags Twig 3 removed
+- **Breaking:** `vlucas/phpdotenv` moves from 2 to 5. `.env` values still reach `getenv()` and `envar()`, and existing values are still not overwritten. Application code that calls Dotenv directly must use `Dotenv::createUnsafeImmutable()`. This removes the `auto_detect_line_endings` deprecation, which phpdotenv 2 printed before headers on PHP 8, breaking sessions and redirects when `display_errors` was on
 - Tests run on PHPUnit 12, and the coding standard moves from PSR-2 to PSR-12
 
 #### Security
