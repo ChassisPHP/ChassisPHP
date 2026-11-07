@@ -80,13 +80,13 @@ class Container extends LeagueContainer
         });
 
         $this->add('Twig', function () {
-            $loader = new \Twig_Loader_Filesystem($this->get('BaseDir') . '/resources/views');
-            $twig = new \Twig_Environment($loader, array(
+            $loader = new \Twig\Loader\FilesystemLoader($this->get('BaseDir') . '/resources/views');
+            $twig = new \Twig\Environment($loader, array(
                'cache' => $this->get('BaseDir') . '/storage/compiledviews',
                'auto_reload' => true,
                'debug' => false,
             ));
-            $twig->addExtension(new \Twig_Extension_Debug());
+            $twig->addExtension(new \Twig\Extension\DebugExtension());
             $supportAddress = $this->get('Config')->get('mail')['supportAddress'];
             $twig->addGlobal("supportAddress", $supportAddress);
             return $twig;
